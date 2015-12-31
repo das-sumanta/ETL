@@ -1,0 +1,44 @@
+Aug 18, 2015 5:12:48 PM DataLoader writeLog
+INFO: Application Started Successfully
+Aug 18, 2015 5:12:48 PM DataLoader writeLog
+INFO: DataExtraction Operation Started for DB table LOCATIONS
+Aug 18, 2015 5:12:50 PM DataLoader writeLog
+INFO: Retrieving data for LOCATIONS
+Aug 18, 2015 5:12:51 PM DataLoader writeLog
+INFO: DataExtration Oparation for table LOCATIONS is extracted in C:\DB_Extract\LOCATIONS-18082015051250.csv
+Aug 18, 2015 5:12:51 PM DataLoader writeLog
+INFO: DataExtraction Operation Started for DB table EMPLOYEES
+Aug 18, 2015 5:12:52 PM DataLoader writeLog
+INFO: Retrieving data for EMPLOYEES
+Aug 18, 2015 5:12:53 PM DataLoader writeLog
+INFO: DataExtration Oparation for table EMPLOYEES is extracted in C:\DB_Extract\EMPLOYEES-18082015051252.csv
+Aug 18, 2015 5:12:53 PM DataLoader writeLog
+INFO: DataExtration Oparation is Completed.
+Aug 18, 2015 6:19:46 PM DataLoader writeLog
+INFO: Application Started Successfully
+Aug 18, 2015 6:19:46 PM DataLoader writeLog
+INFO: DataExtraction Operation Started for DB table LOCATIONS
+Aug 18, 2015 6:19:48 PM DataLoader writeLog
+INFO: Retrieving data for LOCATIONS
+Aug 18, 2015 6:19:49 PM DataLoader writeLog
+INFO: DataExtration Oparation for table LOCATIONS is extracted in C:\DB_Extract\LOCATIONS-18082015061948.csv
+Aug 18, 2015 6:19:49 PM DataLoader writeLog
+INFO: DataExtraction Operation Started for DB table EMPLOYEES
+Aug 18, 2015 6:19:50 PM DataLoader writeLog
+INFO: Retrieving data for EMPLOYEES
+Aug 18, 2015 6:19:51 PM DataLoader writeLog
+INFO: DataExtration Oparation for table EMPLOYEES is extracted in C:\DB_Extract\EMPLOYEES-18082015061950.csv
+Aug 18, 2015 6:19:51 PM DataLoader writeLog
+INFO: DataExtration Oparation is Completed.
+Aug 18, 2015 6:23:22 PM DataLoader writeLog
+INFO: Application Started Successfully
+Aug 18, 2015 6:23:25 PM DataLoader writeLog
+INFO: Uploading LOCATIONS-18082015061948.csv to Amazon S3 bucket kol-kd
+Aug 18, 2015 6:23:25 PM DataLoader writeLog
+INFO: LOCATIONS-18082015061948.csv transffered successfully.
+Aug 18, 2015 6:23:25 PM DataLoader writeLog
+INFO: Uploading EMPLOYEES-18082015061950.csv to Amazon S3 bucket kol-kd
+Aug 18, 2015 6:23:25 PM DataLoader writeLog
+INFO: EMPLOYEES-18082015061950.csv transffered successfully.
+Aug 18, 2015 6:23:25 PM DataLoader writeLog
+INFO: All files are transffered successfully.

@@ -1,0 +1,29 @@
+"RunID","ACCPAC_LOB_CODES","CLASS_EXTID","CLASS_ID","DATE_LAST_MODIFIED","FULL_NAME","HYPERION_LOB_CODES","ISINACTIVE","LINE_OF_BUSINESS_CODE","NAME","PARENT_ID"
+"21",,,"1","2014-07-22 17:58:47","Children's Book Pub. and Dist.",,"No","100","Children's Book Pub. and Dist.",
+"21",,,"2","2014-08-03 04:05:11","Education",,"No","300","Education",
+"21",,,"3","2014-11-26 11:01:05","Media,Licensing,and Advertising",,"No","500","Media,Licensing,and Advertising",
+"21",,,"4","2015-06-29 00:38:38","Support Services : Support Services",,"No","605","Support Services","203"
+"21",,,"5","2014-11-26 10:59:43","Other Corporate",,"No","900","Other Corporate",
+"21","08",,"101","2015-08-13 03:55:02","Children's Book Pub. and Dist. : Book Clubs","DS8","No","105","Book Clubs","1"
+"21","05",,"102","2015-06-29 00:22:51","Children's Book Pub. and Dist. : Book Fairs","DS5","No","110","Book Fairs","1"
+"21","07",,"103","2015-08-13 03:55:29","Children's Book Pub. and Dist. : Trade","DS6","No","115","Trade","1"
+"21",,,"104","2015-06-29 00:23:05","Children's Book Pub. and Dist. : Books in Home",,"No","120","Books in Home","1"
+"21","01, 02",,"105","2015-06-29 00:23:30","Children's Book Pub. and Dist. : Direct Web Sales","DS1, DS2","No","125","Direct Web Sales","1"
+"21",,,"106","2015-06-29 00:25:32","Children's Book Pub. and Dist. : Standing Orders",,"No","130","Standing Orders","1"
+"21",,,"107","2015-06-29 00:23:58","Children's Book Pub. and Dist. : Export",,"No","135","Export","1"
+"21",,,"108","2015-06-29 00:24:12","Children's Book Pub. and Dist. : Retail Store",,"No","140","Retail Store","1"
+"21","06",,"109","2015-06-29 00:28:52","Education : Education - General","DS7","No","305","Education - General","2"
+"21",,,"110","2015-06-29 00:27:40","Education : Digital/Technology",,"No","310","Digital/Technology","2"
+"21",,,"111","2014-07-22 17:58:48","Education : Classroom Magazines",,"No","315","Classroom Magazines","2"
+"21",,,"112","2015-06-29 00:30:14","Education : Tutorial Centers",,"No","320","Tutorial Centers","2"
+"21","06",,"113","2015-06-29 00:27:57","Education : Early English Center","DS7","No","325","Early English Center","2"
+"21",,,"114","2015-06-29 00:29:33","Education : Library Publishing",,"No","330","Library Publishing","2"
+"21",,,"115","2015-06-29 00:29:55","Education : School Essentials",,"No","335","School Essentials","2"
+"21",,,"116","2015-06-29 00:29:15","Education : Franchise",,"No","340","Franchise","2"
+"21",,,"117","2015-06-29 00:35:11","Media,Licensing,and Advertising : Consumer Magazines",,"No","505","Consumer Magazines","3"
+"21",,,"118","2015-06-29 00:30:30","Media,Licensing,and Advertising : Advertising",,"No","510","Advertising","3"
+"21",,,"119","2015-06-29 00:33:22","Media,Licensing,and Advertising : Rights",,"No","515","Rights","3"
+"21",,,"120","2014-07-22 17:58:48","Media,Licensing,and Advertising : Media and Technology",,"No","520","Media and Technology","3"
+"21",,,"202","2015-06-29 00:37:38","Other Corporate : Elimination",,"No","905","Elimination","5"
+"21",,,"203","2014-12-31 07:36:52","Support Services",,"No","600","Support Services",
+"21",,,"204","2015-06-29 00:23:43","Children's Book Pub. and Dist. : EBooks",,"No","525","EBooks","1"

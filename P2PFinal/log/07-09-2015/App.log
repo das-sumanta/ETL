@@ -1,0 +1,102 @@
+Sep 07, 2015 4:32:09 PM DataLoader writeLog
+INFO: Application Started Successfully
+Sep 07, 2015 4:32:09 PM DataLoader writeLog
+INFO: DataExtraction Operation Started for DB table SUBSIDIARIES
+Sep 07, 2015 4:32:11 PM DataLoader writeLog
+INFO: Retrieving data for SUBSIDIARIES
+Sep 07, 2015 4:32:11 PM DataLoader writeLog
+INFO: DataExtration Oparation for table SUBSIDIARIES is extracted in D:\Sumanta\workspace\P2PFinal\DB_Extracts\07-09-2015\SUBSIDIARIES-07092015043211.csv
+Sep 07, 2015 4:32:11 PM DataLoader writeLog
+SEVERE: Error!!D:\Sumanta\workspace\P2PFinal\FactSQLDir\.sql (The system cannot find the file specified)
+Sep 07, 2015 4:32:11 PM DataLoader writeLog
+SEVERE: Error!!java.io.FileNotFoundException: D:\Sumanta\workspace\P2PFinal\FactSQLDir\.sql (The system cannot find the file specified)
+Sep 07, 2015 4:32:12 PM DataLoader writeLog
+INFO: Uploading SUBSIDIARIES-07092015043211.csv to Amazon S3 bucket kol-kd
+Sep 07, 2015 4:32:12 PM DataLoader writeLog
+INFO: SUBSIDIARIES-07092015043211.csv transffered successfully.
+Sep 07, 2015 4:32:12 PM DataLoader writeLog
+SEVERE: Index: 0, Size: 0
+Sep 07, 2015 4:32:12 PM DataLoader writeLog
+INFO: There is an issue while creating the extract of . So loading operation is skipped for 
+Sep 07, 2015 4:45:46 PM DataLoader writeLog
+INFO: Application Started Successfully
+Sep 07, 2015 4:45:46 PM DataLoader writeLog
+INFO: DataExtraction Operation Started for DB table SUBSIDIARIES
+Sep 07, 2015 4:45:48 PM DataLoader writeLog
+INFO: Retrieving data for SUBSIDIARIES
+Sep 07, 2015 4:45:49 PM DataLoader writeLog
+INFO: DataExtration Oparation for table SUBSIDIARIES is extracted in D:\Sumanta\workspace\P2PFinal\DB_Extracts\07-09-2015\SUBSIDIARIES-07092015044548.csv
+Sep 07, 2015 4:45:49 PM DataLoader writeLog
+SEVERE: Error!!D:\Sumanta\workspace\P2PFinal\FactSQLDir\.sql (The system cannot find the file specified)
+Sep 07, 2015 4:45:49 PM DataLoader writeLog
+SEVERE: Error!!java.io.FileNotFoundException: D:\Sumanta\workspace\P2PFinal\FactSQLDir\.sql (The system cannot find the file specified)
+Sep 07, 2015 4:47:07 PM DataLoader writeLog
+INFO: Uploading SUBSIDIARIES-07092015044548.csv to Amazon S3 bucket kol-kd
+Sep 07, 2015 4:47:08 PM DataLoader writeLog
+INFO: SUBSIDIARIES-07092015044548.csv transffered successfully.
+Sep 07, 2015 4:47:08 PM DataLoader writeLog
+SEVERE: Index: 0, Size: 0
+Sep 07, 2015 4:47:09 PM DataLoader writeLog
+INFO: There is an issue while creating the extract of . So loading operation is skipped for 
+Sep 07, 2015 4:48:25 PM DataLoader writeLog
+INFO: Application Started Successfully
+Sep 07, 2015 4:48:25 PM DataLoader writeLog
+INFO: DataExtraction Operation Started for DB table SUBSIDIARIES
+Sep 07, 2015 4:48:26 PM DataLoader writeLog
+INFO: Retrieving data for SUBSIDIARIES
+Sep 07, 2015 4:48:27 PM DataLoader writeLog
+INFO: DataExtration Oparation for table SUBSIDIARIES is extracted in D:\Sumanta\workspace\P2PFinal\DB_Extracts\07-09-2015\SUBSIDIARIES-07092015044826.csv
+Sep 07, 2015 4:48:27 PM DataLoader writeLog
+SEVERE: Error!!D:\Sumanta\workspace\P2PFinal\FactSQLDir\.sql (The system cannot find the file specified)
+Sep 07, 2015 4:48:27 PM DataLoader writeLog
+SEVERE: Error!!java.io.FileNotFoundException: D:\Sumanta\workspace\P2PFinal\FactSQLDir\.sql (The system cannot find the file specified)
+Sep 07, 2015 4:51:28 PM DataLoader writeLog
+INFO: Uploading SUBSIDIARIES-07092015044826.csv to Amazon S3 bucket kol-kd
+Sep 07, 2015 4:51:30 PM DataLoader writeLog
+INFO: SUBSIDIARIES-07092015044826.csv transffered successfully.
+Sep 07, 2015 4:51:30 PM DataLoader writeLog
+SEVERE: Index: 0, Size: 0
+Sep 07, 2015 4:51:31 PM DataLoader writeLog
+INFO: There is an issue while creating the extract of . So loading operation is skipped for 
+Sep 07, 2015 4:52:05 PM DataLoader writeLog
+INFO: Application Started Successfully
+Sep 07, 2015 4:52:05 PM DataLoader writeLog
+INFO: DataExtraction Operation Started for DB table SUBSIDIARIES
+Sep 07, 2015 4:52:06 PM DataLoader writeLog
+INFO: Retrieving data for SUBSIDIARIES
+Sep 07, 2015 4:52:07 PM DataLoader writeLog
+INFO: DataExtration Oparation for table SUBSIDIARIES is extracted in D:\Sumanta\workspace\P2PFinal\DB_Extracts\07-09-2015\SUBSIDIARIES-07092015045206.csv
+Sep 07, 2015 4:52:07 PM DataLoader writeLog
+SEVERE: Error!!D:\Sumanta\workspace\P2PFinal\FactSQLDir\.sql (The system cannot find the file specified)
+Sep 07, 2015 4:52:07 PM DataLoader writeLog
+SEVERE: Error!!java.io.FileNotFoundException: D:\Sumanta\workspace\P2PFinal\FactSQLDir\.sql (The system cannot find the file specified)
+Sep 07, 2015 4:53:38 PM DataLoader writeLog
+INFO: Uploading SUBSIDIARIES-07092015045206.csv to Amazon S3 bucket kol-kd
+Sep 07, 2015 4:54:08 PM DataLoader writeLog
+INFO: SUBSIDIARIES-07092015045206.csv transffered successfully.
+Sep 07, 2015 6:27:27 PM DataLoader writeLog
+INFO: Application Started Successfully
+Sep 07, 2015 6:27:27 PM DataLoader writeLog
+INFO: DataExtraction Operation Started for DB table SUBSIDIARIES
+Sep 07, 2015 6:27:29 PM DataLoader writeLog
+INFO: Retrieving data for SUBSIDIARIES
+Sep 07, 2015 6:27:30 PM DataLoader writeLog
+INFO: DataExtration Oparation for table SUBSIDIARIES is extracted in D:\Sumanta\workspace\P2PFinal\DB_Extracts\07-09-2015\SUBSIDIARIES-07092015062729.csv
+Sep 07, 2015 6:27:30 PM DataLoader writeLog
+SEVERE: Error!!D:\Sumanta\workspace\P2PFinal\FactSQLDir\.sql (The system cannot find the file specified)
+Sep 07, 2015 6:27:30 PM DataLoader writeLog
+SEVERE: Error!!java.io.FileNotFoundException: D:\Sumanta\workspace\P2PFinal\FactSQLDir\.sql (The system cannot find the file specified)
+Sep 07, 2015 6:28:53 PM DataLoader writeLog
+INFO: Uploading SUBSIDIARIES-07092015062729.csv to Amazon S3 bucket kol-kd
+Sep 07, 2015 6:29:04 PM DataLoader writeLog
+INFO: SUBSIDIARIES-07092015062729.csv transffered successfully.
+Sep 07, 2015 6:34:37 PM DataLoader writeLog
+INFO: Application Started Successfully
+Sep 07, 2015 6:34:37 PM DataLoader writeLog
+INFO: DataExtraction Operation Started for DB table SUBSIDIARIES
+Sep 07, 2015 6:34:39 PM DataLoader writeLog
+INFO: Retrieving data for SUBSIDIARIES
+Sep 07, 2015 6:34:39 PM DataLoader writeLog
+INFO: DataExtration Oparation for table SUBSIDIARIES is extracted in D:\Sumanta\workspace\P2PFinal\DB_Extracts\07-09-2015\SUBSIDIARIES-07092015063439.csv
+Sep 07, 2015 6:35:56 PM DataLoader writeLog
+SEVERE: Error!!D:\Sumanta\workspace\P2PFinal\FactSQLDir\.sql (The system cannot find the file specified)

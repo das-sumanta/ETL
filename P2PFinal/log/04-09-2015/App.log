@@ -1,0 +1,227 @@
+Sep 04, 2015 11:37:54 AM DataLoader writeLog
+INFO: Application Started Successfully
+Sep 04, 2015 11:37:54 AM DataLoader writeLog
+INFO: DataExtraction Operation Started for DB table SUBSIDIARIES
+Sep 04, 2015 11:43:07 AM DataLoader writeLog
+INFO: Application Started Successfully
+Sep 04, 2015 11:43:07 AM DataLoader writeLog
+INFO: DataExtraction Operation Started for DB table SUBSIDIARIES
+Sep 04, 2015 11:43:08 AM DataLoader writeLog
+INFO: Retrieving data for SUBSIDIARIES
+Sep 04, 2015 11:43:09 AM DataLoader writeLog
+INFO: DataExtration Oparation for table SUBSIDIARIES is extracted in C:\Scholastic\codes\Sandbox\P2PFinal\DB_Extracts\04-09-2015\SUBSIDIARIES-04092015114308.csv
+Sep 04, 2015 11:43:09 AM DataLoader writeLog
+INFO: Executing query for purchase_orderswhere DATE_LAST_MODIFIED >= 2015-08-28 17:11:16
+Sep 04, 2015 11:43:17 AM DataLoader writeLog
+SEVERE: Error!![NetSuite][NetSuite JDBC Driver]Unsupported method: ResultSet.beforeFirst
+Sep 04, 2015 11:43:17 AM DataLoader writeLog
+SEVERE: Error!!java.sql.SQLException: [NetSuite][NetSuite JDBC Driver]Unsupported method: ResultSet.beforeFirst
+Sep 04, 2015 11:43:18 AM DataLoader writeLog
+INFO: Uploading SUBSIDIARIES-04092015114308.csv to Amazon S3 bucket kol-kd
+Sep 04, 2015 11:43:18 AM DataLoader writeLog
+INFO: SUBSIDIARIES-04092015114308.csv transffered successfully.
+Sep 04, 2015 11:43:18 AM DataLoader writeLog
+INFO: RedShift Data loading started for SUBSIDIARIES
+Sep 04, 2015 11:44:41 AM DataLoader writeLog
+SEVERE: Error occured while loading data from S3 to Redshift Cluster for SUBSIDIARIES
+Sep 04, 2015 11:44:41 AM DataLoader writeLog
+INFO: There is an issue while creating the extract of purchase_orders. So loading operation is skipped for purchase_orders
+Sep 04, 2015 2:45:08 PM DataLoader writeLog
+INFO: Application Started Successfully
+Sep 04, 2015 2:45:08 PM DataLoader writeLog
+INFO: DataExtraction Operation Started for DB table SUBSIDIARIES
+Sep 04, 2015 2:45:10 PM DataLoader writeLog
+INFO: Retrieving data for SUBSIDIARIES
+Sep 04, 2015 2:45:10 PM DataLoader writeLog
+INFO: DataExtration Oparation for table SUBSIDIARIES is extracted in C:\Scholastic\codes\Sandbox\P2PFinal\DB_Extracts\04-09-2015\SUBSIDIARIES-04092015024510.csv
+Sep 04, 2015 2:45:10 PM DataLoader writeLog
+INFO: DataExtraction Operation Started for DB table EMPLOYEES
+Sep 04, 2015 2:45:13 PM DataLoader writeLog
+INFO: Retrieving data for EMPLOYEES
+Sep 04, 2015 2:45:28 PM DataLoader writeLog
+INFO: DataExtration Oparation for table EMPLOYEES is extracted in C:\Scholastic\codes\Sandbox\P2PFinal\DB_Extracts\04-09-2015\EMPLOYEES-04092015024513.csv
+Sep 04, 2015 2:45:28 PM DataLoader writeLog
+INFO: DataExtraction Operation Started for DB table VENDORS
+Sep 04, 2015 2:45:31 PM DataLoader writeLog
+INFO: Retrieving data for VENDORS
+Sep 04, 2015 2:48:07 PM DataLoader writeLog
+INFO: DataExtration Oparation for table VENDORS is extracted in C:\Scholastic\codes\Sandbox\P2PFinal\DB_Extracts\04-09-2015\VENDORS-04092015024531.csv
+Sep 04, 2015 2:48:07 PM DataLoader writeLog
+SEVERE: Error!!C:\Scholastic\codes\Sandbox\P2PFinal\FactSQLDir\.sql (The system cannot find the file specified)
+Sep 04, 2015 2:48:07 PM DataLoader writeLog
+SEVERE: Error!!java.io.FileNotFoundException: C:\Scholastic\codes\Sandbox\P2PFinal\FactSQLDir\.sql (The system cannot find the file specified)
+Sep 04, 2015 2:48:09 PM DataLoader writeLog
+INFO: Uploading SUBSIDIARIES-04092015024510.csv to Amazon S3 bucket kol-kd
+Sep 04, 2015 2:48:09 PM DataLoader writeLog
+INFO: SUBSIDIARIES-04092015024510.csv transffered successfully.
+Sep 04, 2015 2:48:09 PM DataLoader writeLog
+INFO: RedShift Data loading started for SUBSIDIARIES
+Sep 04, 2015 2:49:11 PM DataLoader writeLog
+SEVERE: Error occured while loading data from S3 to Redshift Cluster for SUBSIDIARIES
+Sep 04, 2015 2:49:11 PM DataLoader writeLog
+INFO: Uploading EMPLOYEES-04092015024513.csv to Amazon S3 bucket kol-kd
+Sep 04, 2015 2:49:11 PM DataLoader writeLog
+INFO: EMPLOYEES-04092015024513.csv transffered successfully.
+Sep 04, 2015 2:49:11 PM DataLoader writeLog
+INFO: RedShift Data loading started for EMPLOYEES
+Sep 04, 2015 2:50:13 PM DataLoader writeLog
+SEVERE: Error occured while loading data from S3 to Redshift Cluster for EMPLOYEES
+Sep 04, 2015 2:50:13 PM DataLoader writeLog
+INFO: Uploading VENDORS-04092015024531.csv to Amazon S3 bucket kol-kd
+Sep 04, 2015 2:50:13 PM DataLoader writeLog
+INFO: VENDORS-04092015024531.csv transffered successfully.
+Sep 04, 2015 2:50:13 PM DataLoader writeLog
+INFO: RedShift Data loading started for VENDORS
+Sep 04, 2015 2:51:15 PM DataLoader writeLog
+SEVERE: Error occured while loading data from S3 to Redshift Cluster for VENDORS
+Sep 04, 2015 2:51:15 PM DataLoader writeLog
+INFO: There is an issue while creating the extract of . So loading operation is skipped for 
+Sep 04, 2015 2:54:19 PM DataLoader writeLog
+INFO: Application Started Successfully
+Sep 04, 2015 2:54:19 PM DataLoader writeLog
+INFO: DataExtraction Operation Started for DB table SUBSIDIARIES
+Sep 04, 2015 2:59:41 PM DataLoader writeLog
+INFO: Application Started Successfully
+Sep 04, 2015 2:59:41 PM DataLoader writeLog
+INFO: DataExtraction Operation Started for DB table SUBSIDIARIES
+Sep 04, 2015 3:00:29 PM DataLoader writeLog
+INFO: Retrieving data for SUBSIDIARIES
+Sep 04, 2015 3:03:18 PM DataLoader writeLog
+INFO: Application Started Successfully
+Sep 04, 2015 3:03:18 PM DataLoader writeLog
+INFO: DataExtraction Operation Started for DB table SUBSIDIARIES
+Sep 04, 2015 3:03:19 PM DataLoader writeLog
+INFO: Retrieving data for SUBSIDIARIES
+Sep 04, 2015 3:03:20 PM DataLoader writeLog
+INFO: DataExtration Oparation for table SUBSIDIARIES is extracted in C:\Scholastic\codes\Sandbox\P2PFinal\DB_Extracts\04-09-2015\SUBSIDIARIES-04092015030319.csv
+Sep 04, 2015 3:03:20 PM DataLoader writeLog
+SEVERE: Error!!C:\Scholastic\codes\Sandbox\P2PFinal\FactSQLDir\.sql (The system cannot find the file specified)
+Sep 04, 2015 3:03:20 PM DataLoader writeLog
+SEVERE: Error!!java.io.FileNotFoundException: C:\Scholastic\codes\Sandbox\P2PFinal\FactSQLDir\.sql (The system cannot find the file specified)
+Sep 04, 2015 3:03:21 PM DataLoader writeLog
+INFO: Uploading SUBSIDIARIES-04092015030319.csv to Amazon S3 bucket kol-kd
+Sep 04, 2015 3:03:21 PM DataLoader writeLog
+INFO: SUBSIDIARIES-04092015030319.csv transffered successfully.
+Sep 04, 2015 3:03:50 PM DataLoader writeLog
+INFO: RedShift Data loading started for SUBSIDIARIES
+Sep 04, 2015 3:10:14 PM DataLoader writeLog
+INFO: Application Started Successfully
+Sep 04, 2015 3:10:14 PM DataLoader writeLog
+INFO: DataExtraction Operation Started for DB table SUBSIDIARIES
+Sep 04, 2015 3:10:16 PM DataLoader writeLog
+INFO: Retrieving data for SUBSIDIARIES
+Sep 04, 2015 3:10:17 PM DataLoader writeLog
+INFO: DataExtration Oparation for table SUBSIDIARIES is extracted in C:\Scholastic\codes\Sandbox\P2PFinal\DB_Extracts\04-09-2015\SUBSIDIARIES-04092015031016.csv
+Sep 04, 2015 3:10:17 PM DataLoader writeLog
+INFO: DataExtraction Operation Started for DB table EMPLOYEES
+Sep 04, 2015 3:10:21 PM DataLoader writeLog
+INFO: Retrieving data for EMPLOYEES
+Sep 04, 2015 3:10:32 PM DataLoader writeLog
+INFO: DataExtration Oparation for table EMPLOYEES is extracted in C:\Scholastic\codes\Sandbox\P2PFinal\DB_Extracts\04-09-2015\EMPLOYEES-04092015031021.csv
+Sep 04, 2015 3:10:32 PM DataLoader writeLog
+INFO: DataExtraction Operation Started for DB table VENDORS
+Sep 04, 2015 3:10:36 PM DataLoader writeLog
+INFO: Retrieving data for VENDORS
+Sep 04, 2015 3:12:50 PM DataLoader writeLog
+INFO: DataExtration Oparation for table VENDORS is extracted in C:\Scholastic\codes\Sandbox\P2PFinal\DB_Extracts\04-09-2015\VENDORS-04092015031036.csv
+Sep 04, 2015 3:12:50 PM DataLoader writeLog
+SEVERE: Error!!C:\Scholastic\codes\Sandbox\P2PFinal\FactSQLDir\.sql (The system cannot find the file specified)
+Sep 04, 2015 3:12:50 PM DataLoader writeLog
+SEVERE: Error!!java.io.FileNotFoundException: C:\Scholastic\codes\Sandbox\P2PFinal\FactSQLDir\.sql (The system cannot find the file specified)
+Sep 04, 2015 3:12:50 PM DataLoader writeLog
+INFO: Uploading SUBSIDIARIES-04092015031016.csv to Amazon S3 bucket kol-kd
+Sep 04, 2015 3:12:50 PM DataLoader writeLog
+INFO: SUBSIDIARIES-04092015031016.csv transffered successfully.
+Sep 04, 2015 3:12:50 PM DataLoader writeLog
+INFO: RedShift Data loading started for SUBSIDIARIES
+Sep 04, 2015 3:13:52 PM DataLoader writeLog
+SEVERE: Error occured while loading data from S3 to Redshift Cluster for SUBSIDIARIES
+[Amazon](11300) A ResultSet was expected but not generated from query "truncate dw_prestage.SUBSIDIARIES". The query was executed.
+Sep 04, 2015 3:13:52 PM DataLoader writeLog
+INFO: Uploading EMPLOYEES-04092015031021.csv to Amazon S3 bucket kol-kd
+Sep 04, 2015 3:13:52 PM DataLoader writeLog
+INFO: EMPLOYEES-04092015031021.csv transffered successfully.
+Sep 04, 2015 3:13:52 PM DataLoader writeLog
+INFO: RedShift Data loading started for EMPLOYEES
+Sep 04, 2015 3:18:38 PM DataLoader writeLog
+INFO: Application Started Successfully
+Sep 04, 2015 3:18:38 PM DataLoader writeLog
+INFO: DataExtraction Operation Started for DB table SUBSIDIARIES
+Sep 04, 2015 3:18:40 PM DataLoader writeLog
+INFO: Retrieving data for SUBSIDIARIES
+Sep 04, 2015 3:18:41 PM DataLoader writeLog
+INFO: DataExtration Oparation for table SUBSIDIARIES is extracted in C:\Scholastic\codes\Sandbox\P2PFinal\DB_Extracts\04-09-2015\SUBSIDIARIES-04092015031840.csv
+Sep 04, 2015 3:18:41 PM DataLoader writeLog
+SEVERE: Error!!C:\Scholastic\codes\Sandbox\P2PFinal\FactSQLDir\.sql (The system cannot find the file specified)
+Sep 04, 2015 3:18:41 PM DataLoader writeLog
+SEVERE: Error!!java.io.FileNotFoundException: C:\Scholastic\codes\Sandbox\P2PFinal\FactSQLDir\.sql (The system cannot find the file specified)
+Sep 04, 2015 3:18:42 PM DataLoader writeLog
+INFO: Uploading SUBSIDIARIES-04092015031840.csv to Amazon S3 bucket kol-kd
+Sep 04, 2015 3:18:42 PM DataLoader writeLog
+INFO: SUBSIDIARIES-04092015031840.csv transffered successfully.
+Sep 04, 2015 3:18:52 PM DataLoader writeLog
+INFO: RedShift Data loading started for SUBSIDIARIES
+Sep 04, 2015 3:24:41 PM DataLoader writeLog
+INFO: Application Started Successfully
+Sep 04, 2015 3:24:41 PM DataLoader writeLog
+INFO: DataExtraction Operation Started for DB table SUBSIDIARIES
+Sep 04, 2015 3:24:43 PM DataLoader writeLog
+INFO: Retrieving data for SUBSIDIARIES
+Sep 04, 2015 3:24:44 PM DataLoader writeLog
+INFO: DataExtration Oparation for table SUBSIDIARIES is extracted in C:\Scholastic\codes\Sandbox\P2PFinal\DB_Extracts\04-09-2015\SUBSIDIARIES-04092015032443.csv
+Sep 04, 2015 3:24:44 PM DataLoader writeLog
+SEVERE: Error!!C:\Scholastic\codes\Sandbox\P2PFinal\FactSQLDir\.sql (The system cannot find the file specified)
+Sep 04, 2015 3:24:44 PM DataLoader writeLog
+SEVERE: Error!!java.io.FileNotFoundException: C:\Scholastic\codes\Sandbox\P2PFinal\FactSQLDir\.sql (The system cannot find the file specified)
+Sep 04, 2015 3:24:44 PM DataLoader writeLog
+INFO: Uploading SUBSIDIARIES-04092015032443.csv to Amazon S3 bucket kol-kd
+Sep 04, 2015 3:24:44 PM DataLoader writeLog
+INFO: SUBSIDIARIES-04092015032443.csv transffered successfully.
+Sep 04, 2015 3:24:44 PM DataLoader writeLog
+INFO: RedShift Data loading started for SUBSIDIARIES
+Sep 04, 2015 3:25:50 PM DataLoader writeLog
+INFO: RedShift Data loading is completed successfully for SUBSIDIARIES
+Sep 04, 2015 3:25:50 PM DataLoader writeLog
+INFO: There is an issue while creating the extract of . So loading operation is skipped for 
+Sep 04, 2015 7:27:44 PM DataLoader writeLog
+INFO: Application Started Successfully
+Sep 04, 2015 7:27:44 PM DataLoader writeLog
+INFO: DataExtraction Operation Started for DB table SUBSIDIARIES
+Sep 04, 2015 7:27:52 PM DataLoader writeLog
+INFO: Retrieving data for SUBSIDIARIES
+Sep 04, 2015 7:30:21 PM DataLoader writeLog
+INFO: Application Started Successfully
+Sep 04, 2015 7:30:21 PM DataLoader writeLog
+INFO: DataExtraction Operation Started for DB table SUBSIDIARIES
+Sep 04, 2015 7:30:27 PM DataLoader writeLog
+INFO: Retrieving data for SUBSIDIARIES
+Sep 04, 2015 7:30:41 PM DataLoader writeLog
+INFO: DataExtration Oparation for table SUBSIDIARIES is extracted in C:\Scholastic\codes\Sandbox\P2PFinal\DB_Extracts\04-09-2015\SUBSIDIARIES-04092015073027.csv
+Sep 04, 2015 7:30:41 PM DataLoader writeLog
+SEVERE: Error!!C:\Scholastic\codes\Sandbox\P2PFinal\FactSQLDir\.sql (The system cannot find the file specified)
+Sep 04, 2015 7:30:41 PM DataLoader writeLog
+SEVERE: Error!!java.io.FileNotFoundException: C:\Scholastic\codes\Sandbox\P2PFinal\FactSQLDir\.sql (The system cannot find the file specified)
+Sep 04, 2015 7:30:42 PM DataLoader writeLog
+INFO: Uploading SUBSIDIARIES-04092015073027.csv to Amazon S3 bucket kol-kd
+Sep 04, 2015 7:30:42 PM DataLoader writeLog
+INFO: SUBSIDIARIES-04092015073027.csv transffered successfully.
+Sep 04, 2015 7:30:42 PM DataLoader writeLog
+SEVERE: Index: 0, Size: 0
+Sep 04, 2015 7:30:42 PM DataLoader writeLog
+INFO: There is an issue while creating the extract of . So loading operation is skipped for 
+Sep 04, 2015 7:32:30 PM DataLoader writeLog
+INFO: Application Started Successfully
+Sep 04, 2015 7:32:30 PM DataLoader writeLog
+INFO: DataExtraction Operation Started for DB table SUBSIDIARIES
+Sep 04, 2015 7:32:33 PM DataLoader writeLog
+INFO: Retrieving data for SUBSIDIARIES
+Sep 04, 2015 7:32:37 PM DataLoader writeLog
+INFO: DataExtration Oparation for table SUBSIDIARIES is extracted in C:\Scholastic\codes\Sandbox\P2PFinal\DB_Extracts\04-09-2015\SUBSIDIARIES-04092015073233.csv
+Sep 04, 2015 7:32:37 PM DataLoader writeLog
+SEVERE: Error!!C:\Scholastic\codes\Sandbox\P2PFinal\FactSQLDir\.sql (The system cannot find the file specified)
+Sep 04, 2015 7:32:37 PM DataLoader writeLog
+SEVERE: Error!!java.io.FileNotFoundException: C:\Scholastic\codes\Sandbox\P2PFinal\FactSQLDir\.sql (The system cannot find the file specified)
+Sep 04, 2015 7:34:21 PM DataLoader writeLog
+INFO: Uploading SUBSIDIARIES-04092015073233.csv to Amazon S3 bucket kol-kd
+Sep 04, 2015 7:35:04 PM DataLoader writeLog
+INFO: SUBSIDIARIES-04092015073233.csv transffered successfully.

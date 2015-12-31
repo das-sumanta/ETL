@@ -1,0 +1,396 @@
+Aug 28, 2015 12:05:26 PM DataLoader writeLog
+INFO: Application Started Successfully
+Aug 28, 2015 12:05:26 PM DataLoader writeLog
+INFO: DataExtraction Operation Started for DB table SUBSIDIARIES
+Aug 28, 2015 12:05:28 PM DataLoader writeLog
+INFO: Retrieving data for SUBSIDIARIES
+Aug 28, 2015 12:05:29 PM DataLoader writeLog
+INFO: DataExtration Oparation for table SUBSIDIARIES is extracted in C:\Scholastic\codes\Sandbox\P2PFinal\DB_Extracts\28-08-2015\SUBSIDIARIES-28082015120528.csv
+Aug 28, 2015 12:05:29 PM DataLoader writeLog
+INFO: DataExtration Oparation is Completed.
+Aug 28, 2015 12:05:29 PM DataLoader writeLog
+INFO: Executing query for PurchaseOrderwhere DATE_LAST_MODIFIED >= 2015-08-27 19:44:45
+Aug 28, 2015 12:05:36 PM DataLoader writeLog
+INFO: Retrieving data for PurchaseOrder
+Aug 28, 2015 12:05:37 PM DataLoader writeLog
+INFO: Extraction Completed for fact 
+Aug 28, 2015 12:05:40 PM DataLoader writeLog
+INFO: Uploading SUBSIDIARIES-28082015120528.csv to Amazon S3 bucket kol-kd
+Aug 28, 2015 12:05:40 PM DataLoader writeLog
+INFO: SUBSIDIARIES-28082015120528.csv transffered successfully.
+Aug 28, 2015 12:07:01 PM DataLoader writeLog
+INFO: Uploading PurchaseOrder-28082015120536.csv to Amazon S3 bucket kol-kd
+Aug 28, 2015 12:07:01 PM DataLoader writeLog
+INFO: PurchaseOrder-28082015120536.csv transffered successfully.
+Aug 28, 2015 12:08:24 PM DataLoader writeLog
+INFO: All files are transffered successfully.
+Aug 28, 2015 12:17:01 PM DataLoader writeLog
+INFO: Application Started Successfully
+Aug 28, 2015 12:17:01 PM DataLoader writeLog
+INFO: DataExtraction Operation Started for DB table SUBSIDIARIES
+Aug 28, 2015 12:17:03 PM DataLoader writeLog
+INFO: Retrieving data for SUBSIDIARIES
+Aug 28, 2015 12:17:04 PM DataLoader writeLog
+INFO: DataExtration Oparation for table SUBSIDIARIES is extracted in C:\Scholastic\codes\Sandbox\P2PFinal\DB_Extracts\28-08-2015\SUBSIDIARIES-28082015121703.csv
+Aug 28, 2015 12:17:04 PM DataLoader writeLog
+INFO: DataExtration Oparation is Completed.
+Aug 28, 2015 12:17:04 PM DataLoader writeLog
+INFO: Executing query for PurchaseOrderwhere DATE_LAST_MODIFIED >= 2015-08-28 12:05:37
+Aug 28, 2015 12:17:11 PM DataLoader writeLog
+INFO: Retrieving data for PurchaseOrder
+Aug 28, 2015 12:17:12 PM DataLoader writeLog
+INFO: Extraction Completed for fact 
+Aug 28, 2015 12:17:13 PM DataLoader writeLog
+INFO: Uploading SUBSIDIARIES-28082015121703.csv to Amazon S3 bucket kol-kd
+Aug 28, 2015 12:17:13 PM DataLoader writeLog
+INFO: SUBSIDIARIES-28082015121703.csv transffered successfully.
+Aug 28, 2015 12:17:13 PM DataLoader writeLog
+SEVERE: null
+Aug 28, 2015 12:17:13 PM DataLoader writeLog
+INFO: Uploading PurchaseOrder-28082015121711.csv to Amazon S3 bucket kol-kd
+Aug 28, 2015 12:17:13 PM DataLoader writeLog
+INFO: PurchaseOrder-28082015121711.csv transffered successfully.
+Aug 28, 2015 12:17:13 PM DataLoader writeLog
+SEVERE: null
+Aug 28, 2015 12:17:13 PM DataLoader writeLog
+INFO: All files are transffered successfully.
+Aug 28, 2015 12:21:45 PM DataLoader writeLog
+INFO: Application Started Successfully
+Aug 28, 2015 12:21:45 PM DataLoader writeLog
+INFO: DataExtraction Operation Started for DB table SUBSIDIARIES
+Aug 28, 2015 12:21:47 PM DataLoader writeLog
+INFO: Retrieving data for SUBSIDIARIES
+Aug 28, 2015 12:21:48 PM DataLoader writeLog
+INFO: DataExtration Oparation for table SUBSIDIARIES is extracted in C:\Scholastic\codes\Sandbox\P2PFinal\DB_Extracts\28-08-2015\SUBSIDIARIES-28082015122147.csv
+Aug 28, 2015 12:21:48 PM DataLoader writeLog
+INFO: DataExtration Oparation is Completed.
+Aug 28, 2015 12:21:48 PM DataLoader writeLog
+INFO: Executing query for PurchaseOrderwhere DATE_LAST_MODIFIED >= 2015-08-28 12:17:12
+Aug 28, 2015 12:21:55 PM DataLoader writeLog
+INFO: Retrieving data for PurchaseOrder
+Aug 28, 2015 12:21:56 PM DataLoader writeLog
+INFO: Extraction Completed for fact 
+Aug 28, 2015 12:21:56 PM DataLoader writeLog
+INFO: Uploading SUBSIDIARIES-28082015122147.csv to Amazon S3 bucket kol-kd
+Aug 28, 2015 12:21:56 PM DataLoader writeLog
+INFO: SUBSIDIARIES-28082015122147.csv transffered successfully.
+Aug 28, 2015 12:21:56 PM DataLoader writeLog
+SEVERE: null
+Aug 28, 2015 12:21:56 PM DataLoader writeLog
+INFO: Uploading PurchaseOrder-28082015122155.csv to Amazon S3 bucket kol-kd
+Aug 28, 2015 12:21:56 PM DataLoader writeLog
+INFO: PurchaseOrder-28082015122155.csv transffered successfully.
+Aug 28, 2015 12:21:56 PM DataLoader writeLog
+SEVERE: null
+Aug 28, 2015 12:21:56 PM DataLoader writeLog
+INFO: All files are transffered successfully.
+Aug 28, 2015 12:23:07 PM DataLoader writeLog
+INFO: Application Started Successfully
+Aug 28, 2015 12:23:07 PM DataLoader writeLog
+INFO: DataExtraction Operation Started for DB table SUBSIDIARIES
+Aug 28, 2015 12:23:09 PM DataLoader writeLog
+INFO: Retrieving data for SUBSIDIARIES
+Aug 28, 2015 12:23:10 PM DataLoader writeLog
+INFO: DataExtration Oparation for table SUBSIDIARIES is extracted in C:\Scholastic\codes\Sandbox\P2PFinal\DB_Extracts\28-08-2015\SUBSIDIARIES-28082015122309.csv
+Aug 28, 2015 12:23:10 PM DataLoader writeLog
+INFO: DataExtration Oparation is Completed.
+Aug 28, 2015 12:23:10 PM DataLoader writeLog
+INFO: Executing query for PurchaseOrderwhere DATE_LAST_MODIFIED >= 2015-08-28 12:21:56
+Aug 28, 2015 12:23:16 PM DataLoader writeLog
+INFO: Retrieving data for PurchaseOrder
+Aug 28, 2015 12:23:17 PM DataLoader writeLog
+INFO: Extraction Completed for fact 
+Aug 28, 2015 12:23:39 PM DataLoader writeLog
+INFO: Uploading SUBSIDIARIES-28082015122309.csv to Amazon S3 bucket kol-kd
+Aug 28, 2015 12:23:46 PM DataLoader writeLog
+INFO: SUBSIDIARIES-28082015122309.csv transffered successfully.
+Aug 28, 2015 12:25:12 PM DataLoader writeLog
+INFO: Application Started Successfully
+Aug 28, 2015 12:25:12 PM DataLoader writeLog
+INFO: DataExtraction Operation Started for DB table SUBSIDIARIES
+Aug 28, 2015 12:25:14 PM DataLoader writeLog
+INFO: Retrieving data for SUBSIDIARIES
+Aug 28, 2015 12:25:15 PM DataLoader writeLog
+INFO: DataExtration Oparation for table SUBSIDIARIES is extracted in C:\Scholastic\codes\Sandbox\P2PFinal\DB_Extracts\28-08-2015\SUBSIDIARIES-28082015122514.csv
+Aug 28, 2015 12:25:15 PM DataLoader writeLog
+INFO: DataExtration Oparation is Completed.
+Aug 28, 2015 12:25:15 PM DataLoader writeLog
+INFO: Executing query for PurchaseOrderwhere DATE_LAST_MODIFIED >= 2015-08-28 12:23:17
+Aug 28, 2015 12:25:21 PM DataLoader writeLog
+INFO: Retrieving data for PurchaseOrder
+Aug 28, 2015 12:25:23 PM DataLoader writeLog
+INFO: Extraction Completed for fact 
+Aug 28, 2015 12:25:57 PM DataLoader writeLog
+INFO: Uploading SUBSIDIARIES-28082015122514.csv to Amazon S3 bucket kol-kd
+Aug 28, 2015 12:26:05 PM DataLoader writeLog
+INFO: SUBSIDIARIES-28082015122514.csv transffered successfully.
+Aug 28, 2015 12:27:22 PM DataLoader writeLog
+INFO: Application Started Successfully
+Aug 28, 2015 12:27:22 PM DataLoader writeLog
+INFO: DataExtraction Operation Started for DB table SUBSIDIARIES
+Aug 28, 2015 12:27:24 PM DataLoader writeLog
+INFO: Retrieving data for SUBSIDIARIES
+Aug 28, 2015 12:27:24 PM DataLoader writeLog
+INFO: DataExtration Oparation for table SUBSIDIARIES is extracted in C:\Scholastic\codes\Sandbox\P2PFinal\DB_Extracts\28-08-2015\SUBSIDIARIES-28082015122724.csv
+Aug 28, 2015 12:27:24 PM DataLoader writeLog
+INFO: DataExtration Oparation is Completed.
+Aug 28, 2015 12:27:24 PM DataLoader writeLog
+INFO: Executing query for PurchaseOrderwhere DATE_LAST_MODIFIED >= 2015-08-28 12:25:23
+Aug 28, 2015 12:27:32 PM DataLoader writeLog
+INFO: Retrieving data for PurchaseOrder
+Aug 28, 2015 12:27:33 PM DataLoader writeLog
+INFO: Extraction Completed for fact 
+Aug 28, 2015 12:27:34 PM DataLoader writeLog
+INFO: Uploading SUBSIDIARIES-28082015122724.csv to Amazon S3 bucket kol-kd
+Aug 28, 2015 12:27:34 PM DataLoader writeLog
+INFO: SUBSIDIARIES-28082015122724.csv transffered successfully.
+Aug 28, 2015 12:27:34 PM DataLoader writeLog
+SEVERE: null
+Aug 28, 2015 12:27:34 PM DataLoader writeLog
+INFO: Uploading PurchaseOrder-28082015122732.csv to Amazon S3 bucket kol-kd
+Aug 28, 2015 12:27:34 PM DataLoader writeLog
+INFO: PurchaseOrder-28082015122732.csv transffered successfully.
+Aug 28, 2015 12:27:34 PM DataLoader writeLog
+SEVERE: null
+Aug 28, 2015 12:27:34 PM DataLoader writeLog
+INFO: All files are transffered successfully.
+Aug 28, 2015 12:29:22 PM DataLoader writeLog
+INFO: Application Started Successfully
+Aug 28, 2015 12:29:22 PM DataLoader writeLog
+INFO: DataExtraction Operation Started for DB table SUBSIDIARIES
+Aug 28, 2015 12:29:23 PM DataLoader writeLog
+INFO: Retrieving data for SUBSIDIARIES
+Aug 28, 2015 12:29:25 PM DataLoader writeLog
+INFO: DataExtration Oparation for table SUBSIDIARIES is extracted in C:\Scholastic\codes\Sandbox\P2PFinal\DB_Extracts\28-08-2015\SUBSIDIARIES-28082015122923.csv
+Aug 28, 2015 12:29:25 PM DataLoader writeLog
+INFO: DataExtration Oparation is Completed.
+Aug 28, 2015 12:29:25 PM DataLoader writeLog
+INFO: Executing query for PurchaseOrderwhere DATE_LAST_MODIFIED >= 2015-08-28 12:27:33
+Aug 28, 2015 12:29:31 PM DataLoader writeLog
+INFO: Retrieving data for PurchaseOrder
+Aug 28, 2015 12:29:33 PM DataLoader writeLog
+INFO: Extraction Completed for fact 
+Aug 28, 2015 12:29:33 PM DataLoader writeLog
+INFO: Uploading SUBSIDIARIES-28082015122923.csv to Amazon S3 bucket kol-kd
+Aug 28, 2015 12:29:33 PM DataLoader writeLog
+INFO: SUBSIDIARIES-28082015122923.csv transffered successfully.
+Aug 28, 2015 12:32:18 PM DataLoader writeLog
+INFO: Application Started Successfully
+Aug 28, 2015 12:32:18 PM DataLoader writeLog
+INFO: DataExtraction Operation Started for DB table SUBSIDIARIES
+Aug 28, 2015 12:32:20 PM DataLoader writeLog
+INFO: Retrieving data for SUBSIDIARIES
+Aug 28, 2015 12:32:21 PM DataLoader writeLog
+INFO: DataExtration Oparation for table SUBSIDIARIES is extracted in C:\Scholastic\codes\Sandbox\P2PFinal\DB_Extracts\28-08-2015\SUBSIDIARIES-28082015123220.csv
+Aug 28, 2015 12:32:21 PM DataLoader writeLog
+INFO: DataExtration Oparation is Completed.
+Aug 28, 2015 12:32:21 PM DataLoader writeLog
+INFO: Executing query for PurchaseOrderwhere DATE_LAST_MODIFIED >= 2015-08-28 12:29:33
+Aug 28, 2015 12:32:27 PM DataLoader writeLog
+INFO: Retrieving data for PurchaseOrder
+Aug 28, 2015 12:32:29 PM DataLoader writeLog
+INFO: Extraction Completed for fact 
+Aug 28, 2015 12:32:29 PM DataLoader writeLog
+INFO: Uploading SUBSIDIARIES-28082015123220.csv to Amazon S3 bucket kol-kd
+Aug 28, 2015 12:32:29 PM DataLoader writeLog
+INFO: SUBSIDIARIES-28082015123220.csv transffered successfully.
+Aug 28, 2015 12:34:33 PM DataLoader writeLog
+INFO: Application Started Successfully
+Aug 28, 2015 12:34:33 PM DataLoader writeLog
+INFO: DataExtraction Operation Started for DB table SUBSIDIARIES
+Aug 28, 2015 12:34:35 PM DataLoader writeLog
+INFO: Retrieving data for SUBSIDIARIES
+Aug 28, 2015 12:34:36 PM DataLoader writeLog
+INFO: DataExtration Oparation for table SUBSIDIARIES is extracted in C:\Scholastic\codes\Sandbox\P2PFinal\DB_Extracts\28-08-2015\SUBSIDIARIES-28082015123435.csv
+Aug 28, 2015 12:34:36 PM DataLoader writeLog
+INFO: DataExtration Oparation is Completed.
+Aug 28, 2015 12:34:36 PM DataLoader writeLog
+INFO: Executing query for PurchaseOrderwhere DATE_LAST_MODIFIED >= 2015-08-28 12:32:29
+Aug 28, 2015 12:34:43 PM DataLoader writeLog
+INFO: Retrieving data for PurchaseOrder
+Aug 28, 2015 12:34:44 PM DataLoader writeLog
+INFO: Extraction Completed for fact 
+Aug 28, 2015 12:34:44 PM DataLoader writeLog
+INFO: Uploading SUBSIDIARIES-28082015123435.csv to Amazon S3 bucket kol-kd
+Aug 28, 2015 12:34:45 PM DataLoader writeLog
+INFO: SUBSIDIARIES-28082015123435.csv transffered successfully.
+Aug 28, 2015 12:34:45 PM DataLoader writeLog
+INFO: RedShift Data loading started for SUBSIDIARIES
+Aug 28, 2015 12:35:48 PM DataLoader writeLog
+INFO: Uploading PurchaseOrder-28082015123443.csv to Amazon S3 bucket kol-kd
+Aug 28, 2015 12:35:48 PM DataLoader writeLog
+INFO: PurchaseOrder-28082015123443.csv transffered successfully.
+Aug 28, 2015 12:35:48 PM DataLoader writeLog
+INFO: RedShift Data loading started for PurchaseOrder
+Aug 28, 2015 12:36:53 PM DataLoader writeLog
+INFO: All files are transffered successfully.
+Aug 28, 2015 12:52:50 PM DataLoader writeLog
+INFO: Application Started Successfully
+Aug 28, 2015 12:52:50 PM DataLoader writeLog
+INFO: DataExtraction Operation Started for DB table SUBSIDIARIES
+Aug 28, 2015 12:52:52 PM DataLoader writeLog
+INFO: Retrieving data for SUBSIDIARIES
+Aug 28, 2015 12:52:53 PM DataLoader writeLog
+INFO: DataExtration Oparation for table SUBSIDIARIES is extracted in C:\Scholastic\codes\Sandbox\P2PFinal\DB_Extracts\28-08-2015\SUBSIDIARIES-28082015125252.csv
+Aug 28, 2015 12:52:53 PM DataLoader writeLog
+INFO: DataExtration Oparation is Completed.
+Aug 28, 2015 12:52:53 PM DataLoader writeLog
+SEVERE: Error!!C:\Scholastic\codes\Sandbox\P2PFinal\FactSQLDir\purchase_orders.sql (The system cannot find the file specified)
+Aug 28, 2015 12:52:53 PM DataLoader writeLog
+SEVERE: Error!!java.io.FileNotFoundException: C:\Scholastic\codes\Sandbox\P2PFinal\FactSQLDir\purchase_orders.sql (The system cannot find the file specified)
+Aug 28, 2015 12:52:54 PM DataLoader writeLog
+INFO: Uploading SUBSIDIARIES-28082015125252.csv to Amazon S3 bucket kol-kd
+Aug 28, 2015 12:52:54 PM DataLoader writeLog
+INFO: SUBSIDIARIES-28082015125252.csv transffered successfully.
+Aug 28, 2015 12:52:54 PM DataLoader writeLog
+INFO: RedShift Data loading started for SUBSIDIARIES
+Aug 28, 2015 12:54:01 PM DataLoader writeLog
+SEVERE: null
+Aug 28, 2015 12:54:01 PM DataLoader writeLog
+INFO: All files are transffered successfully.
+Aug 28, 2015 2:20:02 PM DataLoader writeLog
+INFO: Application Started Successfully
+Aug 28, 2015 2:20:02 PM DataLoader writeLog
+INFO: DataExtraction Operation Started for DB table SUBSIDIARIES
+Aug 28, 2015 2:20:03 PM DataLoader writeLog
+INFO: Retrieving data for SUBSIDIARIES
+Aug 28, 2015 2:20:04 PM DataLoader writeLog
+INFO: DataExtration Oparation for table SUBSIDIARIES is extracted in C:\Scholastic\codes\Sandbox\P2PFinal\DB_Extracts\28-08-2015\SUBSIDIARIES-28082015022003.csv
+Aug 28, 2015 2:20:04 PM DataLoader writeLog
+INFO: DataExtration Oparation is Completed.
+Aug 28, 2015 2:22:26 PM DataLoader writeLog
+INFO: Executing query for purchase_orderswhere DATE_LAST_MODIFIED >= null
+Aug 28, 2015 2:22:27 PM DataLoader writeLog
+SEVERE: Error!![NetSuite][NetSuite JDBC Driver][OpenAccess SDK SQL Engine]Error getting the literal value of right operand.[10169]
+Aug 28, 2015 2:25:29 PM DataLoader writeLog
+INFO: Application Started Successfully
+Aug 28, 2015 2:25:29 PM DataLoader writeLog
+INFO: DataExtraction Operation Started for DB table SUBSIDIARIES
+Aug 28, 2015 2:25:31 PM DataLoader writeLog
+INFO: Retrieving data for SUBSIDIARIES
+Aug 28, 2015 2:25:32 PM DataLoader writeLog
+INFO: DataExtration Oparation for table SUBSIDIARIES is extracted in C:\Scholastic\codes\Sandbox\P2PFinal\DB_Extracts\28-08-2015\SUBSIDIARIES-28082015022531.csv
+Aug 28, 2015 2:25:32 PM DataLoader writeLog
+INFO: DataExtration Oparation is Completed.
+Aug 28, 2015 2:27:39 PM DataLoader writeLog
+INFO: Application Started Successfully
+Aug 28, 2015 2:27:39 PM DataLoader writeLog
+INFO: DataExtraction Operation Started for DB table SUBSIDIARIES
+Aug 28, 2015 2:27:41 PM DataLoader writeLog
+INFO: Retrieving data for SUBSIDIARIES
+Aug 28, 2015 2:27:42 PM DataLoader writeLog
+INFO: DataExtration Oparation for table SUBSIDIARIES is extracted in C:\Scholastic\codes\Sandbox\P2PFinal\DB_Extracts\28-08-2015\SUBSIDIARIES-28082015022741.csv
+Aug 28, 2015 2:27:42 PM DataLoader writeLog
+INFO: DataExtration Oparation is Completed.
+Aug 28, 2015 2:27:42 PM DataLoader writeLog
+INFO: Executing query for purchase_orderswhere DATE_LAST_MODIFIED >= 2015-08-28 12:34:44
+Aug 28, 2015 2:27:49 PM DataLoader writeLog
+INFO: Retrieving data for purchase_orders
+Aug 28, 2015 2:27:50 PM DataLoader writeLog
+INFO: Extraction Completed for fact 
+Aug 28, 2015 2:27:51 PM DataLoader writeLog
+INFO: Uploading SUBSIDIARIES-28082015022741.csv to Amazon S3 bucket kol-kd
+Aug 28, 2015 2:27:52 PM DataLoader writeLog
+INFO: SUBSIDIARIES-28082015022741.csv transffered successfully.
+Aug 28, 2015 2:27:52 PM DataLoader writeLog
+INFO: RedShift Data loading started for SUBSIDIARIES
+Aug 28, 2015 2:28:55 PM DataLoader writeLog
+INFO: Uploading purchase_orders-28082015022749.csv to Amazon S3 bucket kol-kd
+Aug 28, 2015 2:28:55 PM DataLoader writeLog
+INFO: purchase_orders-28082015022749.csv transffered successfully.
+Aug 28, 2015 2:28:55 PM DataLoader writeLog
+INFO: RedShift Data loading started for purchase_orders
+Aug 28, 2015 2:30:01 PM DataLoader writeLog
+INFO: All files are transffered successfully.
+Aug 28, 2015 2:50:40 PM DataLoader writeLog
+INFO: Application Started Successfully
+Aug 28, 2015 2:50:40 PM DataLoader writeLog
+INFO: DataExtraction Operation Started for DB table SUBSIDIARIES
+Aug 28, 2015 2:50:43 PM DataLoader writeLog
+INFO: Retrieving data for SUBSIDIARIES
+Aug 28, 2015 2:50:43 PM DataLoader writeLog
+INFO: DataExtration Oparation for table SUBSIDIARIES is extracted in C:\Scholastic\codes\Sandbox\P2PFinal\DB_Extracts\28-08-2015\SUBSIDIARIES-28082015025043.csv
+Aug 28, 2015 2:50:43 PM DataLoader writeLog
+INFO: DataExtration Oparation is Completed.
+Aug 28, 2015 3:24:20 PM DataLoader writeLog
+INFO: Application Started Successfully
+Aug 28, 2015 3:24:21 PM DataLoader writeLog
+INFO: DataExtraction Operation Started for DB table SUBSIDIARIES
+Aug 28, 2015 3:24:22 PM DataLoader writeLog
+INFO: Retrieving data for SUBSIDIARIES
+Aug 28, 2015 3:24:23 PM DataLoader writeLog
+INFO: DataExtration Oparation for table SUBSIDIARIES is extracted in C:\Scholastic\codes\Sandbox\P2PFinal\DB_Extracts\28-08-2015\SUBSIDIARIES-28082015032422.csv
+Aug 28, 2015 3:24:23 PM DataLoader writeLog
+INFO: DataExtration Oparation is Completed.
+Aug 28, 2015 4:04:57 PM DataLoader writeLog
+INFO: Application Started Successfully
+Aug 28, 2015 4:04:57 PM DataLoader writeLog
+INFO: DataExtraction Operation Started for DB table SUBSIDIARIES
+Aug 28, 2015 4:04:59 PM DataLoader writeLog
+INFO: Retrieving data for SUBSIDIARIES
+Aug 28, 2015 4:05:00 PM DataLoader writeLog
+INFO: DataExtration Oparation for table SUBSIDIARIES is extracted in C:\Scholastic\codes\Sandbox\P2PFinal\DB_Extracts\28-08-2015\SUBSIDIARIES-28082015040459.csv
+Aug 28, 2015 4:05:00 PM DataLoader writeLog
+INFO: DataExtration Oparation is Completed.
+Aug 28, 2015 4:05:44 PM DataLoader writeLog
+INFO: Application Started Successfully
+Aug 28, 2015 4:05:44 PM DataLoader writeLog
+INFO: DataExtraction Operation Started for DB table SUBSIDIARIES
+Aug 28, 2015 4:05:46 PM DataLoader writeLog
+INFO: Retrieving data for SUBSIDIARIES
+Aug 28, 2015 4:05:47 PM DataLoader writeLog
+INFO: DataExtration Oparation for table SUBSIDIARIES is extracted in C:\Scholastic\codes\Sandbox\P2PFinal\DB_Extracts\28-08-2015\SUBSIDIARIES-28082015040546.csv
+Aug 28, 2015 4:05:47 PM DataLoader writeLog
+INFO: DataExtration Oparation is Completed.
+Aug 28, 2015 4:05:47 PM DataLoader writeLog
+INFO: Executing query for purchase_orderswhere DATE_LAST_MODIFIED >= 2015-01-02 04:11:10
+Aug 28, 2015 4:05:56 PM DataLoader writeLog
+INFO: Retrieving data for purchase_orders
+Aug 28, 2015 4:06:36 PM DataLoader writeLog
+INFO: Extraction Completed for fact 
+Aug 28, 2015 4:06:38 PM DataLoader writeLog
+INFO: Uploading SUBSIDIARIES-28082015040546.csv to Amazon S3 bucket kol-kd
+Aug 28, 2015 4:06:38 PM DataLoader writeLog
+INFO: SUBSIDIARIES-28082015040546.csv transffered successfully.
+Aug 28, 2015 4:06:38 PM DataLoader writeLog
+INFO: RedShift Data loading started for SUBSIDIARIES
+Aug 28, 2015 4:07:41 PM DataLoader writeLog
+INFO: Uploading purchase_orders-28082015040556.csv to Amazon S3 bucket kol-kd
+Aug 28, 2015 4:07:41 PM DataLoader writeLog
+INFO: purchase_orders-28082015040556.csv transffered successfully.
+Aug 28, 2015 4:07:41 PM DataLoader writeLog
+INFO: RedShift Data loading started for purchase_orders
+Aug 28, 2015 4:08:44 PM DataLoader writeLog
+INFO: All files are transffered successfully.
+Aug 28, 2015 5:11:05 PM DataLoader writeLog
+INFO: Application Started Successfully
+Aug 28, 2015 5:11:05 PM DataLoader writeLog
+INFO: DataExtraction Operation Started for DB table SUBSIDIARIES
+Aug 28, 2015 5:11:07 PM DataLoader writeLog
+INFO: Retrieving data for SUBSIDIARIES
+Aug 28, 2015 5:11:07 PM DataLoader writeLog
+INFO: DataExtration Oparation for table SUBSIDIARIES is extracted in C:\Scholastic\codes\Sandbox\P2PFinal\DB_Extracts\28-08-2015\SUBSIDIARIES-28082015051107.csv
+Aug 28, 2015 5:11:07 PM DataLoader writeLog
+INFO: DataExtration Oparation is Completed for dimensions
+Aug 28, 2015 5:11:08 PM DataLoader writeLog
+INFO: Executing query for purchase_orderswhere DATE_LAST_MODIFIED >= 2015-08-28 16:06:36
+Aug 28, 2015 5:11:14 PM DataLoader writeLog
+INFO: Retrieving data for purchase_orders
+Aug 28, 2015 5:11:16 PM DataLoader writeLog
+INFO: Extraction Completed for fact 
+Aug 28, 2015 5:11:16 PM DataLoader writeLog
+INFO: DataExtration Oparation is Completed for facts
+Aug 28, 2015 5:11:19 PM DataLoader writeLog
+INFO: Uploading SUBSIDIARIES-28082015051107.csv to Amazon S3 bucket kol-kd
+Aug 28, 2015 5:11:19 PM DataLoader writeLog
+INFO: SUBSIDIARIES-28082015051107.csv transffered successfully.
+Aug 28, 2015 5:11:19 PM DataLoader writeLog
+INFO: RedShift Data loading started for SUBSIDIARIES
+Aug 28, 2015 5:12:22 PM DataLoader writeLog
+INFO: Uploading purchase_orders-28082015051114.csv to Amazon S3 bucket kol-kd
+Aug 28, 2015 5:12:22 PM DataLoader writeLog
+INFO: purchase_orders-28082015051114.csv transffered successfully.
+Aug 28, 2015 5:12:22 PM DataLoader writeLog
+INFO: RedShift Data loading started for purchase_orders
+Aug 28, 2015 5:13:26 PM DataLoader writeLog
+INFO: All files are transffered successfully.

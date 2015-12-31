@@ -1,0 +1,206 @@
+Aug 21, 2015 11:38:29 AM DataLoader writeLog
+INFO: Application Started Successfully
+Aug 21, 2015 11:38:31 AM DataLoader writeLog
+SEVERE: null
+Aug 21, 2015 11:38:31 AM DataLoader writeLog
+SEVERE: null
+Aug 21, 2015 11:38:31 AM DataLoader writeLog
+INFO: All files are transffered successfully.
+Aug 21, 2015 11:39:42 AM DataLoader writeLog
+INFO: Application Started Successfully
+Aug 21, 2015 11:39:42 AM DataLoader writeLog
+SEVERE: null
+Aug 21, 2015 11:39:42 AM DataLoader writeLog
+SEVERE: null
+Aug 21, 2015 11:39:42 AM DataLoader writeLog
+INFO: All files are transffered successfully.
+Aug 21, 2015 11:40:18 AM DataLoader writeLog
+INFO: Application Started Successfully
+Aug 21, 2015 11:40:18 AM DataLoader writeLog
+INFO: DataExtraction Operation Started for DB table LOCATIONS
+Aug 21, 2015 11:41:03 AM DataLoader writeLog
+INFO: Retrieving data for LOCATIONS
+Aug 21, 2015 11:41:21 AM DataLoader writeLog
+INFO: DataExtration Oparation for table LOCATIONS is extracted in C:\Scholastic\codes\Sandbox\P2PFinal\DB_Extracts\21-08-2015\LOCATIONS-21082015114107.csv
+Aug 21, 2015 11:41:21 AM DataLoader writeLog
+INFO: DataExtraction Operation Started for DB table EMPLOYEES
+Aug 21, 2015 11:41:50 AM DataLoader writeLog
+INFO: Retrieving data for EMPLOYEES
+Aug 21, 2015 11:41:53 AM DataLoader writeLog
+INFO: DataExtration Oparation for table EMPLOYEES is extracted in C:\Scholastic\codes\Sandbox\P2PFinal\DB_Extracts\21-08-2015\EMPLOYEES-21082015114150.csv
+Aug 21, 2015 11:41:53 AM DataLoader writeLog
+INFO: DataExtration Oparation is Completed.
+Aug 21, 2015 11:41:53 AM DataLoader writeLog
+INFO: Uploading LOCATIONS-21082015114107.csv to Amazon S3 bucket kol-kd
+Aug 21, 2015 11:41:53 AM DataLoader writeLog
+INFO: LOCATIONS-21082015114107.csv transffered successfully.
+Aug 21, 2015 11:42:39 AM DataLoader writeLog
+SEVERE: Cannot format given Object as a Date
+Aug 21, 2015 11:44:16 AM DataLoader writeLog
+INFO: Application Started Successfully
+Aug 21, 2015 11:44:16 AM DataLoader writeLog
+INFO: DataExtraction Operation Started for DB table LOCATIONS
+Aug 21, 2015 11:44:18 AM DataLoader writeLog
+INFO: Retrieving data for LOCATIONS
+Aug 21, 2015 11:44:19 AM DataLoader writeLog
+INFO: DataExtration Oparation for table LOCATIONS is extracted in C:\Scholastic\codes\Sandbox\P2PFinal\DB_Extracts\21-08-2015\LOCATIONS-21082015114418.csv
+Aug 21, 2015 11:44:19 AM DataLoader writeLog
+INFO: DataExtraction Operation Started for DB table EMPLOYEES
+Aug 21, 2015 11:44:20 AM DataLoader writeLog
+INFO: Retrieving data for EMPLOYEES
+Aug 21, 2015 11:44:22 AM DataLoader writeLog
+INFO: DataExtration Oparation for table EMPLOYEES is extracted in C:\Scholastic\codes\Sandbox\P2PFinal\DB_Extracts\21-08-2015\EMPLOYEES-21082015114420.csv
+Aug 21, 2015 11:44:22 AM DataLoader writeLog
+INFO: DataExtration Oparation is Completed.
+Aug 21, 2015 11:44:23 AM DataLoader writeLog
+INFO: Uploading LOCATIONS-21082015114418.csv to Amazon S3 bucket kol-kd
+Aug 21, 2015 11:44:23 AM DataLoader writeLog
+INFO: LOCATIONS-21082015114418.csv transffered successfully.
+Aug 21, 2015 11:45:16 AM DataLoader writeLog
+SEVERE: Cannot format given Object as a Date
+Aug 21, 2015 11:46:29 AM DataLoader writeLog
+INFO: Application Started Successfully
+Aug 21, 2015 11:46:29 AM DataLoader writeLog
+INFO: DataExtraction Operation Started for DB table LOCATIONS
+Aug 21, 2015 11:46:31 AM DataLoader writeLog
+INFO: Retrieving data for LOCATIONS
+Aug 21, 2015 11:46:34 AM DataLoader writeLog
+INFO: DataExtration Oparation for table LOCATIONS is extracted in C:\Scholastic\codes\Sandbox\P2PFinal\DB_Extracts\21-08-2015\LOCATIONS-21082015114631.csv
+Aug 21, 2015 11:46:34 AM DataLoader writeLog
+INFO: DataExtraction Operation Started for DB table EMPLOYEES
+Aug 21, 2015 11:46:35 AM DataLoader writeLog
+INFO: Retrieving data for EMPLOYEES
+Aug 21, 2015 11:46:37 AM DataLoader writeLog
+INFO: DataExtration Oparation for table EMPLOYEES is extracted in C:\Scholastic\codes\Sandbox\P2PFinal\DB_Extracts\21-08-2015\EMPLOYEES-21082015114635.csv
+Aug 21, 2015 11:46:37 AM DataLoader writeLog
+INFO: DataExtration Oparation is Completed.
+Aug 21, 2015 11:46:37 AM DataLoader writeLog
+INFO: Uploading LOCATIONS-21082015114631.csv to Amazon S3 bucket kol-kd
+Aug 21, 2015 11:46:37 AM DataLoader writeLog
+INFO: LOCATIONS-21082015114631.csv transffered successfully.
+Aug 21, 2015 12:43:57 PM DataLoader writeLog
+INFO: Application Started Successfully
+Aug 21, 2015 12:43:57 PM DataLoader writeLog
+INFO: DataExtraction Operation Started for DB table LOCATIONS
+Aug 21, 2015 12:44:08 PM DataLoader writeLog
+INFO: Retrieving data for LOCATIONS
+Aug 21, 2015 12:44:10 PM DataLoader writeLog
+INFO: DataExtration Oparation for table LOCATIONS is extracted in C:\Scholastic\codes\Sandbox\P2PFinal\DB_Extracts\21-08-2015\LOCATIONS-21082015124408.csv
+Aug 21, 2015 12:44:10 PM DataLoader writeLog
+INFO: DataExtraction Operation Started for DB table EMPLOYEES
+Aug 21, 2015 12:48:50 PM DataLoader writeLog
+INFO: Application Started Successfully
+Aug 21, 2015 12:48:50 PM DataLoader writeLog
+INFO: DataExtraction Operation Started for DB table LOCATIONS
+Aug 21, 2015 12:49:04 PM DataLoader writeLog
+INFO: Retrieving data for LOCATIONS
+Aug 21, 2015 12:49:05 PM DataLoader writeLog
+INFO: DataExtration Oparation for table LOCATIONS is extracted in C:\Scholastic\codes\Sandbox\P2PFinal\DB_Extracts\21-08-2015\LOCATIONS-21082015124904.csv
+Aug 21, 2015 12:49:05 PM DataLoader writeLog
+INFO: DataExtration Oparation is Completed.
+Aug 21, 2015 12:49:08 PM DataLoader writeLog
+INFO: Uploading LOCATIONS-21082015124904.csv to Amazon S3 bucket kol-kd
+Aug 21, 2015 12:49:08 PM DataLoader writeLog
+INFO: LOCATIONS-21082015124904.csv transffered successfully.
+Aug 21, 2015 12:49:08 PM DataLoader writeLog
+SEVERE: Cannot format given Object as a Date
+Aug 21, 2015 12:49:08 PM DataLoader writeLog
+INFO: All files are transffered successfully.
+Aug 21, 2015 7:40:27 PM DataLoader writeLog
+INFO: Application Started Successfully
+Aug 21, 2015 7:40:27 PM DataLoader writeLog
+INFO: DataExtraction Operation Started for DB table EMPLOYEES
+Aug 21, 2015 7:40:31 PM DataLoader writeLog
+INFO: Retrieving data for EMPLOYEES
+Aug 21, 2015 7:40:38 PM DataLoader writeLog
+INFO: DataExtration Oparation for table EMPLOYEES is extracted in C:\Scholastic\codes\Sandbox\P2PFinal\DB_Extracts\21-08-2015\EMPLOYEES-21082015074031.csv
+Aug 21, 2015 7:40:38 PM DataLoader writeLog
+INFO: DataExtration Oparation is Completed.
+Aug 21, 2015 7:40:42 PM DataLoader writeLog
+INFO: Uploading EMPLOYEES-21082015074031.csv to Amazon S3 bucket kol-kd
+Aug 21, 2015 7:40:42 PM DataLoader writeLog
+INFO: EMPLOYEES-21082015074031.csv transffered successfully.
+Aug 21, 2015 7:40:42 PM DataLoader writeLog
+SEVERE: Unparseable date: "1440166227417"
+Aug 21, 2015 7:40:42 PM DataLoader writeLog
+INFO: All files are transffered successfully.
+Aug 21, 2015 7:42:04 PM DataLoader writeLog
+INFO: Application Started Successfully
+Aug 21, 2015 7:42:04 PM DataLoader writeLog
+INFO: DataExtraction Operation Started for DB table EMPLOYEES
+Aug 21, 2015 7:42:08 PM DataLoader writeLog
+INFO: Retrieving data for EMPLOYEES
+Aug 21, 2015 7:42:15 PM DataLoader writeLog
+INFO: DataExtration Oparation for table EMPLOYEES is extracted in C:\Scholastic\codes\Sandbox\P2PFinal\DB_Extracts\21-08-2015\EMPLOYEES-21082015074208.csv
+Aug 21, 2015 7:42:15 PM DataLoader writeLog
+INFO: DataExtration Oparation is Completed.
+Aug 21, 2015 7:42:15 PM DataLoader writeLog
+INFO: Uploading EMPLOYEES-21082015074208.csv to Amazon S3 bucket kol-kd
+Aug 21, 2015 7:42:15 PM DataLoader writeLog
+INFO: EMPLOYEES-21082015074208.csv transffered successfully.
+Aug 21, 2015 7:42:20 PM DataLoader writeLog
+INFO: All files are transffered successfully.
+Aug 21, 2015 7:49:21 PM DataLoader writeLog
+INFO: Application Started Successfully
+Aug 21, 2015 7:49:21 PM DataLoader writeLog
+INFO: DataExtraction Operation Started for DB table EMPLOYEES
+Aug 21, 2015 7:49:26 PM DataLoader writeLog
+INFO: Retrieving data for EMPLOYEES
+Aug 21, 2015 7:49:42 PM DataLoader writeLog
+INFO: DataExtration Oparation for table EMPLOYEES is extracted in C:\Scholastic\codes\Sandbox\P2PFinal\DB_Extracts\21-08-2015\EMPLOYEES-21082015074926.csv
+Aug 21, 2015 7:49:42 PM DataLoader writeLog
+INFO: DataExtration Oparation is Completed.
+Aug 21, 2015 7:49:43 PM DataLoader writeLog
+INFO: Uploading EMPLOYEES-21082015074926.csv to Amazon S3 bucket kol-kd
+Aug 21, 2015 7:49:43 PM DataLoader writeLog
+INFO: EMPLOYEES-21082015074926.csv transffered successfully.
+Aug 21, 2015 7:49:47 PM DataLoader writeLog
+INFO: All files are transffered successfully.
+Aug 21, 2015 8:15:48 PM DataLoader writeLog
+INFO: Application Started Successfully
+Aug 21, 2015 8:15:48 PM DataLoader writeLog
+INFO: DataExtraction Operation Started for DB table EMPLOYEES
+Aug 21, 2015 8:15:53 PM DataLoader writeLog
+INFO: Retrieving data for EMPLOYEES
+Aug 21, 2015 8:16:08 PM DataLoader writeLog
+INFO: DataExtration Oparation for table EMPLOYEES is extracted in C:\Scholastic\codes\Sandbox\P2PFinal\DB_Extracts\21-08-2015\EMPLOYEES-21082015081553.csv
+Aug 21, 2015 8:16:08 PM DataLoader writeLog
+INFO: DataExtration Oparation is Completed.
+Aug 21, 2015 8:16:10 PM DataLoader writeLog
+INFO: Uploading EMPLOYEES-21082015081553.csv to Amazon S3 bucket kol-kd
+Aug 21, 2015 8:16:10 PM DataLoader writeLog
+INFO: EMPLOYEES-21082015081553.csv transffered successfully.
+Aug 21, 2015 8:16:28 PM DataLoader writeLog
+INFO: All files are transffered successfully.
+Aug 21, 2015 8:17:45 PM DataLoader writeLog
+INFO: Application Started Successfully
+Aug 21, 2015 8:17:45 PM DataLoader writeLog
+INFO: DataExtraction Operation Started for DB table EMPLOYEES
+Aug 21, 2015 8:17:52 PM DataLoader writeLog
+INFO: Retrieving data for EMPLOYEES
+Aug 21, 2015 8:18:13 PM DataLoader writeLog
+INFO: DataExtration Oparation for table EMPLOYEES is extracted in C:\Scholastic\codes\Sandbox\P2PFinal\DB_Extracts\21-08-2015\EMPLOYEES-21082015081752.csv
+Aug 21, 2015 8:18:13 PM DataLoader writeLog
+INFO: DataExtration Oparation is Completed.
+Aug 21, 2015 8:18:14 PM DataLoader writeLog
+INFO: Uploading EMPLOYEES-21082015081752.csv to Amazon S3 bucket kol-kd
+Aug 21, 2015 8:18:14 PM DataLoader writeLog
+INFO: EMPLOYEES-21082015081752.csv transffered successfully.
+Aug 21, 2015 8:18:36 PM DataLoader writeLog
+INFO: All files are transffered successfully.
+Aug 21, 2015 8:19:08 PM DataLoader writeLog
+INFO: Application Started Successfully
+Aug 21, 2015 8:19:08 PM DataLoader writeLog
+INFO: DataExtraction Operation Started for DB table EMPLOYEES
+Aug 21, 2015 8:19:14 PM DataLoader writeLog
+INFO: Retrieving data for EMPLOYEES
+Aug 21, 2015 8:19:49 PM DataLoader writeLog
+INFO: DataExtration Oparation for table EMPLOYEES is extracted in C:\Scholastic\codes\Sandbox\P2PFinal\DB_Extracts\21-08-2015\EMPLOYEES-21082015081914.csv
+Aug 21, 2015 8:19:49 PM DataLoader writeLog
+INFO: DataExtration Oparation is Completed.
+Aug 21, 2015 8:19:50 PM DataLoader writeLog
+INFO: Uploading EMPLOYEES-21082015081914.csv to Amazon S3 bucket kol-kd
+Aug 21, 2015 8:19:50 PM DataLoader writeLog
+INFO: EMPLOYEES-21082015081914.csv transffered successfully.
+Aug 21, 2015 8:20:54 PM DataLoader writeLog
+INFO: All files are transffered successfully.

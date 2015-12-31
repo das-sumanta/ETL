@@ -1,0 +1,13 @@
+Nov 26, 2015 7:41:17 PM DataLoader writeLog
+INFO: Application Started Successfully.RunID  of this session is 22
+Nov 26, 2015 7:41:17 PM DataLoader writeLog
+INFO: RunID 22
+DataExtraction Operation Started for DB table EMPLOYEES
+Nov 26, 2015 7:41:33 PM DataLoader writeLog
+INFO: RunID 22
+Retrieving data for EMPLOYEES
+Nov 26, 2015 7:41:48 PM DataLoader writeLog
+INFO: RunID  No.22
+DataExtration Oparation for table EMPLOYEES is extracted in D:\Sumanta\workspace\P2PFinal\DB_Extracts\26-11-2015\EMPLOYEES-RunID-22-26112015074133.csv
+Nov 26, 2015 8:16:25 PM DataLoader writeLog
+INFO: Application Started Successfully.RunID  of this session is 23

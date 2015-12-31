@@ -1,0 +1,2 @@
+RunID 			Table			ExtractStartTime		ExtractEndTime		LoadStartTime(S3)		LoadEndTime(S3)		LoadStartTime(Redshift)		LoadEndTime(Redshift)		Status
+50			CLASSES			17:19:07		17:19:09		17:19:09		17:19:09		17:20:09		17:20:30		Loaded

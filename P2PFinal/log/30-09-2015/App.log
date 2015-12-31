@@ -1,0 +1,13 @@
+Sep 30, 2015 6:53:39 PM DataLoader writeLog
+INFO: Application Started Successfully.RunID  of this session is 3
+Sep 30, 2015 6:53:39 PM DataLoader writeLog
+INFO: RunID 3
+DataExtraction Operation Started for DB table ACCOUNTS
+Sep 30, 2015 6:53:41 PM DataLoader writeLog
+INFO: RunID 3
+Retrieving data for ACCOUNTS
+Sep 30, 2015 6:53:42 PM DataLoader writeLog
+SEVERE: RunID 3
+SQL Error!![NetSuite][NetSuite JDBC Driver]Column index 17 is out of range.
+Sep 30, 2015 6:53:42 PM DataLoader writeLog
+SEVERE: Cannot load the credentials from the credential profiles file. Please make sure that your credentials file is at the correct location, and is in valid format.

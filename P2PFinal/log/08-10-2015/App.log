@@ -1,0 +1,182 @@
+Oct 08, 2015 4:42:06 PM DataLoader writeLog
+INFO: Application Started Successfully.RunID  of this session is 24
+Oct 08, 2015 4:42:06 PM DataLoader writeLog
+INFO: RunID 24
+DataExtraction Operation Started for DB table CLASSES
+Oct 08, 2015 4:42:08 PM DataLoader writeLog
+INFO: RunID 24
+Retrieving data for CLASSES
+Oct 08, 2015 4:42:08 PM DataLoader writeLog
+INFO: RunID  No.24
+DataExtration Oparation for table CLASSES is extracted in C:\sumanta\bkp\7-10-2015\P2PFinal\DB_Extracts\08-10-2015\CLASSES-RunID-24-08102015044208.csv
+Oct 08, 2015 4:42:08 PM DataLoader writeLog
+INFO: RunID 24
+DataExtraction Operation Started for DB table CURRENCIES
+Oct 08, 2015 4:42:09 PM DataLoader writeLog
+INFO: RunID 24
+Retrieving data for CURRENCIES
+Oct 08, 2015 4:42:09 PM DataLoader writeLog
+INFO: RunID  No.24
+DataExtration Oparation for table CURRENCIES is extracted in C:\sumanta\bkp\7-10-2015\P2PFinal\DB_Extracts\08-10-2015\CURRENCIES-RunID-24-08102015044209.csv
+Oct 08, 2015 4:42:11 PM DataLoader writeLog
+INFO: RunID 24
+Uploading CLASSES-RunID-24-08102015044208.csv to Amazon S3 bucket kol-kd
+Oct 08, 2015 4:42:11 PM DataLoader writeLog
+INFO: RunID 24
+CLASSES-RunID-24-08102015044208.csv transffered successfully.
+Oct 08, 2015 4:42:11 PM DataLoader writeLog
+INFO: RedShift Data loading started for CLASSES
+Oct 08, 2015 4:43:13 PM DataLoader writeLog
+INFO: Executing Query..
+copy dw_prestage.CLASSES from 's3://kol-kd/08-10-2015/CLASSES-RunID-24-08102015044208.csv' credentials 'aws_access_key_id=AKIAIV5OYYAGFGTEELSA;aws_secret_access_key=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' timeformat 'YYYY-MM-DD HH:MI:SS' escape removequotes delimiter as ',' IGNOREHEADER 1 ACCEPTINVCHARS;
+Oct 08, 2015 4:43:15 PM DataLoader writeLog
+INFO: RedShift Data loading is completed successfully for CLASSES
+Oct 08, 2015 4:43:15 PM DataLoader writeLog
+INFO: RunID 24
+All tables are loaded sucessfully
+Oct 08, 2015 4:48:04 PM DataLoader writeLog
+INFO: Application Started Successfully.RunID  of this session is 25
+Oct 08, 2015 4:48:04 PM DataLoader writeLog
+INFO: RunID 25
+DataExtraction Operation Started for DB table CLASSES
+Oct 08, 2015 4:48:12 PM DataLoader writeLog
+INFO: RunID 25
+Retrieving data for CLASSES
+Oct 08, 2015 4:48:13 PM DataLoader writeLog
+INFO: RunID  No.25
+DataExtration Oparation for table CLASSES is extracted in C:\sumanta\bkp\7-10-2015\P2PFinal\DB_Extracts\08-10-2015\CLASSES-RunID-25-08102015044812.csv
+Oct 08, 2015 4:48:13 PM DataLoader writeLog
+INFO: RunID 25
+DataExtraction Operation Started for DB table CURRENCIES
+Oct 08, 2015 4:48:13 PM DataLoader writeLog
+INFO: RunID 25
+Retrieving data for CURRENCIES
+Oct 08, 2015 4:48:13 PM DataLoader writeLog
+INFO: RunID  No.25
+DataExtration Oparation for table CURRENCIES is extracted in C:\sumanta\bkp\7-10-2015\P2PFinal\DB_Extracts\08-10-2015\CURRENCIES-RunID-25-08102015044813.csv
+Oct 08, 2015 4:48:14 PM DataLoader writeLog
+INFO: RunID 25
+Uploading CLASSES-RunID-25-08102015044812.csv to Amazon S3 bucket kol-kd
+Oct 08, 2015 4:48:14 PM DataLoader writeLog
+INFO: RunID 25
+CLASSES-RunID-25-08102015044812.csv transffered successfully.
+Oct 08, 2015 4:48:14 PM DataLoader writeLog
+INFO: RedShift Data loading started for CLASSES
+Oct 08, 2015 4:49:16 PM DataLoader writeLog
+INFO: Executing Query..
+copy dw_prestage.CLASSES from 's3://kol-kd/08-10-2015/CLASSES-RunID-25-08102015044812.csv' credentials 'aws_access_key_id=AKIAIV5OYYAGFGTEELSA;aws_secret_access_key=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' timeformat 'YYYY-MM-DD HH:MI:SS' escape removequotes delimiter as ',' IGNOREHEADER 1 ACCEPTINVCHARS;
+Oct 08, 2015 4:49:17 PM DataLoader writeLog
+INFO: RedShift Data loading is completed successfully for CLASSES
+Oct 08, 2015 4:49:17 PM DataLoader writeLog
+INFO: RunID 25
+Uploading CURRENCIES-RunID-25-08102015044813.csv to Amazon S3 bucket kol-kd
+Oct 08, 2015 4:49:17 PM DataLoader writeLog
+INFO: RunID 25
+CURRENCIES-RunID-25-08102015044813.csv transffered successfully.
+Oct 08, 2015 4:49:17 PM DataLoader writeLog
+INFO: RedShift Data loading started for CURRENCIES
+Oct 08, 2015 4:50:19 PM DataLoader writeLog
+INFO: Executing Query..
+copy dw_prestage.CURRENCIES from 's3://kol-kd/08-10-2015/CURRENCIES-RunID-25-08102015044813.csv' credentials 'aws_access_key_id=AKIAIV5OYYAGFGTEELSA;aws_secret_access_key=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' timeformat 'YYYY-MM-DD HH:MI:SS' escape removequotes delimiter as ',' IGNOREHEADER 1 ACCEPTINVCHARS;
+Oct 08, 2015 4:50:35 PM DataLoader writeLog
+INFO: RedShift Data loading is completed successfully for CURRENCIES
+Oct 08, 2015 4:55:32 PM DataLoader writeLog
+INFO: Application Started Successfully.RunID  of this session is 26
+Oct 08, 2015 4:55:32 PM DataLoader writeLog
+INFO: RunID 26
+DataExtraction Operation Started for DB table CLASSES
+Oct 08, 2015 4:55:41 PM DataLoader writeLog
+INFO: RunID 26
+Retrieving data for CLASSES
+Oct 08, 2015 4:55:41 PM DataLoader writeLog
+INFO: RunID  No.26
+DataExtration Oparation for table CLASSES is extracted in C:\sumanta\bkp\7-10-2015\P2PFinal\DB_Extracts\08-10-2015\CLASSES-RunID-26-08102015045541.csv
+Oct 08, 2015 4:55:42 PM DataLoader writeLog
+INFO: RunID 26
+Uploading CLASSES-RunID-26-08102015045541.csv to Amazon S3 bucket kol-kd
+Oct 08, 2015 4:55:42 PM DataLoader writeLog
+INFO: RunID 26
+CLASSES-RunID-26-08102015045541.csv transffered successfully.
+Oct 08, 2015 4:55:54 PM DataLoader writeLog
+INFO: RedShift Data loading started for CLASSES
+Oct 08, 2015 4:57:23 PM DataLoader writeLog
+INFO: Executing Query..
+copy dw_prestage.CLASSES from 's3://kol-kd/08-10-2015/CLASSES-RunID-26-08102015045541.csv' credentials 'aws_access_key_id=AKIAIV5OYYAGFGTEELSA;aws_secret_access_key=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' timeformat 'YYYY-MM-DD HH:MI:SS' escape removequotes delimiter as ',' IGNOREHEADER 1 ACCEPTINVCHARS;
+Oct 08, 2015 4:57:38 PM DataLoader writeLog
+INFO: RedShift Data loading is completed successfully for CLASSES
+Oct 08, 2015 5:04:58 PM DataLoader writeLog
+INFO: Application Started Successfully.RunID  of this session is 27
+Oct 08, 2015 5:04:58 PM DataLoader writeLog
+INFO: RunID 27
+DataExtraction Operation Started for DB table CLASSES
+Oct 08, 2015 5:05:07 PM DataLoader writeLog
+INFO: RunID 27
+Retrieving data for CLASSES
+Oct 08, 2015 5:05:07 PM DataLoader writeLog
+INFO: RunID  No.27
+DataExtration Oparation for table CLASSES is extracted in C:\sumanta\bkp\7-10-2015\P2PFinal\DB_Extracts\08-10-2015\CLASSES-RunID-27-08102015050507.csv
+Oct 08, 2015 5:05:07 PM DataLoader writeLog
+INFO: RunID 27
+DataExtraction Operation Started for DB table CURRENCIES
+Oct 08, 2015 5:05:08 PM DataLoader writeLog
+INFO: RunID 27
+Retrieving data for CURRENCIES
+Oct 08, 2015 5:05:09 PM DataLoader writeLog
+INFO: RunID  No.27
+DataExtration Oparation for table CURRENCIES is extracted in C:\sumanta\bkp\7-10-2015\P2PFinal\DB_Extracts\08-10-2015\CURRENCIES-RunID-27-08102015050508.csv
+Oct 08, 2015 5:05:09 PM DataLoader writeLog
+INFO: RunID 27
+Uploading CLASSES-RunID-27-08102015050507.csv to Amazon S3 bucket kol-kd
+Oct 08, 2015 5:05:09 PM DataLoader writeLog
+INFO: RunID 27
+CLASSES-RunID-27-08102015050507.csv transffered successfully.
+Oct 08, 2015 5:05:09 PM DataLoader writeLog
+INFO: RedShift Data loading started for CLASSES
+Oct 08, 2015 5:06:11 PM DataLoader writeLog
+INFO: Executing Query..
+copy dw_prestage.CLASSES from 's3://kol-kd/08-10-2015/CLASSES-RunID-27-08102015050507.csv' credentials 'aws_access_key_id=AKIAIV5OYYAGFGTEELSA;aws_secret_access_key=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' timeformat 'YYYY-MM-DD HH:MI:SS' escape removequotes delimiter as ',' IGNOREHEADER 1 ACCEPTINVCHARS;
+Oct 08, 2015 5:06:12 PM DataLoader writeLog
+INFO: RedShift Data loading is completed successfully for CLASSES
+Oct 08, 2015 5:06:12 PM DataLoader writeLog
+INFO: RunID 27
+Uploading CURRENCIES-RunID-27-08102015050508.csv to Amazon S3 bucket kol-kd
+Oct 08, 2015 5:06:12 PM DataLoader writeLog
+INFO: RunID 27
+CURRENCIES-RunID-27-08102015050508.csv transffered successfully.
+Oct 08, 2015 5:06:12 PM DataLoader writeLog
+INFO: RedShift Data loading started for CURRENCIES
+Oct 08, 2015 5:07:14 PM DataLoader writeLog
+INFO: Executing Query..
+copy dw_prestage.CURRENCIES from 's3://kol-kd/08-10-2015/CURRENCIES-RunID-27-08102015050508.csv' credentials 'aws_access_key_id=AKIAIV5OYYAGFGTEELSA;aws_secret_access_key=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' timeformat 'YYYY-MM-DD HH:MI:SS' escape removequotes delimiter as ',' IGNOREHEADER 1 ACCEPTINVCHARS;
+Oct 08, 2015 5:07:15 PM DataLoader writeLog
+INFO: RedShift Data loading is completed successfully for CURRENCIES
+Oct 08, 2015 5:20:14 PM DataLoader writeLog
+INFO: Application Started Successfully.RunID  of this session is 28
+Oct 08, 2015 6:40:23 PM DataLoader writeLog
+INFO: Application Started Successfully.RunID  of this session is 29
+Oct 08, 2015 6:42:05 PM DataLoader writeLog
+INFO: Application Started Successfully.RunID  of this session is 30
+Oct 08, 2015 6:42:38 PM DataLoader writeLog
+INFO: Application Started Successfully.RunID  of this session is 31
+Oct 08, 2015 6:51:48 PM DataLoader writeLog
+INFO: Application Started Successfully.RunID  of this session is 32
+Oct 08, 2015 6:56:22 PM DataLoader writeLog
+INFO: Application Started Successfully.RunID  of this session is 33
+Oct 08, 2015 7:10:08 PM DataLoader writeLog
+INFO: Application Started Successfully.RunID  of this session is 34
+Oct 08, 2015 7:11:15 PM DataLoader writeLog
+INFO: Application Started Successfully.RunID  of this session is 35
+Oct 08, 2015 7:16:17 PM DataLoader writeLog
+INFO: Application Started Successfully.RunID  of this session is 36
+Oct 08, 2015 7:27:58 PM DataLoader writeLog
+INFO: Application Started Successfully.RunID  of this session is 37
+Oct 08, 2015 7:30:11 PM DataLoader writeLog
+INFO: Application Started Successfully.RunID  of this session is 38
+Oct 08, 2015 7:35:50 PM DataLoader writeLog
+INFO: Application Started Successfully.RunID  of this session is 39
+Oct 08, 2015 7:40:05 PM DataLoader writeLog
+INFO: Application Started Successfully.RunID  of this session is 40
+Oct 08, 2015 8:09:41 PM DataLoader writeLog
+INFO: Application Started Successfully.RunID  of this session is 41
+Oct 08, 2015 8:18:09 PM DataLoader writeLog
+INFO: Application Started Successfully.RunID  of this session is 42

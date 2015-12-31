@@ -1,0 +1,209 @@
+"ADDRESS","ADDRESSEE","ADDRESS_ONE","ADDRESS_THREE","ADDRESS_TWO","ATTENTION","BRANCH_ID","CITY","COUNTRY","TO_CHAR(DATE_LAST_MODIFIED, YYYY-MM-DD HH24:MI:SS)","FULL_NAME","INVENTORY_AVAILABLE","INVENTORY_AVAILABLE_WEB_STORE","ISINACTIVE","IS_INCLUDE_IN_SUPPLY_PLANNING","LINE_OF_BUSINESS_ID","LOCATION_EXTID","LOCATION_ID","NAME","PARENT_ID","PHONE","RETURNADDRESS","RETURN_ADDRESS_ONE","RETURN_ADDRESS_TWO","RETURN_CITY","RETURN_COUNTRY","RETURN_STATE","RETURN_ZIPCODE","STATE","TRAN_NUM_PREFIX","ZIPCODE"
+"IN MAIN
+India","IN MAIN",,,,,,,"IN","2015-01-19 09:47:56","IN MAIN","Yes","Yes","No","Yes","105.0",,"56.0","IN MAIN",,,,,,,,,,,,
+"Azmi
+Balakong  
+Malaysia","Azmi",,,,,,"Balakong","MY","2014-07-22 18:18:49","MEGA - MEGA BALAKONG : MIGA - MIGA BALAKONG","Yes","Yes","No","No","105.0",,"16.0","MIGA - MIGA BALAKONG","1.0","016-2733420","Afghanistan",,,,"AF",,,"Selangor",,
+"JB - JOHOR BAHRU
+Johor Bahru  
+Malaysia","JB - JOHOR BAHRU",,,,,,"Johor Bahru","MY","2015-06-03 03:24:27","MEGA - MEGA BALAKONG : JB - JOHOR BAHRU","Yes","Yes","Yes","No","105.0",,"20.0","JB - JOHOR BAHRU","1.0",,"Afghanistan",,,,"AF",,,,,
+"KU - KUCHING
+Kuching  
+Malaysia","KU - KUCHING",,,,,,"Kuching","MY","2014-07-22 18:18:48","MEGA - MEGA BALAKONG : KU - KUCHING","Yes","Yes","No","No","105.0",,"22.0","KU - KUCHING","1.0",,"Afghanistan",,,,"AF",,,,,
+"LIMB - LIMBANG
+Limbang  
+Malaysia","LIMB - LIMBANG",,,,,,"Limbang","MY","2014-07-22 18:18:48","MEGA - MEGA BALAKONG : LIMB - LIMBANG","Yes","Yes","No","No","105.0",,"24.0","LIMB - LIMBANG","1.0",,"Afghanistan",,,,"AF",,,,,
+"MI - MIRI
+Miri  
+Malaysia","MI - MIRI",,,,,,"Miri","MY","2014-07-22 18:18:48","MEGA - MEGA BALAKONG : MI - MIRI","Yes","Yes","No","No","105.0",,"26.0","MI - MIRI","1.0",,"Afghanistan",,,,"AF",,,,,
+"SN - SANDAKAN
+Sandakan  
+Malaysia","SN - SANDAKAN",,,,,,"Sandakan","MY","2014-07-22 18:18:49","MEGA - MEGA BALAKONG : SN - SANDAKAN","Yes","Yes","No","No","105.0",,"28.0","SN - SANDAKAN","1.0",,"Afghanistan",,,,"AF",,,,,
+"ARME - ARME
+Delivery Van 8
+Malaysia","ARME - ARME","Delivery Van 8",,,,,,"MY","2014-07-22 18:18:47","MEGA - MEGA BALAKONG : ARME - ARME","Yes","Yes","No","No","105.0",,"37.0","ARME - ARME","1.0",,"Afghanistan",,,,"AF",,,,,
+"YOGA - YOGA
+Delivery Van 14
+Malaysia","YOGA - YOGA","Delivery Van 14",,,,,,"MY","2014-07-22 18:18:49","MEGA - MEGA BALAKONG : YOGA - YOGA","Yes","Yes","No","No","105.0",,"43.0","YOGA - YOGA","1.0",,"Afghanistan",,,,"AF",,,,,
+"NAWA-NAWAWI
+Malaysia","NAWA-NAWAWI",,,,,,,"MY","2015-06-03 03:27:09","MEGA - MEGA BALAKONG : NAWA-NAWAWI","Yes","Yes","Yes","Yes","105.0",,"48.0","NAWA-NAWAWI","1.0",,,,,,,,,,,
+"HASR - HASROL
+Delivery Van 10
+Malaysia","HASR - HASROL","Delivery Van 10",,,,,,"MY","2014-07-22 18:18:48","MEGA - MEGA BALAKONG : HASR - HASROL","Yes","Yes","No","No","105.0",,"39.0","HASR - HASROL","1.0",,"Afghanistan",,,,"AF",,,,,
+"LOCATION 3 
+3017 Ubi Road 1 #01-131
+408708
+Singapore","Location 3 (RIC & IVY)","3017 Ubi Road 1 #01-131",,,,,,"SG","2014-08-22 01:15:00","Location 2 (SEIS Singapore) : Location 3 (RIC & IVY)","Yes","Yes","No","No",,,"45.0","Location 3 (RIC & IVY)","15.0",,"Afghanistan",,,,"AF",,,,,"408708"
+"BOOK CLUB RESERVED WAREHOUSE
+Malaysia","BOOK CLUB RESERVED WAREHOUSE",,,,,,,"MY","2014-09-29 04:59:11","BOOK CLUB RESERVED WAREHOUSE","Yes","Yes","No","No","101.0",,"4.0","BOOK CLUB RESERVED WAREHOUSE",,,"Afghanistan",,,,"AF",,,,,
+"Grolier Malaysia
+Malaysia","Grolier Malaysia",,,,,,,"MY","2014-07-22 18:18:50","TRADE RESERVED WAREHOUSE","Yes","Yes","No","No","103.0",,"8.0","TRADE RESERVED WAREHOUSE",,,"Afghanistan",,,,"AF",,,,,
+"Grolier Malaysia
+Malaysia","Grolier Malaysia",,,,,,,"MY","2014-10-16 09:21:11","EDUCATION EXCESS WAREHOUSE","Yes","Yes","No","No","113.0",,"12.0","EDUCATION EXCESS WAREHOUSE",,,"Afghanistan",,,,"AF",,,,,
+"TH SCHOLASTIC
+Thailand","TH SCHOLASTIC",,,,,,,"TH","2014-12-23 01:03:40","TH SCHOLASTIC","Yes","Yes","No","Yes",,,"55.0","TH SCHOLASTIC",,,,,,,,,,,,
+"PK - PORT KLANG
+Klang  
+Malaysia","PK - PORT KLANG",,,,,,"Klang","MY","2014-07-22 18:18:49","MEGA - MEGA BALAKONG : PK - PORT KLANG","Yes","Yes","No","No","105.0",,"17.0","PK - PORT KLANG","1.0",,"Afghanistan",,,,"AF",,,,,
+"DROP SHIPMENT TH
+Thailand","DROP SHIPMENT TH",,,,,,,"TH","2015-04-28 04:52:50","DROP SHIPMENT TH","Yes","Yes","No","Yes","103.0",,"57.0","DROP SHIPMENT TH",,,,,,,,,,,,
+"LB - LABUAN
+Labuan  
+Malaysia","LB - LABUAN",,,,,,"Labuan","MY","2014-07-22 18:18:48","MEGA - MEGA BALAKONG : LB - LABUAN","Yes","Yes","No","No","105.0",,"23.0","LB - LABUAN","1.0",,"Afghanistan",,,,"AF",,,"Wilayah Persekutuan",,
+"LKWI - LANGKAWI
+Langkawi  
+Malaysia","LKWI - LANGKAWI",,,,,,"Langkawi","MY","2014-07-22 18:18:48","MEGA - MEGA BALAKONG : LKWI - LANGKAWI","Yes","Yes","No","No","105.0",,"25.0","LKWI - LANGKAWI","1.0",,"Afghanistan",,,,"AF",,,,,
+"SI - SIBU
+Sibu  
+Malaysia","SI - SIBU",,,,,,"Sibu","MY","2014-07-22 18:18:49","MEGA - MEGA BALAKONG : SI - SIBU","Yes","Yes","No","No","105.0",,"27.0","SI - SIBU","1.0",,"Afghanistan",,,,"AF",,,,,
+"TA - TAWAU
+Tawau  
+Malaysia","TA - TAWAU",,,,,,"Tawau","MY","2014-07-22 18:18:49","MEGA - MEGA BALAKONG : TA - TAWAU","Yes","Yes","No","No","105.0",,"29.0","TA - TAWAU","1.0",,"Afghanistan",,,,"AF",,,,,
+"ANTH - ANTHONY
+Delivery Van 2
+Malaysia","ANTH - ANTHONY","Delivery Van 2",,,,,,"MY","2014-07-22 18:18:47","MEGA - MEGA BALAKONG : ANTH - ANTHONY","Yes","Yes","No","No","105.0",,"31.0","ANTH - ANTHONY","1.0",,"Afghanistan",,,,"AF",,,,,
+"NS - NORMAN
+Delivery Van 4
+Malaysia","NS - NORMAN","Delivery Van 4",,,,,,"MY","2014-07-22 18:18:49","MEGA - MEGA BALAKONG : NS - NORMAN","Yes","Yes","No","No","105.0",,"33.0","NS - NORMAN","1.0",,"Afghanistan",,,,"AF",,,,,
+"ZAM - ZAMRI
+Delivery Van 7
+Malaysia","ZAM - ZAMRI","Delivery Van 7",,,,,,"MY","2014-07-22 18:18:50","MEGA - MEGA BALAKONG : ZAM - ZAMRI","Yes","Yes","No","No","105.0",,"36.0","ZAM - ZAMRI","1.0",,"Afghanistan",,,,"AF",,,,,
+"SZAN - SANIZAN
+Delivery Van 13
+Malaysia","SZAN - SANIZAN","Delivery Van 13",,,,,,"MY","2014-07-22 18:18:49","MEGA - MEGA BALAKONG : SZAN - SANIZAN","Yes","Yes","No","No","105.0",,"42.0","SZAN - SANIZAN","1.0",,"Afghanistan",,,,"AF",,,,,
+"CONSIGNMENT TESCO
+Malaysia","CONSIGNMENT TESCO",,,,,,,"MY","2014-10-24 06:32:42","CONSIGNMENT TESCO","Yes","Yes","No","Yes","103.0",,"51.0","CONSIGNMENT TESCO",,,,,,,,,,,,
+"CONSIGNMENT AMARIN
+Malaysia","CONSIGNMENT AMARIN",,,,,,,"MY","2014-10-24 06:34:09","CONSIGNMENT AMARIN","Yes","Yes","No","Yes","103.0",,"52.0","CONSIGNMENT AMARIN",,,,,,,,,,,,
+"Location 5 (Printer)
+Singapore","Location 5 (Printer)",,,,,,,"SG","2014-08-22 01:15:56","Location 2 (SEIS Singapore) : Location 5 (Printer)","Yes","Yes","No","No",,,"47.0","Location 5 (Printer)","15.0",,"Afghanistan",,,,"AF",,,,,
+"DROP SHIPMENT MY
+Malaysia","DROP SHIPMENT MY",,,,,,,"MY","2014-09-29 05:32:15","DROP SHIPMENT MY","Yes","Yes","No","Yes","103.0",,"49.0","DROP SHIPMENT MY",,,,,,,,,,,,
+"Azmi
+Lot 7.01 Plaza First Nationwide
+161 Jalan Tun H.S. Lee
+Kuala Lumpur  50000
+Malaysia","Azmi","Lot 7.01 Plaza First Nationwide",,"161 Jalan Tun H.S. Lee",,,"Kuala Lumpur","MY","2014-07-22 18:18:48","MEGA - MEGA BALAKONG : KL - KL OFFICE","Yes","Yes","No","No","105.0",,"18.0","KL - KL OFFICE","1.0","016-2733420","Afghanistan",,,,"AF",,,"Wilayah Persekutuan",,"50000"
+"SHAM - HISHAM
+Delivery Van 5
+Malaysia","SHAM - HISHAM","Delivery Van 5",,,,,,"MY","2014-07-22 18:18:49","MEGA - MEGA BALAKONG : SHAM - HISHAM","Yes","Yes","No","No","105.0",,"34.0","SHAM - HISHAM","1.0",,"Afghanistan",,,,"AF",,,,,
+"NAZR - NAZIR
+Delivery Van 11
+Malaysia","NAZR - NAZIR","Delivery Van 11",,,,,,"MY","2014-07-22 18:18:49","MEGA - MEGA BALAKONG : NAZR - NAZIR","Yes","Yes","No","No","105.0",,"40.0","NAZR - NAZIR","1.0",,"Afghanistan",,,,"AF",,,,,
+"Location 4 (Bookfair)
+Singapore","Location 4 (Bookfair)",,,,,,,"SG","2014-08-22 01:15:34","Location 2 (SEIS Singapore) : Location 4 (Bookfair)","Yes","Yes","No","No",,,"46.0","Location 4 (Bookfair)","15.0",,"Afghanistan",,,,"AF",,,,,
+"Lim Chong Hui
+PT43117, Batu 13,
+Off Jalan Balakong,
+Balakong,  43300
+Malaysia","Lim Chong Hui","PT43117, Batu 13,",,"Off Jalan Balakong,",,,"Balakong,","MY","2014-07-22 18:18:47","BOOK CLUB MAIN WAREHOUSE","Yes","Yes","No","No","101.0",,"2.0","BOOK CLUB MAIN WAREHOUSE",,"03-89623378","Afghanistan",,,,"AF",,,"Selangor,",,"43300"
+"Lim Chong Hui
+PT43117, Batu 13,
+Off Jalan Balakong,
+Balakong,  43300
+Malaysia","Lim Chong Hui","PT43117, Batu 13,",,"Off Jalan Balakong,",,,"Balakong,","MY","2014-07-22 18:18:50","TRADE MAIN WAREHOUSE","Yes","Yes","No","No","103.0",,"6.0","TRADE MAIN WAREHOUSE",,"03-89623378","Afghanistan",,,,"AF",,,"Selangor,",,"43300"
+"Lim Chong Hui
+PT43117, Batu 13,
+Off Jalan Balakong,
+Balakong,  43300
+Malaysia","Lim Chong Hui","PT43117, Batu 13,",,"Off Jalan Balakong,",,,"Balakong,","MY","2014-10-16 09:21:44","EDUCATION MAIN WAREHOUSE","Yes","Yes","No","No","113.0",,"10.0","EDUCATION MAIN WAREHOUSE",,"03-89623378","Afghanistan",,,,"AF",,,"Selangor,",,"43300"
+"VAN WAREHOUSE
+Singapore","VAN WAREHOUSE",,,,,,,"SG","2014-10-16 00:44:03","VAN WAREHOUSE","Yes","Yes","No","No","105.0",,"14.0","VAN WAREHOUSE",,,"Afghanistan",,,,"AF",,,,,
+"AZRI - AZRIL
+Delivery Van 9
+Malaysia","AZRI - AZRIL","Delivery Van 9",,,,,,"MY","2014-07-22 18:18:48","MEGA - MEGA BALAKONG : AZRI - AZRIL","Yes","Yes","No","No","105.0",,"38.0","AZRI - AZRIL","1.0",,"Afghanistan",,,,"AF",,,,,
+"ZBRI - ZAMBRI BROHIM
+Delivery Van 15
+Malaysia","ZBRI - ZAMBRI BROHIM","Delivery Van 15",,,,,,"MY","2014-07-22 18:18:50","MEGA - MEGA BALAKONG : ZBRI - ZAMBRI BROHIM","Yes","Yes","No","No","105.0",,"44.0","ZBRI - ZAMBRI BROHIM","1.0",,"Afghanistan",,,,"AF",,,,,
+"DROP SHIPMENT SG
+Singapore","DROP SHIPMENT SG",,,,,,,"SG","2014-09-29 05:33:19","DROP SHIPMENT SG","Yes","Yes","No","Yes","103.0",,"50.0","DROP SHIPMENT SG",,,,,,,,,,,,
+"ID Jakarta Main
+Indonesia","ID Jakarta Main",,,,,,,"ID","2014-11-20 07:00:23","ID Jakarta Main","Yes","Yes","No","Yes","105.0",,"53.0","ID Jakarta Main",,,,,,,,,,,,
+"Head Office
+27F (Penthouse) Prestige Tower, F. Ortigas Jr Road,
+Ortigas
+Pasig City Select... 1611
+Philippines","Head Office","27F (Penthouse) Prestige Tower, F. Ortigas Jr Road,",,"Ortigas",,,"Pasig City","PH","2015-08-19 06:45:53","Head Office","Yes","Yes","No","Yes",,,"67.0","Head Office",,,,,,,,,,"Select...",,"1611"
+"Azmi
+Bangunan MIGA, Lot 1998/C,
+Jalan Perusahaan 3, Taman Industri Selesa Jaya (Balakong),
+Balakong,  43300
+Malaysia","Azmi","Bangunan MIGA, Lot 1998/C,",,"Jalan Perusahaan 3, Taman Industri Selesa Jaya (Balakong),",,,"Balakong,","MY","2014-07-22 18:18:47","MEGA - MEGA BALAKONG","Yes","Yes","No","No","105.0",,"1.0","MEGA - MEGA BALAKONG",,"016-2733420","Afghanistan",,,,"AF",,,"Selangor",,"43300"
+"Grolier Malaysia
+Malaysia","Grolier Malaysia",,,,,,,"MY","2014-07-22 18:18:50","TRADE EXCESS WAREHOUSE","Yes","Yes","No","No","103.0",,"9.0","TRADE EXCESS WAREHOUSE",,,"Afghanistan",,,,"AF",,,,,
+"Grolier Malaysia
+Malaysia","Grolier Malaysia",,,,,,,"MY","2014-07-22 18:18:46","BOOK CLUB EXCESS WAREHOUSE","Yes","Yes","No","No","101.0",,"5.0","BOOK CLUB EXCESS WAREHOUSE",,,"Afghanistan",,,,"AF",,,,,
+"YFE-Clark Express Pte Ltd
+27 Changi North Crescent
+Singapore, 499618
+Tel:  67480002","YFE-Clark Express Pte Ltd","27 Changi North Crescent",,,,,,"SG","2015-04-07 09:24:39","YFE WAREHOUSE","Yes","Yes","No","No","105.0",,"13.0","YFE WAREHOUSE",,"67480002","YFE-Clark Express Pte Ltd
+27 Changi North Crescent
+Singapore, 499618
+Tel:  67480002","27 Changi North Crescent",,,"SG",,"499618",,,"499618"
+"Christchurch  
+New Zealand",,,,,,,"Christchurch","NZ","2015-06-28 11:02:10","Christchurch","Yes","Yes","No","Yes",,,"59.0","Christchurch",,,,,,,,,,,,
+"PH Location
+Malaysia","PH Location",,,,,,,"MY","2015-08-19 02:53:05","PH Location","Yes","Yes","No","Yes",,,"66.0","PH Location",,,,,,,,,,,,
+"21 Lady Ruby Drive, 
+East Tamaki,
+Auckland  2013
+New Zealand",,"21 Lady Ruby Drive,",,"East Tamaki,",,,"Auckland","NZ","2015-06-28 11:00:46","Auckland","Yes","Yes","No","Yes",,,"58.0","Auckland",,,,,,,,,,,,"2013"
+"Lim Chong Hui
+Lot 1998/C, Jalan Perusahaan 3,
+Taman Industri Selesa Jaya (Balakong),
+Balakong,  43300
+Malaysia","Lim Chong Hui","Lot 1998/C, Jalan Perusahaan 3,",,"Taman Industri Selesa Jaya (Balakong),",,,"Balakong,","MY","2014-07-22 18:18:47","BOOK CLUB PUBLIC WAREHOUSE","Yes","Yes","No","No","101.0",,"3.0","BOOK CLUB PUBLIC WAREHOUSE",,"03-89623378","Afghanistan",,,,"AF",,,"Selangor,",,"43300"
+"Grolier Malaysia
+Lot 1998/C, Jalan Perusahaan 3,
+Taman Industri Selesa Jaya (Balakong),
+Balakong,  43300
+Malaysia","Grolier Malaysia","Lot 1998/C, Jalan Perusahaan 3,",,"Taman Industri Selesa Jaya (Balakong),",,,"Balakong,","MY","2014-07-22 18:18:50","TRADE PUBLIC WAREHOUSE","Yes","Yes","No","No","103.0",,"7.0","TRADE PUBLIC WAREHOUSE",,,"Afghanistan",,,,"AF",,,"Selangor,",,"43300"
+"Grolier Malaysia
+Malaysia","Grolier Malaysia",,,,,,,"MY","2014-10-16 09:22:20","EDUCATION RESERVED WAREHOUSE","Yes","Yes","No","No","113.0",,"11.0","EDUCATION RESERVED WAREHOUSE",,,"Afghanistan",,,,"AF",,,,,
+"Scholastic Education International (Singapore) Pte Ltd 
+Singapore","Location 2 (SEIS Singapore)",,,,,,,"SG","2014-10-16 00:35:24","Location 2 (SEIS Singapore)","Yes","Yes","No","No",,,"15.0","Location 2 (SEIS Singapore)",,,"Afghanistan",,,,"AF",,,,,
+"Book Club Warehouse
+21 Lady Ruby Drive
+East Tamaki
+Auckland   2013
+New Zealand","Book Club Warehouse","21 Lady Ruby Drive",,"East Tamaki",,,"Auckland","NZ","2015-06-28 23:46:43","Auckland : Book Club Warehouse","Yes","Yes","No","Yes",,,"60.0","Book Club Warehouse","58.0",,,,,,,,,,,"2013"
+"General Warehouse
+21 Lady Ruby Drive
+East Tamaki
+Auckland  2013
+New Zealand","General Warehouse","21 Lady Ruby Drive",,"East Tamaki",,,"Auckland","NZ","2015-08-12 12:59:59","Auckland : General Warehouse","Yes","Yes","No","Yes",,,"61.0","General Warehouse","58.0",,,,,,,,,,,"2013"
+"BIH Warehouse
+21 Lady Ruby Drive
+East Tamaki
+Auckland  2013
+New Zealand","BIH Warehouse","21 Lady Ruby Drive",,"East Tamaki",,,"Auckland","NZ","2015-06-28 23:48:42","Auckland : BIH Warehouse","Yes","Yes","No","Yes",,,"62.0","BIH Warehouse","58.0",,,,,,,,,,,"2013"
+"Book Fairs Warehouse
+21 Lady Ruby Drive
+East Tamaki
+Auckland  2013
+New Zealand","Book Fairs Warehouse","21 Lady Ruby Drive",,"East Tamaki",,,"Auckland","NZ","2015-08-13 10:39:08","Auckland : Book Fairs Warehouse","Yes","Yes","No","Yes","102.0",,"63.0","Book Fairs Warehouse","58.0",,,,,,,,,,,"2013"
+"Standing Orders Warehouse
+21 Lady Ruby Drive
+East Tamaki
+Auckland  2013
+New Zealand","Standing Orders Warehouse","21 Lady Ruby Drive",,"East Tamaki",,,"Auckland","NZ","2015-08-13 10:40:13","Auckland : Standing Orders Warehouse","Yes","Yes","No","Yes","106.0",,"65.0","Standing Orders Warehouse","58.0",,,,,,,,,,,"2013"
+"BT - BINTULU
+Bintulu  
+Malaysia","BT - BINTULU",,,,,,"Bintulu","MY","2014-07-22 18:18:48","MEGA - MEGA BALAKONG : BT - BINTULU","Yes","Yes","No","No","105.0",,"19.0","BT - BINTULU","1.0",,"Afghanistan",,,,"AF",,,,,
+"KK - KOTA KINABALU
+Kota Kinabalu  
+Malaysia","KK - KOTA KINABALU",,,,,,"Kota Kinabalu","MY","2014-07-22 18:18:48","MEGA - MEGA BALAKONG : KK - KOTA KINABALU","Yes","Yes","No","No","105.0",,"21.0","KK - KOTA KINABALU","1.0",,"Afghanistan",,,,"AF",,,,,
+"AMD - AHMAD
+Delivery Van 1
+Malaysia","AMD - AHMAD","Delivery Van 1",,,,,,"MY","2014-07-22 18:18:47","MEGA - MEGA BALAKONG : AMD - AHMAD","Yes","Yes","No","No","105.0",,"30.0","AMD - AHMAD","1.0",,"Afghanistan",,,,"AF",,,,,
+"AZM - AZMAN
+Delivery Van 3
+Malaysia","AZM - AZMAN","Delivery Van 3",,,,,,"MY","2014-07-22 18:18:48","MEGA - MEGA BALAKONG : AZM - AZMAN","Yes","Yes","No","No","105.0",,"32.0","AZM - AZMAN","1.0",,"Afghanistan",,,,"AF",,,,,
+"ZAK - ZAKRI MOHD
+Delivery Van 6
+Malaysia","ZAK - ZAKRI MOHD","Delivery Van 6",,,,,,"MY","2014-07-22 18:18:49","MEGA - MEGA BALAKONG : ZAK - ZAKRI MOHD","Yes","Yes","No","No","105.0",,"35.0","ZAK - ZAKRI MOHD","1.0",,"Afghanistan",,,,"AF",,,,,
+"SRIL - SHARIL
+Delivery Van 12
+Malaysia","SRIL - SHARIL","Delivery Van 12",,,,,,"MY","2014-07-22 18:18:49","MEGA - MEGA BALAKONG : SRIL - SHARIL","Yes","Yes","No","No","105.0",,"41.0","SRIL - SHARIL","1.0",,"Afghanistan",,,,"AF",,,,,
+"TH RAMA MAIN
+Thailand","TH RAMA MAIN",,,,,,,"TH","2014-12-23 01:02:25","TH RAMA MAIN","Yes","Yes","No","Yes",,,"54.0","TH RAMA MAIN",,,,,,,,,,,,

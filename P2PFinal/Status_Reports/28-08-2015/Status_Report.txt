@@ -1,0 +1,7 @@
+Table			ExtractStartTime		ExtractEndTime		LoadStartTime		LoadEndTime		Status
+SUBSIDIARIES			12:27:22		12:27:24		12:27:34		--		Error in load
+PurchaseOrder			12:27:24		12:27:33		12:27:34		--		Error in load
+SUBSIDIARIES			16:05:44		16:05:47		16:06:38		16:06:38		Loaded
+purchase_orders			16:05:47		16:06:36		16:07:41		16:07:41		Loaded
+SUBSIDIARIES			17:11:05		17:11:07		17:11:19		17:11:19		Loaded
+purchase_orders			17:11:07		17:11:16		17:12:22		17:12:22		Loaded

@@ -1,0 +1,11 @@
+Sep 23, 2015 12:40:56 PM DataLoader writeLog
+INFO: Application Started Successfully.RunID  of this session is 3
+Sep 23, 2015 12:41:09 PM DataLoader writeLog
+INFO: RunID 3
+DataExtraction Operation Started for DB table ACCOUNTS
+Sep 23, 2015 12:41:12 PM DataLoader writeLog
+INFO: RunID 3
+Retrieving data for ACCOUNTS
+Sep 23, 2015 12:42:18 PM DataLoader writeLog
+SEVERE: RunID 3
+SQL Error!![NetSuite][NetSuite JDBC Driver]Column index 17 is out of range.

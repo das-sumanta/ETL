@@ -1,0 +1,16 @@
+Sep 01, 2015 4:28:56 PM DataLoader writeLog
+INFO: Application Started Successfully
+Sep 01, 2015 4:28:56 PM DataLoader writeLog
+INFO: DataExtraction Operation Started for DB table SUBSIDIARIES
+Sep 01, 2015 4:28:58 PM DataLoader writeLog
+SEVERE: SQL Error!![NetSuite][NetSuite JDBC Driver][OpenAccess SDK SQL Engine]Failed to retrieve data. Error ticket# ie18skjp1ijcuoi0ysuk4[400]
+Sep 01, 2015 4:28:58 PM DataLoader writeLog
+INFO: Executing query for purchase_orderswhere DATE_LAST_MODIFIED >= 2015-08-28 17:11:16
+Sep 01, 2015 4:29:06 PM DataLoader writeLog
+SEVERE: Error!![NetSuite][NetSuite JDBC Driver]Unsupported method: ResultSet.beforeFirst
+Sep 01, 2015 4:29:06 PM DataLoader writeLog
+SEVERE: Error!!java.sql.SQLException: [NetSuite][NetSuite JDBC Driver]Unsupported method: ResultSet.beforeFirst
+Sep 01, 2015 4:29:09 PM DataLoader writeLog
+INFO: There is an issue while creating the extract of SUBSIDIARIES. So loading operation is skipped for SUBSIDIARIES
+Sep 01, 2015 4:29:09 PM DataLoader writeLog
+INFO: There is an issue while creating the extract of purchase_orders. So loading operation is skipped for purchase_orders

@@ -1,0 +1,135 @@
+Oct 12, 2015 6:06:36 PM DataLoader writeLog
+INFO: Application Started Successfully.RunID  of this session is 58
+Oct 12, 2015 6:07:27 PM DataLoader writeLog
+INFO: Application Started Successfully.RunID  of this session is 59
+Oct 12, 2015 6:07:27 PM DataLoader writeLog
+INFO: RunID 59
+DataExtraction Operation Started for DB table VENDORS
+Oct 12, 2015 6:07:33 PM DataLoader writeLog
+INFO: RunID 59
+Retrieving data for VENDORS
+Oct 12, 2015 6:09:27 PM DataLoader writeLog
+INFO: RunID  No.59
+DataExtration Oparation for table VENDORS is extracted in C:\sumanta\bkp\7-10-2015\P2PFinal\DB_Extracts\12-10-2015\VENDORS-RunID-59-12102015060733.csv
+Oct 12, 2015 6:09:28 PM DataLoader writeLog
+INFO: RunID 59
+Uploading VENDORS-RunID-59-12102015060733.csv to Amazon S3 bucket kol-kd
+Oct 12, 2015 6:09:28 PM DataLoader writeLog
+INFO: RunID 59
+VENDORS-RunID-59-12102015060733.csv transffered successfully.
+Oct 12, 2015 6:09:28 PM DataLoader writeLog
+INFO: RedShift Data loading started for VENDORS
+Oct 12, 2015 6:10:31 PM DataLoader writeLog
+INFO: Executing Query..
+copy dw_prestage.VENDORS from 's3://kol-kd/12-10-2015/VENDORS-RunID-59-12102015060733.csv' credentials 'aws_access_key_id=AKIAIV5OYYAGFGTEELSA;aws_secret_access_key=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' timeformat 'YYYY-MM-DD HH:MI:SS' escape removequotes delimiter as ',' IGNOREHEADER 1 ACCEPTINVCHARS;
+Oct 12, 2015 6:10:32 PM DataLoader writeLog
+SEVERE: RunID 59
+Error occured while loading data from S3 to Redshift Cluster for VENDORS
+[Amazon](500310) Invalid operation: The specified S3 prefix '12-10-2015/VENDORS-RunID-59-12102015060733.csv' does not exist;
+Oct 12, 2015 6:17:19 PM DataLoader writeLog
+INFO: Application Started Successfully.RunID  of this session is 60
+Oct 12, 2015 6:17:19 PM DataLoader writeLog
+INFO: RunID 60
+DataExtraction Operation Started for DB table VENDORS
+Oct 12, 2015 6:17:31 PM DataLoader writeLog
+INFO: RunID 60
+Retrieving data for VENDORS
+Oct 12, 2015 7:03:49 PM DataLoader writeLog
+INFO: RunID  No.60
+DataExtration Oparation for table VENDORS is extracted in C:\sumanta\bkp\7-10-2015\P2PFinal\DB_Extracts\12-10-2015\VENDORS-RunID-60-12102015061731.csv
+Oct 12, 2015 7:03:51 PM DataLoader writeLog
+INFO: RunID 60
+Uploading VENDORS-RunID-60-12102015061731.csv to Amazon S3 bucket kol-kd
+Oct 12, 2015 7:03:51 PM DataLoader writeLog
+INFO: RunID 60
+VENDORS-RunID-60-12102015061731.csv transffered successfully.
+Oct 12, 2015 7:03:51 PM DataLoader writeLog
+INFO: RedShift Data loading started for VENDORS
+Oct 12, 2015 7:04:54 PM DataLoader writeLog
+INFO: Executing Query..
+copy dw_prestage.VENDORS from 's3://kol-kd/12-10-2015/VENDORS-RunID-60-12102015061731.csv' credentials 'aws_access_key_id=AKIAIV5OYYAGFGTEELSA;aws_secret_access_key=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' timeformat 'YYYY-MM-DD HH:MI:SS' escape removequotes delimiter as ',' IGNOREHEADER 1 ACCEPTINVCHARS;
+Oct 12, 2015 7:04:55 PM DataLoader writeLog
+SEVERE: RunID 60
+Error occured while loading data from S3 to Redshift Cluster for VENDORS
+[Amazon](500310) Invalid operation: The specified S3 prefix '12-10-2015/VENDORS-RunID-60-12102015061731.csv' does not exist;
+Oct 12, 2015 7:51:42 PM DataLoader writeLog
+INFO: Application Started Successfully.RunID  of this session is 61
+Oct 12, 2015 7:51:42 PM DataLoader writeLog
+INFO: RunID 61
+DataExtraction Operation Started for DB table PAYMENT_TERMS
+Oct 12, 2015 7:51:45 PM DataLoader writeLog
+INFO: RunID 61
+Retrieving data for PAYMENT_TERMS
+Oct 12, 2015 7:51:46 PM DataLoader writeLog
+INFO: RunID  No.61
+DataExtration Oparation for table PAYMENT_TERMS is extracted in C:\sumanta\bkp\7-10-2015\P2PFinal\DB_Extracts\12-10-2015\PAYMENT_TERMS-RunID-61-12102015075145.csv
+Oct 12, 2015 7:51:46 PM DataLoader writeLog
+INFO: RunID 61
+DataExtraction Operation Started for DB table VENDORS
+Oct 12, 2015 7:51:54 PM DataLoader writeLog
+INFO: RunID 61
+Retrieving data for VENDORS
+Oct 12, 2015 7:59:50 PM DataLoader writeLog
+INFO: RunID  No.61
+DataExtration Oparation for table VENDORS is extracted in C:\sumanta\bkp\7-10-2015\P2PFinal\DB_Extracts\12-10-2015\VENDORS-RunID-61-12102015075154.csv
+Oct 12, 2015 7:59:53 PM DataLoader writeLog
+INFO: RunID 61
+Uploading PAYMENT_TERMS-RunID-61-12102015075145.csv to Amazon S3 bucket kol-kd
+Oct 12, 2015 7:59:53 PM DataLoader writeLog
+INFO: RunID 61
+PAYMENT_TERMS-RunID-61-12102015075145.csv transffered successfully.
+Oct 12, 2015 7:59:53 PM DataLoader writeLog
+INFO: RedShift Data loading started for PAYMENT_TERMS
+Oct 12, 2015 8:00:57 PM DataLoader writeLog
+INFO: Executing Query..
+copy dw_prestage.PAYMENT_TERMS from 's3://kol-kd/12-10-2015/PAYMENT_TERMS-RunID-61-12102015075145.csv' credentials 'aws_access_key_id=AKIAIV5OYYAGFGTEELSA;aws_secret_access_key=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' timeformat 'YYYY-MM-DD HH:MI:SS' escape removequotes delimiter as ',' IGNOREHEADER 1 ACCEPTINVCHARS;
+Oct 12, 2015 8:01:20 PM DataLoader writeLog
+INFO: RedShift Data loading is completed successfully for PAYMENT_TERMS
+Oct 12, 2015 8:01:20 PM DataLoader writeLog
+INFO: RunID 61
+Uploading VENDORS-RunID-61-12102015075154.csv to Amazon S3 bucket kol-kd
+Oct 12, 2015 8:01:20 PM DataLoader writeLog
+INFO: RunID 61
+VENDORS-RunID-61-12102015075154.csv transffered successfully.
+Oct 12, 2015 8:01:20 PM DataLoader writeLog
+INFO: RedShift Data loading started for VENDORS
+Oct 12, 2015 8:02:23 PM DataLoader writeLog
+INFO: Executing Query..
+copy dw_prestage.VENDORS from 's3://kol-kd/12-10-2015/VENDORS-RunID-61-12102015075154.csv' credentials 'aws_access_key_id=AKIAIV5OYYAGFGTEELSA;aws_secret_access_key=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' timeformat 'YYYY-MM-DD HH:MI:SS' escape removequotes delimiter as ',' IGNOREHEADER 1 ACCEPTINVCHARS;
+Oct 12, 2015 8:02:24 PM DataLoader writeLog
+SEVERE: RunID 61
+Error occured while loading data from S3 to Redshift Cluster for VENDORS
+[Amazon](500310) Invalid operation: The specified S3 prefix '12-10-2015/VENDORS-RunID-61-12102015075154.csv' does not exist;
+Oct 12, 2015 8:13:09 PM DataLoader writeLog
+INFO: Application Started Successfully.RunID  of this session is 62
+Oct 12, 2015 8:13:09 PM DataLoader writeLog
+INFO: RunID 62
+DataExtraction Operation Started for DB table PAYMENT_TERMS
+Oct 12, 2015 8:13:25 PM DataLoader writeLog
+INFO: Application Started Successfully.RunID  of this session is 63
+Oct 12, 2015 8:13:25 PM DataLoader writeLog
+INFO: RunID 63
+DataExtraction Operation Started for DB table PAYMENT_TERMS
+Oct 12, 2015 8:13:27 PM DataLoader writeLog
+INFO: RunID 63
+Retrieving data for PAYMENT_TERMS
+Oct 12, 2015 8:13:28 PM DataLoader writeLog
+INFO: RunID  No.63
+DataExtration Oparation for table PAYMENT_TERMS is extracted in C:\sumanta\bkp\7-10-2015\P2PFinal\DB_Extracts\12-10-2015\PAYMENT_TERMS-RunID-63-12102015081327.csv
+Oct 12, 2015 8:13:28 PM DataLoader writeLog
+INFO: RunID 63
+DataExtraction Operation Started for DB table VENDORS
+Oct 12, 2015 8:13:32 PM DataLoader writeLog
+INFO: RunID 63
+Retrieving data for VENDORS
+Oct 12, 2015 8:16:10 PM DataLoader writeLog
+INFO: RunID  No.63
+DataExtration Oparation for table VENDORS is extracted in C:\sumanta\bkp\7-10-2015\P2PFinal\DB_Extracts\12-10-2015\VENDORS-RunID-63-12102015081332.csv
+Oct 12, 2015 8:16:11 PM DataLoader writeLog
+INFO: RunID 63
+Uploading PAYMENT_TERMS-RunID-63-12102015081327.csv to Amazon S3 bucket kol-kd
+Oct 12, 2015 8:16:11 PM DataLoader writeLog
+INFO: RunID 63
+PAYMENT_TERMS-RunID-63-12102015081327.csv transffered successfully.
+Oct 12, 2015 8:17:20 PM DataLoader writeLog
+INFO: RedShift Data loading started for PAYMENT_TERMS
