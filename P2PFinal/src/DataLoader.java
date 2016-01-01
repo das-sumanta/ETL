@@ -36,6 +36,8 @@ import java.util.logging.FileHandler;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
+//import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
 import org.supercsv.io.CsvMapReader;
 import org.supercsv.io.CsvMapWriter;
 import org.supercsv.io.ICsvMapReader;
@@ -100,12 +102,16 @@ public class DataLoader {
 	private String logDbURL;
 	private String logDbUid;
 	private String logDbPwd;
-	private int[][] timeArr;
+//	private int[][] timeArr; //No use
 	private long[] insertID;
+	private List insertIDList;
 	private final String[] DIM;
 
 	public DataLoader() throws IOException, ClassNotFoundException,
 			SQLException {
+		
+		/*Logger logger = Logger.getLogger(DataLoader.class);
+		PropertyConfigurator.configure("log4j.properties");*/
 		appConfigPropFile = "config.properties";
 		Properties properties = new Properties();
 		File pf = new File(appConfigPropFile);
@@ -122,10 +128,20 @@ public class DataLoader {
 		roleId = convertToNumber(properties.getProperty("RoleId"), "RoleID");
 		port = convertToNumber(properties.getProperty("Port"), "Port");
 
-		if (!properties.getProperty("Dimensions").equalsIgnoreCase("NONE")) {
+		logDbURL = properties.getProperty("LogDBURL");
+		logDbUid = properties.getProperty("LogDBUID");
+		logDbPwd = properties.getProperty("LogDBPwd");
+		
+		RunID = Integer.parseInt(properties.getProperty("RunID"));
+		RunID++;
+		
+		if (!properties.getProperty("Dimensions").isEmpty() && !properties.getProperty("Dimensions").equalsIgnoreCase("NONE")) {
 			dimensions = properties.getProperty("Dimensions").split(",");
 		} else {
-			dimensions = null;
+			System.out.println("No dimentions are mentioned in the config file. Facts processing cannot be done without dimension, hence terminating the program.");
+			writeLog("Error !! No dimentions are mentioned in the config file. Facts processing cannot be done without dimension, hence terminating the program.",
+					"error","","Aplication Startup","db");
+			System.exit(0);
 		}
 
 		if (!properties.getProperty("Facts").equalsIgnoreCase("NONE")) {
@@ -157,14 +173,11 @@ public class DataLoader {
 		dbURL = properties.getProperty("RSDBURL");
 		csvDelimiter = properties.getProperty("CSVDelim").charAt(0);
 		ExtractURL = properties.getProperty("FileExtractURL");
-		RunID = Integer.parseInt(properties.getProperty("RunID"));
-		RunID++;
+
 		updateFactsProperty(appConfigPropFile, "RunID ", String.valueOf(RunID));
-		logDbURL = properties.getProperty("LogDBURL");
-		logDbUid = properties.getProperty("LogDBUID");
-		logDbPwd = properties.getProperty("LogDBPwd");
+
 		int cnt = dimensions.length + (facts[0] == "NONE" ? 0 : facts.length);
-		timeArr = new int[6][cnt];
+//		timeArr = new int[6][cnt];
 		DIM = properties.getProperty("Dimensions1").split(",");
 
 		try {
@@ -237,11 +250,21 @@ public class DataLoader {
 		accountId = properties.getProperty("AccountId");
 		roleId = convertToNumber(properties.getProperty("RoleId"), "RoleID");
 		port = convertToNumber(properties.getProperty("Port"), "Port");
-
+		
+		RunID = runid;
+		
+		logDbURL = properties.getProperty("LogDBURL");
+		logDbUid = properties.getProperty("LogDBUID");
+		logDbPwd = properties.getProperty("LogDBPwd");
+		
 		if (!properties.getProperty("Dimensions").equalsIgnoreCase("NONE")) {
 			dimensions = properties.getProperty("Dimensions").split(",");
 		} else {
-			dimensions = null;
+			//dimensions = null;
+			System.out.println("No dimentions are mentioned in the config file. Facts processing cannot be done without dimension, hence terminating the program.");
+			writeLog("Error !! No dimentions are mentioned in the config file. Facts processing cannot be done without dimension, hence terminating the program.",
+					"error","","Aplication Startup","db");
+			System.exit(0);
 		}
 
 		if (!properties.getProperty("Facts").equalsIgnoreCase("NONE")) {
@@ -271,11 +294,9 @@ public class DataLoader {
 		redShiftPreStageSchemaName = properties.getProperty("RSSCHEMAPRESTAGE");
 		dbURL = properties.getProperty("RSDBURL");
 		csvDelimiter = properties.getProperty("CSVDelim").charAt(0);
-		RunID = runid;
+		
 		DIM = properties.getProperty("Dimensions1").split(",");
-		logDbURL = properties.getProperty("LogDBURL");
-		logDbUid = properties.getProperty("LogDBUID");
-		logDbPwd = properties.getProperty("LogDBPwd");
+		
 		
 		try {
 			new File(extractLocationLocal).mkdirs();
@@ -332,18 +353,15 @@ public class DataLoader {
 	}
 
 	public void createDbExtract() throws IOException {
-
+		insertIDList = new ArrayList<>();
 		String TBL_DEF_CONF = "tbl_def.properties";
-		String clmNames;
 		String factFileName;
-		int count;
-		String ts;
 
 		Properties properties = new Properties();
 		File pf = new File(TBL_DEF_CONF);
 		properties.load(new FileReader(pf));
 
-		if (dimensions != null) {
+	//	if (dimensions != null) { 
 			for (int i = 0; i < dimensions.length; i++) {
 
 				System.out
@@ -358,8 +376,7 @@ public class DataLoader {
 						"DataExtraction", "db");
 				
 
-					insertID[i] = writeJobLog(getRunID(), dimensions[i],
-							"Normal", "In-Progress");
+					/*insertID[i] =*/ insertIDList.add(writeJobLog(getRunID(), dimensions[i], "Normal", "In-Progress"));
 
 				
 
@@ -370,8 +387,8 @@ public class DataLoader {
 
 				try {
 
-					writeJobLog(insertID[i], "EXTRACTSTART",
-							new SimpleDateFormat("HH:mm:ss").format(Calendar
+					writeJobLog((long)insertIDList.get(insertIDList.size()-1), "EXTRACTSTART",
+							new SimpleDateFormat("YYYY-MM-DD HH:mm:ss").format(Calendar
 									.getInstance().getTime()));
 
 					writeLog("RunID " + RunID + " Retrieving data for "
@@ -388,7 +405,7 @@ public class DataLoader {
 					resultSet = statement.executeQuery(query);
 
 					SimpleDateFormat sdf = new SimpleDateFormat(
-							"ddMMyyyyhhmmss");
+							"ddMMyyyyhhmmss"); // TODO change to 24hr format
 					Date curDate = new Date();
 					String strDate = sdf.format(curDate);
 
@@ -440,8 +457,8 @@ public class DataLoader {
 					}
 					out.close();
 
-					writeJobLog(insertID[i], "EXTRACTEND",
-							new SimpleDateFormat("HH:mm:ss").format(Calendar
+					writeJobLog((long)insertIDList.get(insertIDList.size()-1), "EXTRACTEND",
+							new SimpleDateFormat("YYYY-MM-DD HH:mm:ss").format(Calendar
 									.getInstance().getTime()));
 
 					File csvFile = new File(fileName);
@@ -471,9 +488,9 @@ public class DataLoader {
 							"RunID " + RunID + " SQL Error!!" + e.getMessage(),
 							"error", dimensions[i], "Dataextraction", "db");
 
-					extractEndTime.add(i, "Error");
+			//		extractEndTime.add(i, "Error");
 
-					writeJobLog(insertID[i], "Error", "");
+					writeJobLog((long)insertIDList.get(insertIDList.size()-1), "Error", "");
 
 				} catch (IOException e) {
 
@@ -487,7 +504,7 @@ public class DataLoader {
 							"error", dimensions[i], "Dataextraction", "db");
 					extractEndTime.add(i, "Error");
 
-					writeJobLog(insertID[i], "Error", "");
+					writeJobLog((long)insertIDList.get(insertIDList.size()-1), "Error", "");
 
 				} catch (Exception e) {
 					System.out.println("RunID " + RunID
@@ -500,20 +517,14 @@ public class DataLoader {
 							"error", dimensions[i], "Dataextraction", "db");
 					extractEndTime.add(i, "Error");
 
-					writeJobLog(insertID[i], "Error", "");
+					writeJobLog((long)insertIDList.get(insertIDList.size()-1), "Error", "");
 
 				} finally {
 					continue;
 				}
 
 			}
-		} else {
-
-			System.out.println("No dimentions are mentioned in the config file. Facts processing cannot be done without dimension, hence terminating the program.");
-			writeLog("RunID " + RunID + "Error !! No dimentions are mentioned in the config file. Facts processing cannot be done without dimension, hence terminating the program.",
-					"error","","DataExtraction","db");
-			System.exit(0);
-		}
+	//	} 
 
 		/***************************** Fact Extraction Started **************************************/
 
@@ -524,16 +535,15 @@ public class DataLoader {
 			writeLog("RunID " + RunID
 					+ " DataExtration Oparation is Started for Facts.", "info",
 					"", "Dataextraction", "db");
-			int cunt1 = insertID.length;
+			int cunt1 = insertIDList.size();
 			for (int x = 0; x < facts.length; x++) {
 
 				
 
-					insertID[cunt1] = writeJobLog(getRunID(), facts[x],
-							"Normal", "In-Progress");
+					/*insertID[cunt1] =*/ insertIDList.add(writeJobLog(getRunID(), facts[x],"Normal", "In-Progress"));
 					
-					writeJobLog(insertID[cunt1], "EXTRACTSTART",
-							new SimpleDateFormat("HH:mm:ss").format(Calendar
+					writeJobLog(/*insertID[cunt1]*/(long)insertIDList.get(insertIDList.size()-1), "EXTRACTSTART",
+							new SimpleDateFormat("YYYY-MM-DD HH:mm:ss").format(Calendar
 									.getInstance().getTime()));
 
 				
@@ -551,8 +561,8 @@ public class DataLoader {
 
 					createFactExtract(con, factFileName, facts[x], idex);
 					
-					writeJobLog(insertID[cunt1], "EXTRACTEND",
-							new SimpleDateFormat("HH:mm:ss").format(Calendar
+					writeJobLog(/*insertID[cunt1]*/(long)insertIDList.get(insertIDList.size()-1), "EXTRACTEND",
+							new SimpleDateFormat("YYYY-MM-DD HH:mm:ss").format(Calendar
 									.getInstance().getTime()));
 
 				} catch (Exception e) {
@@ -564,7 +574,7 @@ public class DataLoader {
 					writeLog("RunID " + RunID + " Error!!" + e.getMessage(),
 							"error", facts[x], "Dataextraction", "db");
 					
-					writeJobLog(insertID[cunt1], "Error","");
+					writeJobLog(/*insertID[cunt1]*/(long)insertIDList.get(insertIDList.size()-1), "Error","");
 					
 
 				} finally {
@@ -618,8 +628,8 @@ public class DataLoader {
 					insertID[i] = writeJobLog(getRunID(), failedFileList[i],
 							"Re-Process", "In-Progress");
 					
-					writeJobLog(insertID[i], "EXTRACTSTART",
-							new SimpleDateFormat("HH:mm:ss").format(Calendar
+					writeJobLog((long)insertIDList.get(insertIDList.size()-1), "EXTRACTSTART",
+							new SimpleDateFormat("YYYY-MM-DD HH:mm:ss").format(Calendar
 									.getInstance().getTime()));
 
 					statement = con.createStatement();
@@ -683,8 +693,8 @@ public class DataLoader {
 					}
 					out.close();
 					
-					writeJobLog(insertID[i], "EXTRACTEND",
-							new SimpleDateFormat("HH:mm:ss").format(Calendar
+					writeJobLog((long)insertIDList.get(insertIDList.size()-1), "EXTRACTEND",
+							new SimpleDateFormat("YYYY-MM-DD HH:mm:ss").format(Calendar
 									.getInstance().getTime()));
 					
 					writeLog("RunID " + RunID
@@ -710,7 +720,7 @@ public class DataLoader {
 							"RunID " + RunID + " SQL Error!!" + e.getMessage(),
 							"error", failedFileList[i], "Dataextraction", "DB");
 					
-					writeJobLog(insertID[i], "Error","");
+					writeJobLog((long)insertIDList.get(insertIDList.size()-1), "Error","");
 
 					// extractEndTime.add(i, "Error");
 
@@ -725,7 +735,7 @@ public class DataLoader {
 					writeLog("RunID " + RunID + " Error!!" + e.getMessage(),
 							"error", failedFileList[i], "Dataextraction", "DB");
 					
-					writeJobLog(insertID[i], "Error","");
+					writeJobLog((long)insertIDList.get(insertIDList.size()-1), "Error","");
 					// extractEndTime.add(i, "Error");
 
 				} catch (Exception e) {
@@ -738,7 +748,7 @@ public class DataLoader {
 					writeLog("RunID " + RunID + " Error!!" + e.getMessage(),
 							"error", failedFileList[i], "Dataextraction", "DB");
 					
-					writeJobLog(insertID[i], "Error","");
+					writeJobLog((long)insertIDList.get(insertIDList.size()-1), "Error","");
 					// extractEndTime.add(i, "Error");
 
 				} finally {
@@ -759,14 +769,14 @@ public class DataLoader {
 					insertID[i] = writeJobLog(getRunID(), failedFileList[i],
 							"Re-Process", "In-Progress");
 					
-					writeJobLog(insertID[i], "EXTRACTSTART",
-							new SimpleDateFormat("HH:mm:ss").format(Calendar
+					writeJobLog((long)insertIDList.get(insertIDList.size()-1), "EXTRACTSTART",
+							new SimpleDateFormat("YYYY-MM-DD HH:mm:ss").format(Calendar
 									.getInstance().getTime()));
 					
 					createFactExtract(con, factFileName, failedFileList[i], -1);
 					
-					writeJobLog(insertID[i], "EXTRACTSTART",
-							new SimpleDateFormat("HH:mm:ss").format(Calendar
+					writeJobLog((long)insertIDList.get(insertIDList.size()-1), "EXTRACTSTART",
+							new SimpleDateFormat("YYYY-MM-DD HH:mm:ss").format(Calendar
 									.getInstance().getTime()));
 					
 					writeLog("DataExtraction Operation Ended for DB table "
@@ -779,7 +789,7 @@ public class DataLoader {
 
 					// checkList.put(facts[x],"Extraction Error");
 					
-					writeJobLog(insertID[i], "Error","");
+					writeJobLog((long)insertIDList.get(insertIDList.size()-1), "Error","");
 
 					writeLog("RunID " + RunID + " Error!!" + e.getMessage(),
 							"error", failedFileList[i], "DataExtraction", "DB");
@@ -1023,8 +1033,8 @@ public class DataLoader {
 						.format(Calendar.getInstance().getTime()));
 				
 								
-				writeJobLog(insertID[i], "S3LOADSTART",
-						new SimpleDateFormat("HH:mm:ss").format(Calendar
+				writeJobLog((long)insertIDList.get(insertIDList.size()-1), "S3LOADSTART",
+						new SimpleDateFormat("YYYY-MM-DD HH:mm:ss").format(Calendar
 								.getInstance().getTime()));
 
 				try {
@@ -1044,8 +1054,8 @@ public class DataLoader {
 					System.out.println("Checking transfer status=="+upload.getState().toString()+upload.isDone());
 					upload.waitForCompletion();
 					tx.shutdownNow();
-					writeJobLog(insertID[i], "S3LOADEND",
-							new SimpleDateFormat("HH:mm:ss").format(Calendar
+					writeJobLog((long)insertIDList.get(insertIDList.size()-1), "S3LOADEND",
+							new SimpleDateFormat("YYYY-MM-DD HH:mm:ss").format(Calendar
 									.getInstance().getTime()));
 					
 					writeLog("RunID " + RunID + s3File.getName()
@@ -1058,14 +1068,14 @@ public class DataLoader {
 							.format(Calendar.getInstance().getTime()));
 					
 					
-					writeJobLog(insertID[i], "REDSHIFTLOADSTART",
-							new SimpleDateFormat("HH:mm:ss").format(Calendar
+					writeJobLog((long)insertIDList.get(insertIDList.size()-1), "REDSHIFTLOADSTART",
+							new SimpleDateFormat("YYYY-MM-DD HH:mm:ss").format(Calendar
 									.getInstance().getTime()));
 					
 					loadDataToRedShiftDB(files[i], s3File.getName());
 					
-					writeJobLog(insertID[i], "REDSHIFTLOADEND",
-							new SimpleDateFormat("HH:mm:ss").format(Calendar
+					writeJobLog((long)insertIDList.get(insertIDList.size()-1), "REDSHIFTLOADEND",
+							new SimpleDateFormat("YYYY-MM-DD HH:mm:ss").format(Calendar
 									.getInstance().getTime()));
 
 					
@@ -1097,7 +1107,7 @@ public class DataLoader {
 
 					loadEndTime.add(i, "Error");
 
-					writeJobLog(insertID[i], "Error","");
+					writeJobLog((long)insertIDList.get(insertIDList.size()-1), "Error","");
 
 					checkList.put(files[i], "Loading Error");
 					
@@ -1115,7 +1125,7 @@ public class DataLoader {
 
 					checkList.put(files[i], "Loading Error");
 
-					writeJobLog(insertID[i], "Error","");
+					writeJobLog((long)insertIDList.get(insertIDList.size()-1), "Error","");
 
 				} catch (Exception e) {
 					writeLog("RunID " + RunID + " " + e.getMessage(), "error",
@@ -1127,7 +1137,7 @@ public class DataLoader {
 
 					checkList.put(files[i], "Loading Error");
 
-					writeJobLog(insertID[i], "Error","");
+					writeJobLog((long)insertIDList.get(insertIDList.size()-1), "Error","");
 					
 				} finally {
 					continue;
@@ -1139,7 +1149,7 @@ public class DataLoader {
 						+ files[i] + " so loading operation is skipped for "
 						+ files[i], "info", files[i], "S3Transfer", "DB");
 				
-				writeJobLog(insertID[i], "Error","");
+				writeJobLog((long)insertIDList.get(insertIDList.size()-1), "Error","");
 				
 				System.out
 						.println("There is an issue while creating the extract of "
@@ -1192,8 +1202,8 @@ public class DataLoader {
 
 			if (!checkErrorStatus("Extraction", files[i])) {
 
-				writeJobLog(insertID[i], "S3LoadStart",
-						new SimpleDateFormat("HH:mm:ss").format(Calendar
+				writeJobLog((long)insertIDList.get(insertIDList.size()-1), "S3LoadStart",
+						new SimpleDateFormat("YYYY-MM-DD HH:mm:ss").format(Calendar
 								.getInstance().getTime()));
 
 				try {
@@ -1211,22 +1221,22 @@ public class DataLoader {
 					upload = tx.upload(request);
 					upload.waitForCompletion();
 					tx.shutdownNow();
-					writeJobLog(insertID[i], "S3LoadEnd",
-							new SimpleDateFormat("HH:mm:ss").format(Calendar
+					writeJobLog((long)insertIDList.get(insertIDList.size()-1), "S3LoadEnd",
+							new SimpleDateFormat("YYYY-MM-DD HH:mm:ss").format(Calendar
 									.getInstance().getTime()));
 					
 					writeLog(s3File.getName() + " transffered successfully.",
 							"info", files[i], "S3Transfer_Reprocess", "DB");
 					System.out.println(files[i] + " file transffered.");
 
-					writeJobLog(insertID[i], "RedShiftLoadStart",
-							new SimpleDateFormat("HH:mm:ss").format(Calendar
+					writeJobLog((long)insertIDList.get(insertIDList.size()-1), "RedShiftLoadStart",
+							new SimpleDateFormat("YYYY-MM-DD HH:mm:ss").format(Calendar
 									.getInstance().getTime()));
 					
 					loadDataToRedShiftDB(files[i], s3File.getName());
 					
-					writeJobLog(insertID[i], "RedShiftLoadEnd",
-							new SimpleDateFormat("HH:mm:ss").format(Calendar
+					writeJobLog((long)insertIDList.get(insertIDList.size()-1), "RedShiftLoadEnd",
+							new SimpleDateFormat("YYYY-MM-DD HH:mm:ss").format(Calendar
 									.getInstance().getTime()));
 
 				} catch (AmazonServiceException ase) {
@@ -1255,7 +1265,7 @@ public class DataLoader {
 					System.out.println("Request ID:       "
 							+ ase.getRequestId());
 
-					writeJobLog(insertID[i], "Error","");
+					writeJobLog((long)insertIDList.get(insertIDList.size()-1), "Error","");
 
 				} catch (AmazonClientException ace) {
 					writeLog(
@@ -1265,7 +1275,7 @@ public class DataLoader {
 									+ ace.getMessage(), "error", "",
 							"S3Transfer", "DB");
 					
-					writeJobLog(insertID[i], "Error","");
+					writeJobLog((long)insertIDList.get(insertIDList.size()-1), "Error","");
 
 					System.out.println("Error !! Please check error message "
 							+ ace.getMessage());
@@ -1275,7 +1285,7 @@ public class DataLoader {
 					writeLog("RunID " + RunID + " " + e.getMessage(), "error",
 							"", "S3Transfer_Reprocess", "DB");
 					
-					writeJobLog(insertID[i], "Error","");
+					writeJobLog((long)insertIDList.get(insertIDList.size()-1), "Error","");
 					
 					System.out.println("Error !! Please check error message "
 							+ e.getMessage());
@@ -1292,7 +1302,7 @@ public class DataLoader {
 						+ files[i], "info", files[i], "S3Transfer_Reprocess",
 						"DB");
 				
-				writeJobLog(insertID[i], "Error","");
+				writeJobLog((long)insertIDList.get(insertIDList.size()-1), "Error","");
 				
 				System.out
 						.println("As there is an issue while creating the extract of "
@@ -1465,7 +1475,7 @@ public class DataLoader {
 					"Normal", "In-Progress");
 			
 			writeJobLog(insertID[insertID.length], "EXTRACTSTART",
-					new SimpleDateFormat("HH:mm:ss").format(Calendar
+					new SimpleDateFormat("YYYY-MM-DD HH:mm:ss").format(Calendar
 							.getInstance().getTime()));
 			
 			
@@ -1506,7 +1516,7 @@ public class DataLoader {
 			}
 			
 			writeJobLog(insertID[insertID.length], "EXTRACTEND",
-					new SimpleDateFormat("HH:mm:ss").format(Calendar
+					new SimpleDateFormat("YYYY-MM-DD HH:mm:ss").format(Calendar
 							.getInstance().getTime()));
 
 		} catch (IOException e) {
@@ -1655,7 +1665,7 @@ public class DataLoader {
 		PreparedStatement ps;
 
 	 	Logger logger = Logger.getLogger("AppLog");
-		logger.setUseParentHandlers(false);
+	//	logger.setUseParentHandlers(false);
 
 		if(appender.equals("file")) {
 			
@@ -1665,7 +1675,6 @@ public class DataLoader {
 			switch (type) {
 			case "info":
 				try {
-					
 					FileHandler fh = new FileHandler(logLocation + File.separator
 							+ "App.log", true);
 					logger.addHandler(fh);
@@ -1686,6 +1695,8 @@ public class DataLoader {
 					fh.setFormatter(formatter);
 					logger.severe(msg);
 					fh.close();
+				//	logger.error(msg);
+				
 
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -1718,8 +1729,10 @@ public class DataLoader {
 				logger.addHandler(fh);
 				SimpleFormatter formatter = new SimpleFormatter();
 				fh.setFormatter(formatter);
-				logger.severe("Error in writing message_log!! "+e1.getMessage());
+				logger.severe("Error in writing message_log!!  Hence terminating the program. "+e1.getMessage());
 				fh.close();
+			//	System.out.println(" Error in writing message_log!!  Hence terminating the program. ");
+			//	logger.error("Error in writing message_log!! "+e1.getMessage());
 				System.exit(0);
 			}
 		}
@@ -1860,13 +1873,13 @@ public class DataLoader {
 			ps.setString(3, run_mode);
 			ps.setString(4, job_status);
 			ps.executeUpdate();
-			ResultSet rs = statement.getGeneratedKeys();
+			ResultSet rs = ps.getGeneratedKeys();
 			if (rs != null && rs.next()) {
 				key = rs.getLong(1);
 			}
 
 		} catch (Exception e) {
-
+			e.getStackTrace();
 			System.exit(0);
 		}
 		return key;
@@ -1883,41 +1896,41 @@ public class DataLoader {
 
 			case "EXTRACTSTART":
 
-				logSql = "UPDATE job_log SET ExtractStart = ? WHERE job_id = ?) ";
+				logSql = "UPDATE job_log SET ExtractStart = ? WHERE job_id = ? ";
 				break;
 
 			case "EXTRACTEND":
 
-				logSql = "UPDATE job_log SET ExtractEnd = ? WHERE job_id = ?) ";
+				logSql = "UPDATE job_log SET ExtractEnd = ? WHERE job_id = ? ";
 				break;
 
 			case "S3LOADSTART":
 
-				logSql = "UPDATE job_log SET S3LoadStart = ? WHERE job_id = ?) ";
+				logSql = "UPDATE job_log SET S3LoadStart = ? WHERE job_id = ? ";
 				break;
 
 			case "S3LOADEND":
 
-				logSql = "UPDATE job_log SET S3LoadEnd = ? WHERE job_id = ?) ";
+				logSql = "UPDATE job_log SET S3LoadEnd = ? WHERE job_id = ? ";
 				break;
 
 			case "REDSHIFTLOADSTART":
 
-				logSql = "UPDATE job_log SET RedShiftLoadStart = ? WHERE job_id = ?) ";
+				logSql = "UPDATE job_log SET RedShiftLoadStart = ? WHERE job_id = ? ";
 				break;
 
 			case "REDSHIFTLOADEND":
 
-				logSql = "UPDATE job_log SET RedShiftLoadEnd = ? WHERE job_id = ?) ";
+				logSql = "UPDATE job_log SET RedShiftLoadEnd = ? WHERE job_id = ? ";
 				break;
 
 			case "ERROR":
-				logSql = "UPDATE job_log SET job_status = ? WHERE job_id = ?) ";
+				logSql = "UPDATE job_log SET job_status = ? WHERE job_id = ? ";
 				break;
 				
 			default:
 
-				logSql = "UPDATE job_log SET job_status = ? WHERE job_id = ?) ";
+				logSql = "UPDATE job_log SET job_status = ? WHERE job_id = ? ";
 				break;
 
 			}
