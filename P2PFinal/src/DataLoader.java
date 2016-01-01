@@ -209,6 +209,12 @@ public class DataLoader {
 			writeLog("RunID " + RunID + "Error !! Please check error message. "
 					+ e.getMessage(), "error", "", "Aplication Startup", "db");
 			System.exit(0);
+		} catch (SQLException se) {
+			System.out.println("Error !! Please check error message "
+					+ se.getMessage());
+			writeLog("RunID " + RunID + "Error !! Please check error message. " + se.getMessage(),
+					"error","","Aplication Startup","db");
+			System.exit(0);
 		}
 
 	}
@@ -503,8 +509,10 @@ public class DataLoader {
 			}
 		} else {
 
-			System.out
-					.println("No dimentions are mentioned in the config file.");
+			System.out.println("No dimentions are mentioned in the config file. Facts processing cannot be done without dimension, hence terminating the program.");
+			writeLog("RunID " + RunID + "Error !! No dimentions are mentioned in the config file. Facts processing cannot be done without dimension, hence terminating the program.",
+					"error","","DataExtraction","db");
+			System.exit(0);
 		}
 
 		/***************************** Fact Extraction Started **************************************/
@@ -970,7 +978,7 @@ public class DataLoader {
 
 	}
 
-	public void doAmazonS3FileTransfer() {
+	public void doAmazonS3FileTransfer() throws SecurityException, IOException {
 
 		String[] files = combine(dimensions, facts);
 		AWSCredentials credentials = null;
@@ -1033,7 +1041,9 @@ public class DataLoader {
 					PutObjectRequest request = new PutObjectRequest(bucketName,
 							strDate + "/" + s3File.getName(), s3File);
 					upload = tx.upload(request);
-					
+					System.out.println("Checking transfer status=="+upload.getState().toString()+upload.isDone());
+					upload.waitForCompletion();
+					tx.shutdownNow();
 					writeJobLog(insertID[i], "S3LOADEND",
 							new SimpleDateFormat("HH:mm:ss").format(Calendar
 									.getInstance().getTime()));
@@ -1143,7 +1153,7 @@ public class DataLoader {
 
 	}
 
-	public void doAmazonS3FileTransfer(char mode, String[] files) {
+	public void doAmazonS3FileTransfer(char mode, String[] files) throws SecurityException, IOException {
 
 		AWSCredentials credentials = null;
 		try {
@@ -1199,7 +1209,8 @@ public class DataLoader {
 					PutObjectRequest request = new PutObjectRequest(bucketName,
 							strDate + "/" + s3File.getName(), s3File);
 					upload = tx.upload(request);
-					
+					upload.waitForCompletion();
+					tx.shutdownNow();
 					writeJobLog(insertID[i], "S3LoadEnd",
 							new SimpleDateFormat("HH:mm:ss").format(Calendar
 									.getInstance().getTime()));
@@ -1293,7 +1304,7 @@ public class DataLoader {
 
 	}
 
-	public void loadDataToRedShiftDB(String tableName, String fileName) {
+	public void loadDataToRedShiftDB(String tableName, String fileName) throws SecurityException, IOException {
 
 		Connection conn = null;
 		Statement stmt = null;
@@ -1430,7 +1441,7 @@ public class DataLoader {
 
 	}
 
-	public void createDbExtractFromURL() {
+	public void createDbExtractFromURL() throws IOException {
 
 		ICsvMapReader mapReader = null;
 		ICsvMapWriter mapWriter = null;
@@ -1529,7 +1540,7 @@ public class DataLoader {
 
 	}
 
-	public void reviewDataLoadingSession() {
+	public void reviewDataLoadingSession() throws SecurityException, IOException {
 		int errCount = 0;
 		int successCount = 0;
 		System.out.println("DataLoading Operation completed.");
@@ -1638,23 +1649,25 @@ public class DataLoader {
 		}
 	}
 
-	private void writeLog(String msg, String type, String entity, String stage,
-			String appender) {
+	private void writeLog(String msg, String type, String entity, String stage, String appender) throws /*SecurityException, */ IOException{
 
 		String logSql = "";
 		PreparedStatement ps;
 
-		if (appender.equals("file")) {
+	 	Logger logger = Logger.getLogger("AppLog");
+		logger.setUseParentHandlers(false);
 
-			Logger logger = Logger.getLogger("AppLog");
-			logger.setUseParentHandlers(false);
-
+		if(appender.equals("file")) {
+			
+			/*Logger logger = Logger.getLogger("AppLog");
+			logger.setUseParentHandlers(false);*/
+			
 			switch (type) {
 			case "info":
 				try {
-
-					FileHandler fh = new FileHandler(logLocation
-							+ File.separator + "App.log", true);
+					
+					FileHandler fh = new FileHandler(logLocation + File.separator
+							+ "App.log", true);
 					logger.addHandler(fh);
 					SimpleFormatter formatter = new SimpleFormatter();
 					fh.setFormatter(formatter);
@@ -1666,8 +1679,8 @@ public class DataLoader {
 				return;
 			case "error":
 				try {
-					FileHandler fh = new FileHandler(logLocation
-							+ File.separator + "App.log", true);
+					FileHandler fh = new FileHandler(logLocation + File.separator
+							+ "App.log", true);
 					logger.addHandler(fh);
 					SimpleFormatter formatter = new SimpleFormatter();
 					fh.setFormatter(formatter);
@@ -1682,27 +1695,32 @@ public class DataLoader {
 		} else {
 
 			try {
-				Connection connection = DriverManager.getConnection(logDbURL,
-						logDbUid, logDbPwd);
+				Connection connection = DriverManager.getConnection(logDbURL,logDbUid,logDbPwd);
 				Calendar calendar = Calendar.getInstance();
-				Timestamp currentTimestamp = new java.sql.Timestamp(calendar
-						.getTime().getTime());
-
-				logSql = "INSERT INTO message_log(runid,message_desc,target_table,message_stage,message_type,message_timestamp) "
+		    	Timestamp currentTimestamp = new java.sql.Timestamp(calendar.getTime().getTime());
+		    	
+		    	logSql = "INSERT INTO message_log(runid,message_desc,target_table,message_stage,message_type,message_timestamp) "
 						+ "VALUES(?,?,?,?,?,?)";
-				ps = connection.prepareStatement(logSql);
+		    	ps = connection.prepareStatement(logSql);
 				ps.setInt(1, this.getRunID());
-				ps.setString(2, msg);
-				ps.setString(3, entity);
-				ps.setString(4, stage);
-				ps.setString(5, type);
+		    	ps.setString(2,msg);
+				ps.setString(3,entity);
+				ps.setString(4,stage);
+				ps.setString(5,type);
 				ps.setTimestamp(6, currentTimestamp);
 				ps.executeUpdate();
-				// connection.commit();
+				//connection.commit();
 				connection.close();
-
-			} catch (SQLException e1) {
-				e1.printStackTrace();
+				
+			} catch (SQLException e1) { //Modified to capture if MySql is down
+				//e1.printStackTrace();
+				FileHandler fh = new FileHandler(logLocation + File.separator+ "App.log", true); // can throw IOException
+				logger.addHandler(fh);
+				SimpleFormatter formatter = new SimpleFormatter();
+				fh.setFormatter(formatter);
+				logger.severe("Error in writing message_log!! "+e1.getMessage());
+				fh.close();
+				System.exit(0);
 			}
 		}
 
@@ -1821,7 +1839,7 @@ public class DataLoader {
 
 		return result;
 	}
-
+	
 	public long writeJobLog(int runID, String entity, String run_mode,
 			String job_status) {
 
