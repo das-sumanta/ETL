@@ -37,7 +37,7 @@ import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
 //import org.apache.log4j.Logger;
-import org.apache.log4j.PropertyConfigurator;
+//import org.apache.log4j.PropertyConfigurator;
 import org.supercsv.io.CsvMapReader;
 import org.supercsv.io.CsvMapWriter;
 import org.supercsv.io.ICsvMapReader;
@@ -896,15 +896,14 @@ public class DataLoader {
 									System.out.println("ResultSet row size="+rs.getRow());*/ //TODO remove debug
 							List<Object> row = new ArrayList<Object>();
 							ResultSetMetaData rsmd=rs.getMetaData();
-							int rsColCount=rsmd.getColumnCount(); //TODO remove debug 73
-							System.out.println("Column size="+rsColCount);//TODO remove debug 
-							for (int k = 0; k < /*rsColCount*/columnNames.size(); k++) {
+							row.add(RunID);
+
+							for (int k = 0; k < /*rsColCount*/columnNames.size() - 1; k++) {
 								row.add(rs.getObject(k + 1));  //throwing exception Column index 74 is out of range
 							}
 
 							out.newLine();
 							int rowSize=row.size(); //TODO remove debug 
-							System.out.println("Added row size="+rowSize);//TODO remove debug 
 							for (int j = 0; j < row.size(); j++) {
 								if (!String.valueOf(row.get(j)).equals("null")) {
 									String tmp = "\""
@@ -996,7 +995,7 @@ public class DataLoader {
 
 	public void doAmazonS3FileTransfer() throws SecurityException, IOException {
 
-		String[] files = combine(dimensions, facts);
+ 		String[] files = combine(dimensions, facts);
 		AWSCredentials credentials = null;
 		try {
 
@@ -1032,14 +1031,15 @@ public class DataLoader {
 				.println("--------------------------------------------------------");
 
 		for (int i = 0; i < files.length; i++) {
-
+			
 			if (!checkErrorStatus("Extraction", files[i])) {
+			//	tx = new TransferManager(s3);
 
 				loadStartTime.add(i, new SimpleDateFormat("HH:mm:ss")
 						.format(Calendar.getInstance().getTime()));
 				
 								
-				writeJobLog((long)insertIDList.get(insertIDList.size()-1), "S3LOADSTART",
+				writeJobLog((long)insertIDList.get(i), "S3LOADSTART",
 						new SimpleDateFormat("YYYY-MM-DD HH:mm:ss").format(Calendar
 								.getInstance().getTime()));
 
@@ -1059,8 +1059,12 @@ public class DataLoader {
 					upload = tx.upload(request);
 					System.out.println("Checking transfer status=="+upload.getState().toString()+upload.isDone());
 					upload.waitForCompletion();
-					tx.shutdownNow();
-					writeJobLog((long)insertIDList.get(insertIDList.size()-1), "S3LOADEND",
+					System.out.println(upload.getState().ordinal());
+					if(upload.getState().ordinal()==2 ||upload.getState().ordinal()==3 ||upload.getState().ordinal()==4)
+					 {
+					//	tx.shutdownNow(); //TODO call it outside for loop test
+					 
+					writeJobLog((long)insertIDList.get(i), "S3LOADEND",
 							new SimpleDateFormat("YYYY-MM-DD HH:mm:ss").format(Calendar
 									.getInstance().getTime()));
 					
@@ -1074,17 +1078,21 @@ public class DataLoader {
 							.format(Calendar.getInstance().getTime()));
 					
 					
-					writeJobLog((long)insertIDList.get(insertIDList.size()-1), "REDSHIFTLOADSTART",
+					writeJobLog((long)insertIDList.get(i), "REDSHIFTLOADSTART",
 							new SimpleDateFormat("YYYY-MM-DD HH:mm:ss").format(Calendar
 									.getInstance().getTime()));
 					
 					loadDataToRedShiftDB(files[i], s3File.getName());
 					
-					writeJobLog((long)insertIDList.get(insertIDList.size()-1), "REDSHIFTLOADEND",
+					writeJobLog((long)insertIDList.get(i), "REDSHIFTLOADEND",
 							new SimpleDateFormat("YYYY-MM-DD HH:mm:ss").format(Calendar
 									.getInstance().getTime()));
-
 					
+					/*writeJobLog((long)insertIDList.get(i), "success",
+							new SimpleDateFormat("YYYY-MM-DD HH:mm:ss").format(Calendar
+									.getInstance().getTime()));*/
+
+					 }
 
 				} catch (AmazonServiceException ase) {
 
@@ -1165,7 +1173,7 @@ public class DataLoader {
 			}
 		}
 
-		// reviewDataLoadingSession();
+		
 
 	}
 
