@@ -551,9 +551,9 @@ public class DataLoader {
 					
 				
 				idex = idex + x + 1;
-				extractStartTime.add(idex, new SimpleDateFormat("HH:mm:ss")
-						.format(Calendar.getInstance().getTime()));
-
+				/*extractStartTime.add(idex, new SimpleDateFormat("HH:mm:ss")
+						.format(Calendar.getInstance().getTime()));*/
+ 
 				try {
 
 					factFileName = factsSqlScriptLocation + File.separator
@@ -882,6 +882,7 @@ public class DataLoader {
 
 						String str = "";
 						List<String> columnNames = getColumnNames(rs);
+						int colSize =columnNames.size();  //TODO remove debug 74
 						for (int c = 0; c < columnNames.size(); c++) {
 							str = "\"" + columnNames.get(c) + "\"";
 							out.append(str);
@@ -891,14 +892,19 @@ public class DataLoader {
 						}
 
 						while (rs.next()) {
+							/*if(rs.isLast())
+									System.out.println("ResultSet row size="+rs.getRow());*/ //TODO remove debug
 							List<Object> row = new ArrayList<Object>();
-
-							for (int k = 0; k < columnNames.size(); k++) {
-								row.add(rs.getObject(k + 1));
+							ResultSetMetaData rsmd=rs.getMetaData();
+							int rsColCount=rsmd.getColumnCount(); //TODO remove debug 73
+							System.out.println("Column size="+rsColCount);//TODO remove debug 
+							for (int k = 0; k < /*rsColCount*/columnNames.size(); k++) {
+								row.add(rs.getObject(k + 1));  //throwing exception Column index 74 is out of range
 							}
 
 							out.newLine();
-
+							int rowSize=row.size(); //TODO remove debug 
+							System.out.println("Added row size="+rowSize);//TODO remove debug 
 							for (int j = 0; j < row.size(); j++) {
 								if (!String.valueOf(row.get(j)).equals("null")) {
 									String tmp = "\""
@@ -1144,7 +1150,7 @@ public class DataLoader {
 				}
 
 			} else {
-				checkList.put(files[i], "Loading Error");
+				checkList.put(files[i], "Loading Error");   //TODO Showing this exception in log
 				writeLog("As there is an issue while creating the extract of "
 						+ files[i] + " so loading operation is skipped for "
 						+ files[i], "info", files[i], "S3Transfer", "DB");
