@@ -101,7 +101,7 @@ public class DataLoader {
 	private List<Long> insertIDList;
 	private final String[] DIM;
 
-	public DataLoader() throws IOException, ClassNotFoundException,
+	public DataLoader() throws IOException, /*ClassNotFoundException,*/
 			SQLException {
 		
 		/*Logger logger = Logger.getLogger(DataLoader.class);
@@ -155,11 +155,9 @@ public class DataLoader {
 		extractLocationS3 = properties.getProperty("s3bucket");
 		logLocation = System.getProperty("user.dir") + File.separator + "log"
 				+ File.separator + strDate;
-		statusRptLocation = System.getProperty("user.dir") + File.separator
-				+ "Status_Reports" + File.separator + strDate;
+
 		factsSqlScriptLocation = properties.getProperty("FactFileLoc");
 
-//		aSQLScriptFilePath = properties.getProperty("SQLScriptsPath");
 		awsProfile = properties.getProperty("AwsProfile");
 		redShiftMasterUsername = properties.getProperty("RSUID");
 		redShiftMasterUserPassword = properties.getProperty("RSPWD");
@@ -170,15 +168,12 @@ public class DataLoader {
 
 		updateFactsProperty(appConfigPropFile, "RunID ", String.valueOf(RunID));
 
-//		int cnt = dimensions.length + (facts == null ? 0 : facts.length);
-//		timeArr = new int[6][cnt];
 		DIM = properties.getProperty("Dimensions1").split(",");
 
 		try {
 			new File(extractLocationLocal).mkdirs();
 			new File(extractLocationURL).mkdirs();
 			new File(logLocation).mkdirs();
-			new File(statusRptLocation).mkdirs();
 
 			// Creating JDBC DB Connection
 			Class.forName("com.netsuite.jdbc.openaccess.OpenAccessDriver");
@@ -197,7 +192,7 @@ public class DataLoader {
 			System.out
 					.println("************************************ WELCOME TO P2P DB DATA LOADER UTILITIES ************************************");
 
-		} catch (SecurityException e) {
+		}/* catch (SecurityException e) {
 			System.out
 					.println("Application Can't create Log Directory. See Error Message for mor details."
 							+ e.getMessage());
@@ -210,19 +205,13 @@ public class DataLoader {
 
 			System.exit(0);
 
-		} catch (ClassNotFoundException e) {
+		}*/ catch (ClassNotFoundException e) {
 			System.out.println("Error !! Please check error message "
 					+ e.getMessage());
 			writeLog("RunID " + RunID + "Error !! Please check error message. "
 					+ e.getMessage(), "error", "", "Aplication Startup", "db");
 			System.exit(0);
-		} catch (SQLException se) {
-			System.out.println("Error !! Please check error message "
-					+ se.getMessage());
-			writeLog("RunID " + RunID + "Error !! Please check error message. " + se.getMessage(),
-					"error","","Aplication Startup","db");
-			System.exit(0);
-		}
+		} 
 
 	}
 
@@ -458,7 +447,7 @@ public class DataLoader {
 					File csvFile = new File(fileName);
 					double bytes = csvFile.length();
 
-					writeLog("RunID  No." + RunID
+					writeLog("RunID " + RunID
 							+ " DataExtraction Operation for table "
 							+ dimensions[i] + " is extracted in " + fileName,
 							"info", dimensions[i], "Dataextraction", "db");
@@ -922,6 +911,7 @@ public class DataLoader {
 						writeLog("RunID " + RunID
 								+ " Extraction Completed for fact " + factName,
 								"info", factName, "Dataextraction", "DB");
+						//TODO joblog entry is in calling method
 					} else {
 						System.out
 								.println("No resultset generated after executing query for "
@@ -1045,7 +1035,6 @@ public class DataLoader {
 							strDate + "/" + s3File.getName(), s3File);
 					upload = tx.upload(request);
 					upload.waitForCompletion();
-					System.out.println(upload.getState().ordinal());
 					if(upload.getState().ordinal()==2)
 					 {
 					//	tx.shutdownNow(); //TODO call it outside for loop test
@@ -1054,11 +1043,11 @@ public class DataLoader {
 							new SimpleDateFormat("YYYY-MM-DD HH:mm:ss").format(Calendar
 									.getInstance().getTime()));
 					
-					writeLog("RunID " + RunID + s3File.getName()
-							+ " transffered successfully.", "info", files[i],
+					writeLog("RunID " + RunID +" "+ s3File.getName()
+							+ " transferred successfully.", "info", files[i],
 							"S3Transfer", "DB");
 					
-					System.out.println(files[i] + " file transffered.");
+					System.out.println(files[i] + " file transferred.");
 
 					/*loadEndTime.add(i, new SimpleDateFormat("HH:mm:ss")
 							.format(Calendar.getInstance().getTime()));*/
@@ -1162,17 +1151,18 @@ public class DataLoader {
 		ArrayList<String> factList = new ArrayList<>(Arrays.asList(facts));
 		if(factList.contains(fact)) {
 			for(String dimension : dimensions) {
-			boolean dimLoadError = checkErrorStatus("Loading", dimension);
-			if(dimLoadError)
-				proceed = false;
-				System.out.println("There is an error in copying dimension "+dimension+" to Redshift, hence fact will not work properly, aborting the program.");
-				writeLog(
-						"There is an error in copying dimension "+dimension
-						+" to Redshift, hence fact will not work properly, aborting the program.", 
-						"error", fact,"LoadRedshift", "DB");
-				
-				writeJobLog(insertIDList.get(listIndex), "","Aborted");
-				break;
+				boolean dimLoadError = checkErrorStatus("Loading", dimension);
+				if(dimLoadError) {
+					proceed = false;
+					System.out.println("There is an error in copying dimension "+dimension+" to Redshift, hence fact will not work properly, aborting the program.");
+					writeLog(
+							"There is an error in copying dimension "+dimension
+							+" to Redshift, hence fact will not work properly, aborting the program.", 
+							"error", fact,"LoadRedshift", "DB");
+
+					writeJobLog(insertIDList.get(listIndex), "Error","");
+					break;
+				}
 			}
 		}
 		return proceed;
@@ -1243,9 +1233,9 @@ public class DataLoader {
 								new SimpleDateFormat("YYYY-MM-DD HH:mm:ss").format(Calendar
 										.getInstance().getTime()));
 
-						writeLog(s3File.getName() + " transffered successfully.",
+						writeLog(s3File.getName() + " transferred successfully.",
 								"info", files[i], "S3Transfer_Reprocess", "DB");
-						System.out.println(files[i] + " file transffered.");
+						System.out.println(files[i] + " file transferred.");
 
 						writeJobLog(insertIDList.get(i), "RedShiftLoadStart",
 								new SimpleDateFormat("YYYY-MM-DD HH:mm:ss").format(Calendar
@@ -1445,18 +1435,19 @@ public class DataLoader {
 			checkList.put(tableName, "Loading Error");
 			System.out
 					.println("Error occured while loading data from S3 to Redshift Cluster for "
-							+ tableName);
+							+ tableName+ " " + ex.getMessage()+" hence aborting the program.");
 
 			writeLog(
 					"RunID "
 							+ RunID
 							+ " Error occured while loading data from S3 to Redshift Cluster for "
-							+ tableName + " " + ex.getMessage(), "error",
+							+ tableName + " " + ex.getMessage()+" hence aborting the program.", "error",
 					tableName, "LoadRedshift", "DB");
 			
 			writeJobLog(insertIDList.get(listIndex), "ERROR",
 					new SimpleDateFormat("YYYY-MM-DD HH:mm:ss").format(Calendar
-							.getInstance().getTime()));
+							.getInstance().getTime())); 
+			System.exit(0);
 
 		} finally {
 			// Finally block to close resources.
@@ -1683,7 +1674,7 @@ public class DataLoader {
 		}
 	}
 
-	private void writeLog(String msg, String type, String entity, String stage, String appender) throws /*SecurityException, */ IOException{
+	public void writeLog(String msg, String type, String entity, String stage, String appender) throws /*SecurityException, */ IOException{
 
 		String logSql = "";
 		PreparedStatement ps;
@@ -2022,7 +2013,7 @@ public class DataLoader {
 				break;
 
 			}
-			if (!optName.isEmpty() && !optName.equalsIgnoreCase("error")) {
+			if (!optName.equalsIgnoreCase("error")) {
 				PreparedStatement ps = connection.prepareStatement(logSql);
 				Timestamp ts = Timestamp.valueOf(optTime);
 				ps.setTimestamp(1, ts);
@@ -2030,13 +2021,8 @@ public class DataLoader {
 				ps.executeUpdate();
 				
 			} else {
-
 				PreparedStatement ps = connection.prepareStatement(logSql);
-				if(optName.equalsIgnoreCase("error")) {
-					ps.setString(1, "Error");
-				} else {
-					ps.setString(1, optTime);
-				}
+				ps.setString(1, "Error");
 				ps.setInt(2, (int) key);
 				ps.executeUpdate();
 			}

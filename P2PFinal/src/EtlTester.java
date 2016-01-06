@@ -8,18 +8,18 @@ import java.util.Properties;
 
 public class EtlTester {
 
-	public static void main(String[] args) {
-
+	public static void main(String[] args) throws IOException, SQLException {
+		
 		Connection con = null;
 		String aSQLScriptFilePath = "";
 		String dbObjects[] = null;
-		if (args.length == 0) {
-			DataLoader dl;
-			try {
-
-				dl = new DataLoader();
+		DataLoader dl=null;
+		try {
+			if (args.length == 0) {
+				dl= new DataLoader();
+				
 				dl.createDbExtract(); 
-				dl.doAmazonS3FileTransfer(); System.exit(0);
+				dl.doAmazonS3FileTransfer(); //System.exit(0);
 
 				Properties properties = new Properties();
 				File pf = new File("config.properties");
@@ -32,7 +32,7 @@ public class EtlTester {
 
 				dbObjects = dl.getListOfDimensionsFacts();
 
-				
+
 				for (int u = 0; u < dbObjects.length; u++) {
 					for (int i = 0; i < listOfFiles.length; i++) {
 
@@ -52,8 +52,8 @@ public class EtlTester {
 
 							scriptRunner.runScript(new FileReader(
 									aSQLScriptFilePath + File.separator
-											+ listOfFiles[i].getName()));
-							scriptRunner.writeJobLog(dl.getRunID(),dbObjects[u],"Normal Mode","Success");
+									+ listOfFiles[i].getName()));
+							scriptRunner.writeJobLog(dl.getRunID(),dbObjects[u],"Normal Mode","Success"); //TODO dw stage needs to be captured
 							break;
 
 						} else {
@@ -62,29 +62,18 @@ public class EtlTester {
 					}
 				}
 
-			} catch (ClassNotFoundException e) {
 
-				e.printStackTrace();
 
-			} catch (IOException e) {
-
-				e.printStackTrace();
-
-			} catch (SQLException e) {
-
-				e.printStackTrace();
-			}
-
-		} else {
-			System.out.println("DataLoader running in mannual mode");
+			} else {
+			System.out.println("DataLoader running in manual mode");
 			String[] fileList = args[1].split(",");
-							
-			DataLoader dl;
-			int runId = Integer.valueOf(args[2]);
+			int runId = Integer.valueOf(args[2]);	
+			dl = new DataLoader("r",runId);
 			
-			try {
+			
+		//	try {
 
-				dl = new DataLoader("r",runId);
+				
 				//dl.createDbExtract('r', fileList);
 				//dl.doAmazonS3FileTransfer('r', fileList);
 
@@ -131,7 +120,7 @@ public class EtlTester {
 				dl.updateRunID(runId++);
 				
 
-			} catch (ClassNotFoundException e) {
+			/*} catch (ClassNotFoundException e) {
 
 				e.printStackTrace();
 
@@ -139,11 +128,28 @@ public class EtlTester {
 
 				e.printStackTrace();
 
-			} catch (SQLException e) {
+			} catch (SQLException se) {
+				System.out.println("Error !! Please check error message "
+						+ se.getMessage());
+				dl.writeLog("RunID " + dl.getRunID() + "Error !! Please check error message. " + se.getMessage(),
+						"error","","Aplication Startup","db");
+				System.exit(0);
+			}*/
 
-				e.printStackTrace();
-			}
+		}
+		} catch (ClassNotFoundException e) {
+			System.out.println("Error !! Please check error message "
+					+ e.getMessage());
+			dl.writeLog("RunID " + dl.getRunID()  + "Error !! Please check error message. "
+					+ e.getMessage(), "error", "", "ScriptRunner Startup", "db");
+			System.exit(0);
+		} catch (IOException e) {
 
+			e.printStackTrace();
+
+		} catch (SQLException e) {
+			dl.writeLog("RunID " + dl.getRunID() + " Error !! Please check error message. " + e.getMessage(),
+					"error","","ScriptRunner Startup","db");
 		}
 
 	}

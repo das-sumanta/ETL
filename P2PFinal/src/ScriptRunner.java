@@ -61,6 +61,8 @@ public class ScriptRunner {
         tableList = new ArrayList<Table>();
         sqlOutput = new ArrayList<String>();
         errorCode = "";
+        
+        
 
     }
 
