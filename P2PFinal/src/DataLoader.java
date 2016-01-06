@@ -36,6 +36,7 @@ import java.util.logging.FileHandler;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
+
 //import org.apache.log4j.Logger;
 //import org.apache.log4j.PropertyConfigurator;
 import org.supercsv.io.CsvMapReader;
@@ -82,12 +83,6 @@ public class DataLoader {
 	private Upload upload;
 	private String logLocation;
 	private String awsProfile;
-	private ArrayList<String> extractStartTime = new ArrayList<String>();
-	private ArrayList<String> extractEndTime = new ArrayList<String>();
-	private ArrayList<String> loadStartTime = new ArrayList<String>();
-	private ArrayList<String> loadEndTime = new ArrayList<String>();
-	private ArrayList<String> loadStartTimeRS = new ArrayList<String>();
-	private ArrayList<String> loadEndTimeRS = new ArrayList<String>();
 	private String redShiftMasterUsername;
 	private String redShiftMasterUserPassword;
 	private String redShiftPreStageSchemaName;
@@ -95,16 +90,15 @@ public class DataLoader {
 	private Map<String, String> checkList = new HashMap<String, String>();
 	private char csvDelimiter;
 	private int RunID;
-	private String eol;
-	private String aSQLScriptFilePath;
+//	private String eol;
+//	private String aSQLScriptFilePath;
 	private File tmpLog;
 	private String ExtractURL;
 	private String logDbURL;
 	private String logDbUid;
 	private String logDbPwd;
-//	private int[][] timeArr; //No use
 	private long[] insertID;
-	private List insertIDList;
+	private List<Long> insertIDList;
 	private final String[] DIM;
 
 	public DataLoader() throws IOException, ClassNotFoundException,
@@ -118,7 +112,7 @@ public class DataLoader {
 		properties.load(new FileReader(pf));
 
 		factsPropFile = "facts.properties";
-		eol = System.getProperty("line.separator");
+//		eol = System.getProperty("line.separator");
 
 		serverHost = properties.getProperty("ServerHost");
 		serverDataSource = properties.getProperty("DataSource");
@@ -144,7 +138,7 @@ public class DataLoader {
 			System.exit(0);
 		}
 
-		if (!properties.getProperty("Facts").equalsIgnoreCase("NONE")) {
+		if (!properties.getProperty("Facts").isEmpty() && !properties.getProperty("Facts").equalsIgnoreCase("NONE")) {
 			facts = properties.getProperty("Facts").split(",");
 		} else {
 			facts = null;
@@ -165,7 +159,7 @@ public class DataLoader {
 				+ "Status_Reports" + File.separator + strDate;
 		factsSqlScriptLocation = properties.getProperty("FactFileLoc");
 
-		aSQLScriptFilePath = properties.getProperty("SQLScriptsPath");
+//		aSQLScriptFilePath = properties.getProperty("SQLScriptsPath");
 		awsProfile = properties.getProperty("AwsProfile");
 		redShiftMasterUsername = properties.getProperty("RSUID");
 		redShiftMasterUserPassword = properties.getProperty("RSPWD");
@@ -176,7 +170,7 @@ public class DataLoader {
 
 		updateFactsProperty(appConfigPropFile, "RunID ", String.valueOf(RunID));
 
-		int cnt = dimensions.length + (facts[0] == "NONE" ? 0 : facts.length);
+//		int cnt = dimensions.length + (facts == null ? 0 : facts.length);
 //		timeArr = new int[6][cnt];
 		DIM = properties.getProperty("Dimensions1").split(",");
 
@@ -240,7 +234,7 @@ public class DataLoader {
 		properties.load(new FileReader(pf));
 
 		factsPropFile = "facts.properties";
-		eol = System.getProperty("line.separator");
+//		eol = System.getProperty("line.separator");
 
 		// Initialize the class variables with properties values
 		serverHost = properties.getProperty("ServerHost");
@@ -287,7 +281,7 @@ public class DataLoader {
 		factsSqlScriptLocation = System.getProperty("user.dir")
 				+ File.separator + properties.getProperty("FactFileLoc");
 
-		aSQLScriptFilePath = properties.getProperty("SQLScriptsPath");
+//		aSQLScriptFilePath = properties.getProperty("SQLScriptsPath");
 		awsProfile = properties.getProperty("AwsProfile");
 		redShiftMasterUsername = properties.getProperty("RSUID");
 		redShiftMasterUserPassword = properties.getProperty("RSPWD");
@@ -387,7 +381,7 @@ public class DataLoader {
 
 				try {
 
-					writeJobLog((long)insertIDList.get(insertIDList.size()-1), "EXTRACTSTART",
+					writeJobLog(insertIDList.get(insertIDList.size()-1), "EXTRACTSTART",
 							new SimpleDateFormat("YYYY-MM-DD HH:mm:ss").format(Calendar
 									.getInstance().getTime()));
 
@@ -405,7 +399,7 @@ public class DataLoader {
 					resultSet = statement.executeQuery(query);
 
 					SimpleDateFormat sdf = new SimpleDateFormat(
-							"ddMMyyyyhhmmss"); // TODO change to 24hr format
+							"ddMMyyyyHHmmss"); // TODO change to 24hr format
 					Date curDate = new Date();
 					String strDate = sdf.format(curDate);
 
@@ -457,7 +451,7 @@ public class DataLoader {
 					}
 					out.close();
 
-					writeJobLog((long)insertIDList.get(insertIDList.size()-1), "EXTRACTEND",
+					writeJobLog(insertIDList.get(insertIDList.size()-1), "EXTRACTEND",
 							new SimpleDateFormat("YYYY-MM-DD HH:mm:ss").format(Calendar
 									.getInstance().getTime()));
 
@@ -465,21 +459,21 @@ public class DataLoader {
 					double bytes = csvFile.length();
 
 					writeLog("RunID  No." + RunID
-							+ " DataExtration Oparation for table "
+							+ " DataExtraction Operation for table "
 							+ dimensions[i] + " is extracted in " + fileName,
 							"info", dimensions[i], "Dataextraction", "db");
 
-					System.out.println("DataExtration Oparation for table "
+					System.out.println("DataExtraction Operation for table "
 							+ dimensions[i] + " is extracted in " + fileName);
 
 					checkList.put(dimensions[i], "Extraction Done");
 
-					extractEndTime.add(i, new SimpleDateFormat("HH:mm:ss")
-							.format(Calendar.getInstance().getTime()));
+					/*extractEndTime.add(i, new SimpleDateFormat("HH:mm:ss")
+							.format(Calendar.getInstance().getTime()));*/
 
 				} catch (SQLException e) {
 					System.out
-							.println("SQL Error!! Please Cheack the query and try again.\n"
+							.println("SQL Error!! Please Check the query and try again.\n"
 									+ e.getMessage());
 
 					checkList.put(dimensions[i], "Extraction Error");
@@ -490,7 +484,7 @@ public class DataLoader {
 
 			//		extractEndTime.add(i, "Error");
 
-					writeJobLog((long)insertIDList.get(insertIDList.size()-1), "Error", "");
+					writeJobLog(insertIDList.get(insertIDList.size()-1), "Error", "");
 
 				} catch (IOException e) {
 
@@ -502,9 +496,9 @@ public class DataLoader {
 
 					writeLog("RunID " + RunID + " Error!!" + e.getMessage(),
 							"error", dimensions[i], "Dataextraction", "db");
-					extractEndTime.add(i, "Error");
+				/*	extractEndTime.add(i, "Error");*/
 
-					writeJobLog((long)insertIDList.get(insertIDList.size()-1), "Error", "");
+					writeJobLog(insertIDList.get(insertIDList.size()-1), "Error", "");
 
 				} catch (Exception e) {
 					System.out.println("RunID " + RunID
@@ -515,9 +509,9 @@ public class DataLoader {
 
 					writeLog("RunID " + RunID + " Error!!" + e.getMessage(),
 							"error", dimensions[i], "Dataextraction", "db");
-					extractEndTime.add(i, "Error");
+					/*extractEndTime.add(i, "Error");*/
 
-					writeJobLog((long)insertIDList.get(insertIDList.size()-1), "Error", "");
+					writeJobLog(insertIDList.get(insertIDList.size()-1), "Error", "");
 
 				} finally {
 					continue;
@@ -530,10 +524,10 @@ public class DataLoader {
 
 		if (facts != null) {
 			int idex = dimensions.length - 1;
-			System.out.println("DataExtration Oparation is Started for Facts.");
+			System.out.println("DataExtraction Operation is Started for Facts.");
 
 			writeLog("RunID " + RunID
-					+ " DataExtration Oparation is Started for Facts.", "info",
+					+ " DataExtraction Operation is Started for Facts.", "info",
 					"", "Dataextraction", "db");
 			int cunt1 = insertIDList.size();
 			for (int x = 0; x < facts.length; x++) {
@@ -542,7 +536,7 @@ public class DataLoader {
 
 					/*insertID[cunt1] =*/ insertIDList.add(writeJobLog(getRunID(), facts[x],"Normal", "In-Progress"));
 					
-					writeJobLog(/*insertID[cunt1]*/(long)insertIDList.get(insertIDList.size()-1), "EXTRACTSTART",
+					writeJobLog(/*insertID[cunt1]*/insertIDList.get(insertIDList.size()-1), "EXTRACTSTART",
 							new SimpleDateFormat("YYYY-MM-DD HH:mm:ss").format(Calendar
 									.getInstance().getTime()));
 
@@ -561,20 +555,20 @@ public class DataLoader {
 
 					createFactExtract(con, factFileName, facts[x], idex);
 					
-					writeJobLog(/*insertID[cunt1]*/(long)insertIDList.get(insertIDList.size()-1), "EXTRACTEND",
+					writeJobLog(/*insertID[cunt1]*/insertIDList.get(insertIDList.size()-1), "EXTRACTEND",
 							new SimpleDateFormat("YYYY-MM-DD HH:mm:ss").format(Calendar
 									.getInstance().getTime()));
 
 				} catch (Exception e) {
 
-					extractEndTime.add(idex, "Error");
+					/*extractEndTime.add(idex, "Error");*/
 
 					checkList.put(facts[x], "Extraction Error");
 
 					writeLog("RunID " + RunID + " Error!!" + e.getMessage(),
 							"error", facts[x], "Dataextraction", "db");
 					
-					writeJobLog(/*insertID[cunt1]*/(long)insertIDList.get(insertIDList.size()-1), "Error","");
+					writeJobLog(/*insertID[cunt1]*/insertIDList.get(insertIDList.size()-1), "Error","");
 					
 
 				} finally {
@@ -628,7 +622,7 @@ public class DataLoader {
 					insertID[i] = writeJobLog(getRunID(), failedFileList[i],
 							"Re-Process", "In-Progress");
 					
-					writeJobLog((long)insertIDList.get(insertIDList.size()-1), "EXTRACTSTART",
+					writeJobLog(insertIDList.get(insertIDList.size()-1), "EXTRACTSTART",
 							new SimpleDateFormat("YYYY-MM-DD HH:mm:ss").format(Calendar
 									.getInstance().getTime()));
 
@@ -645,7 +639,7 @@ public class DataLoader {
 							"Dataextraction_Reprocess", "db");
 
 					SimpleDateFormat sdf = new SimpleDateFormat(
-							"ddMMyyyyhhmmss");
+							"ddMMyyyyHHmmss");
 					Date curDate = new Date();
 					String strDate = sdf.format(curDate);
 
@@ -693,17 +687,17 @@ public class DataLoader {
 					}
 					out.close();
 					
-					writeJobLog((long)insertIDList.get(insertIDList.size()-1), "EXTRACTEND",
+					writeJobLog(insertIDList.get(insertIDList.size()-1), "EXTRACTEND",
 							new SimpleDateFormat("YYYY-MM-DD HH:mm:ss").format(Calendar
 									.getInstance().getTime()));
 					
 					writeLog("RunID " + RunID
-							+ " DataExtration Oparation for table "
+							+ " DataExtraction Operation for table "
 							+ failedFileList[i] + " is extracted in "
 							+ fileName, "info", failedFileList[i],
 							"Dataextraction_Reprocess", "db");
 					
-					System.out.println("DataExtration Oparation for table "
+					System.out.println("DataExtraction Operation for table "
 							+ failedFileList[i] + " is extracted in "
 							+ fileName);
 
@@ -720,7 +714,7 @@ public class DataLoader {
 							"RunID " + RunID + " SQL Error!!" + e.getMessage(),
 							"error", failedFileList[i], "Dataextraction", "DB");
 					
-					writeJobLog((long)insertIDList.get(insertIDList.size()-1), "Error","");
+					writeJobLog(insertIDList.get(insertIDList.size()-1), "Error","");
 
 					// extractEndTime.add(i, "Error");
 
@@ -735,7 +729,7 @@ public class DataLoader {
 					writeLog("RunID " + RunID + " Error!!" + e.getMessage(),
 							"error", failedFileList[i], "Dataextraction", "DB");
 					
-					writeJobLog((long)insertIDList.get(insertIDList.size()-1), "Error","");
+					writeJobLog(insertIDList.get(insertIDList.size()-1), "Error","");
 					// extractEndTime.add(i, "Error");
 
 				} catch (Exception e) {
@@ -748,7 +742,7 @@ public class DataLoader {
 					writeLog("RunID " + RunID + " Error!!" + e.getMessage(),
 							"error", failedFileList[i], "Dataextraction", "DB");
 					
-					writeJobLog((long)insertIDList.get(insertIDList.size()-1), "Error","");
+					writeJobLog(insertIDList.get(insertIDList.size()-1), "Error","");
 					// extractEndTime.add(i, "Error");
 
 				} finally {
@@ -769,13 +763,13 @@ public class DataLoader {
 					insertID[i] = writeJobLog(getRunID(), failedFileList[i],
 							"Re-Process", "In-Progress");
 					
-					writeJobLog((long)insertIDList.get(insertIDList.size()-1), "EXTRACTSTART",
+					writeJobLog(insertIDList.get(insertIDList.size()-1), "EXTRACTSTART",
 							new SimpleDateFormat("YYYY-MM-DD HH:mm:ss").format(Calendar
 									.getInstance().getTime()));
 					
 					createFactExtract(con, factFileName, failedFileList[i], -1);
 					
-					writeJobLog((long)insertIDList.get(insertIDList.size()-1), "EXTRACTSTART",
+					writeJobLog(insertIDList.get(insertIDList.size()-1), "EXTRACTSTART",
 							new SimpleDateFormat("YYYY-MM-DD HH:mm:ss").format(Calendar
 									.getInstance().getTime()));
 					
@@ -789,7 +783,7 @@ public class DataLoader {
 
 					// checkList.put(facts[x],"Extraction Error");
 					
-					writeJobLog((long)insertIDList.get(insertIDList.size()-1), "Error","");
+					writeJobLog(insertIDList.get(insertIDList.size()-1), "Error","");
 
 					writeLog("RunID " + RunID + " Error!!" + e.getMessage(),
 							"error", failedFileList[i], "DataExtraction", "DB");
@@ -869,7 +863,7 @@ public class DataLoader {
 								factName, "Dataextraction", "DB");
 
 						SimpleDateFormat sdf = new SimpleDateFormat(
-								"ddMMyyyyhhmmss");
+								"ddMMyyyyHHmmss");
 						Date curDate = new Date();
 						String strDate = sdf.format(curDate);
 
@@ -882,7 +876,6 @@ public class DataLoader {
 
 						String str = "";
 						List<String> columnNames = getColumnNames(rs);
-						int colSize =columnNames.size();  //TODO remove debug 74
 						for (int c = 0; c < columnNames.size(); c++) {
 							str = "\"" + columnNames.get(c) + "\"";
 							out.append(str);
@@ -892,18 +885,13 @@ public class DataLoader {
 						}
 
 						while (rs.next()) {
-							/*if(rs.isLast())
-									System.out.println("ResultSet row size="+rs.getRow());*/ //TODO remove debug
 							List<Object> row = new ArrayList<Object>();
-							ResultSetMetaData rsmd=rs.getMetaData();
 							row.add(RunID);
-
-							for (int k = 0; k < /*rsColCount*/columnNames.size() - 1; k++) {
-								row.add(rs.getObject(k + 1));  //throwing exception Column index 74 is out of range
+							for (int k = 0; k <columnNames.size() - 1; k++) {
+								row.add(rs.getObject(k + 1)); 
 							}
 
 							out.newLine();
-							int rowSize=row.size(); //TODO remove debug 
 							for (int j = 0; j < row.size(); j++) {
 								if (!String.valueOf(row.get(j)).equals("null")) {
 									String tmp = "\""
@@ -924,9 +912,9 @@ public class DataLoader {
 
 						if (pos >= 0) {
 							checkList.put(factName, "Extraction Done");
-							extractEndTime.add(pos, new SimpleDateFormat(
+							/*extractEndTime.add(pos, new SimpleDateFormat(
 									"HH:mm:ss").format(Calendar.getInstance()
-									.getTime()));
+									.getTime()));*/
 						}
 
 						System.out.println("Extraction Completed for fact "
@@ -950,7 +938,7 @@ public class DataLoader {
 								"Dataextraction", "DB");
 						if (pos >= 0) {
 							checkList.put(factName, "Extraction Error");
-							extractEndTime.add(pos, "Error");
+							//extractEndTime.add(pos, "Error");
 						}
 						scn.close();
 
@@ -1033,13 +1021,12 @@ public class DataLoader {
 		for (int i = 0; i < files.length; i++) {
 			
 			if (!checkErrorStatus("Extraction", files[i])) {
-			//	tx = new TransferManager(s3);
 
-				loadStartTime.add(i, new SimpleDateFormat("HH:mm:ss")
-						.format(Calendar.getInstance().getTime()));
+			/*	loadStartTime.add(i, new SimpleDateFormat("HH:mm:ss")
+						.format(Calendar.getInstance().getTime()));*/
 				
 								
-				writeJobLog((long)insertIDList.get(i), "S3LOADSTART",
+				writeJobLog(insertIDList.get(i), "S3LOADSTART",
 						new SimpleDateFormat("YYYY-MM-DD HH:mm:ss").format(Calendar
 								.getInstance().getTime()));
 
@@ -1057,14 +1044,13 @@ public class DataLoader {
 					PutObjectRequest request = new PutObjectRequest(bucketName,
 							strDate + "/" + s3File.getName(), s3File);
 					upload = tx.upload(request);
-					System.out.println("Checking transfer status=="+upload.getState().toString()+upload.isDone());
 					upload.waitForCompletion();
 					System.out.println(upload.getState().ordinal());
-					if(upload.getState().ordinal()==2 ||upload.getState().ordinal()==3 ||upload.getState().ordinal()==4)
+					if(upload.getState().ordinal()==2)
 					 {
 					//	tx.shutdownNow(); //TODO call it outside for loop test
 					 
-					writeJobLog((long)insertIDList.get(i), "S3LOADEND",
+					writeJobLog(insertIDList.get(i), "S3LOADEND",
 							new SimpleDateFormat("YYYY-MM-DD HH:mm:ss").format(Calendar
 									.getInstance().getTime()));
 					
@@ -1074,25 +1060,18 @@ public class DataLoader {
 					
 					System.out.println(files[i] + " file transffered.");
 
-					loadEndTime.add(i, new SimpleDateFormat("HH:mm:ss")
-							.format(Calendar.getInstance().getTime()));
+					/*loadEndTime.add(i, new SimpleDateFormat("HH:mm:ss")
+							.format(Calendar.getInstance().getTime()));*/
 					
 					
-					writeJobLog((long)insertIDList.get(i), "REDSHIFTLOADSTART",
+					writeJobLog(insertIDList.get(i), "REDSHIFTLOADSTART",
 							new SimpleDateFormat("YYYY-MM-DD HH:mm:ss").format(Calendar
 									.getInstance().getTime()));
 					
-					loadDataToRedShiftDB(files[i], s3File.getName());
+					if(proceedWithFactsLoad(files[i],i))
+						loadDataToRedShiftDB(files[i], s3File.getName(), i);
 					
-					writeJobLog((long)insertIDList.get(i), "REDSHIFTLOADEND",
-							new SimpleDateFormat("YYYY-MM-DD HH:mm:ss").format(Calendar
-									.getInstance().getTime()));
-					
-					/*writeJobLog((long)insertIDList.get(i), "success",
-							new SimpleDateFormat("YYYY-MM-DD HH:mm:ss").format(Calendar
-									.getInstance().getTime()));*/
-
-					 }
+				 }
 
 				} catch (AmazonServiceException ase) {
 
@@ -1119,9 +1098,9 @@ public class DataLoader {
 					System.out.println("Request ID:       "
 							+ ase.getRequestId());
 
-					loadEndTime.add(i, "Error");
+				/*	loadEndTime.add(i, "Error");*/
 
-					writeJobLog((long)insertIDList.get(insertIDList.size()-1), "Error","");
+					writeJobLog(insertIDList.get(i), "Error","");
 
 					checkList.put(files[i], "Loading Error");
 					
@@ -1134,12 +1113,12 @@ public class DataLoader {
 									+ ace.getMessage(), "error", files[i],
 							"S3Transfer", "DB");
 
-					loadEndTime.add(i, "Error");
+					/*loadEndTime.add(i, "Error");*/
 					
 
 					checkList.put(files[i], "Loading Error");
 
-					writeJobLog((long)insertIDList.get(insertIDList.size()-1), "Error","");
+					writeJobLog(insertIDList.get(i), "Error","");
 
 				} catch (Exception e) {
 					writeLog("RunID " + RunID + " " + e.getMessage(), "error",
@@ -1147,11 +1126,11 @@ public class DataLoader {
 					System.out.println("Error !! Please check error message "
 							+ e.getMessage());
 
-					loadEndTime.add(i, "Error");
+					/*loadEndTime.add(i, "Error");*/
 
 					checkList.put(files[i], "Loading Error");
 
-					writeJobLog((long)insertIDList.get(insertIDList.size()-1), "Error","");
+					writeJobLog(insertIDList.get(i), "Error","");
 					
 				} finally {
 					continue;
@@ -1163,7 +1142,7 @@ public class DataLoader {
 						+ files[i] + " so loading operation is skipped for "
 						+ files[i], "info", files[i], "S3Transfer", "DB");
 				
-				writeJobLog((long)insertIDList.get(insertIDList.size()-1), "Error","");
+	//			writeJobLog(insertIDList.get(i), "Error",""); //TODO Can be removed as already in error state
 				
 				System.out
 						.println("There is an issue while creating the extract of "
@@ -1173,9 +1152,31 @@ public class DataLoader {
 			}
 		}
 
-		
+		tx.shutdownNow(); 
 
 	}
+
+	
+	private boolean proceedWithFactsLoad(String fact, int listIndex) throws IOException {
+		boolean proceed = true;
+		ArrayList<String> factList = new ArrayList<>(Arrays.asList(facts));
+		if(factList.contains(fact)) {
+			for(String dimension : dimensions) {
+			boolean dimLoadError = checkErrorStatus("Loading", dimension);
+			if(dimLoadError)
+				proceed = false;
+				System.out.println("There is an error in copying dimension "+dimension+" to Redshift, hence fact will not work properly, aborting the program.");
+				writeLog(
+						"There is an error in copying dimension "+dimension
+						+" to Redshift, hence fact will not work properly, aborting the program.", 
+						"error", fact,"LoadRedshift", "DB");
+				
+				writeJobLog(insertIDList.get(listIndex), "","Aborted");
+				break;
+			}
+		}
+		return proceed;
+	}	
 
 	public void doAmazonS3FileTransfer(char mode, String[] files) throws SecurityException, IOException {
 
@@ -1216,7 +1217,7 @@ public class DataLoader {
 
 			if (!checkErrorStatus("Extraction", files[i])) {
 
-				writeJobLog((long)insertIDList.get(insertIDList.size()-1), "S3LoadStart",
+				writeJobLog(insertIDList.get(i), "S3LoadStart",
 						new SimpleDateFormat("YYYY-MM-DD HH:mm:ss").format(Calendar
 								.getInstance().getTime()));
 
@@ -1234,24 +1235,25 @@ public class DataLoader {
 							strDate + "/" + s3File.getName(), s3File);
 					upload = tx.upload(request);
 					upload.waitForCompletion();
-					tx.shutdownNow();
-					writeJobLog((long)insertIDList.get(insertIDList.size()-1), "S3LoadEnd",
-							new SimpleDateFormat("YYYY-MM-DD HH:mm:ss").format(Calendar
-									.getInstance().getTime()));
-					
-					writeLog(s3File.getName() + " transffered successfully.",
-							"info", files[i], "S3Transfer_Reprocess", "DB");
-					System.out.println(files[i] + " file transffered.");
+					System.out.println(upload.getState().ordinal());
+					if(upload.getState().ordinal()==2)
+					{
 
-					writeJobLog((long)insertIDList.get(insertIDList.size()-1), "RedShiftLoadStart",
-							new SimpleDateFormat("YYYY-MM-DD HH:mm:ss").format(Calendar
-									.getInstance().getTime()));
-					
-					loadDataToRedShiftDB(files[i], s3File.getName());
-					
-					writeJobLog((long)insertIDList.get(insertIDList.size()-1), "RedShiftLoadEnd",
-							new SimpleDateFormat("YYYY-MM-DD HH:mm:ss").format(Calendar
-									.getInstance().getTime()));
+						writeJobLog(insertIDList.get(i), "S3LoadEnd",
+								new SimpleDateFormat("YYYY-MM-DD HH:mm:ss").format(Calendar
+										.getInstance().getTime()));
+
+						writeLog(s3File.getName() + " transffered successfully.",
+								"info", files[i], "S3Transfer_Reprocess", "DB");
+						System.out.println(files[i] + " file transffered.");
+
+						writeJobLog(insertIDList.get(i), "RedShiftLoadStart",
+								new SimpleDateFormat("YYYY-MM-DD HH:mm:ss").format(Calendar
+										.getInstance().getTime()));
+
+						loadDataToRedShiftDB(files[i], s3File.getName(),i);
+						
+					}
 
 				} catch (AmazonServiceException ase) {
 
@@ -1279,7 +1281,7 @@ public class DataLoader {
 					System.out.println("Request ID:       "
 							+ ase.getRequestId());
 
-					writeJobLog((long)insertIDList.get(insertIDList.size()-1), "Error","");
+					writeJobLog(insertIDList.get(i), "Error","");
 
 				} catch (AmazonClientException ace) {
 					writeLog(
@@ -1289,7 +1291,7 @@ public class DataLoader {
 									+ ace.getMessage(), "error", "",
 							"S3Transfer", "DB");
 					
-					writeJobLog((long)insertIDList.get(insertIDList.size()-1), "Error","");
+					writeJobLog(insertIDList.get(i), "Error","");
 
 					System.out.println("Error !! Please check error message "
 							+ ace.getMessage());
@@ -1299,7 +1301,7 @@ public class DataLoader {
 					writeLog("RunID " + RunID + " " + e.getMessage(), "error",
 							"", "S3Transfer_Reprocess", "DB");
 					
-					writeJobLog((long)insertIDList.get(insertIDList.size()-1), "Error","");
+					writeJobLog(insertIDList.get(i), "Error","");
 					
 					System.out.println("Error !! Please check error message "
 							+ e.getMessage());
@@ -1316,7 +1318,7 @@ public class DataLoader {
 						+ files[i], "info", files[i], "S3Transfer_Reprocess",
 						"DB");
 				
-				writeJobLog((long)insertIDList.get(insertIDList.size()-1), "Error","");
+				writeJobLog(insertIDList.get(i), "Error","");
 				
 				System.out
 						.println("As there is an issue while creating the extract of "
@@ -1325,10 +1327,10 @@ public class DataLoader {
 								+ files[i]);
 			}
 		}
-
+		tx.shutdownNow();  
 	}
 
-	public void loadDataToRedShiftDB(String tableName, String fileName) throws SecurityException, IOException {
+	public void loadDataToRedShiftDB(String tableName, String fileName, int listIndex) throws SecurityException, IOException {
 
 		Connection conn = null;
 		Statement stmt = null;
@@ -1371,9 +1373,9 @@ public class DataLoader {
 			// Open a connection and define properties.
 			System.out.println("Connecting to Redshift Cluster...");
 
-			loadStartTimeRS.add((loadStartTimeRS.size() + 1) - 1,
+		/*	loadStartTimeRS.add((loadStartTimeRS.size() + 1) - 1,
 					new SimpleDateFormat("HH:mm:ss").format(Calendar
-							.getInstance().getTime()));
+							.getInstance().getTime()));*/
 
 			Properties props = new Properties();
 
@@ -1413,13 +1415,17 @@ public class DataLoader {
 
 			System.out.println("Done..");
 
-			loadEndTimeRS.add((loadEndTimeRS.size() + 1) - 1,
+			/*loadEndTimeRS.add((loadEndTimeRS.size() + 1) - 1,
 					new SimpleDateFormat("HH:mm:ss").format(Calendar
-							.getInstance().getTime()));
+							.getInstance().getTime()));*/
 
 			checkList.put(tableName, "Loading Done");
 			writeLog("RedShift Data loading is completed successfully for "
 					+ tableName, "info", tableName, "LoadRedshift", "DB");
+			
+			writeJobLog(insertIDList.get(listIndex), "REDSHIFTLOADEND",
+					new SimpleDateFormat("YYYY-MM-DD HH:mm:ss").format(Calendar
+							.getInstance().getTime()));
 			stmt.close();
 			conn.close();
 
@@ -1435,7 +1441,7 @@ public class DataLoader {
 			}
 
 		} catch (Exception ex) {
-			loadEndTimeRS.add((loadEndTimeRS.size() + 1) - 1, "error");
+		//	loadEndTimeRS.add((loadEndTimeRS.size() + 1) - 1, "error");
 			checkList.put(tableName, "Loading Error");
 			System.out
 					.println("Error occured while loading data from S3 to Redshift Cluster for "
@@ -1447,6 +1453,10 @@ public class DataLoader {
 							+ " Error occured while loading data from S3 to Redshift Cluster for "
 							+ tableName + " " + ex.getMessage(), "error",
 					tableName, "LoadRedshift", "DB");
+			
+			writeJobLog(insertIDList.get(listIndex), "ERROR",
+					new SimpleDateFormat("YYYY-MM-DD HH:mm:ss").format(Calendar
+							.getInstance().getTime()));
 
 		} finally {
 			// Finally block to close resources.
@@ -1470,7 +1480,7 @@ public class DataLoader {
 		ICsvMapReader mapReader = null;
 		ICsvMapWriter mapWriter = null;
 
-		SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyyhhmmss");
+		SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyyHHmmss");
 		Date curDate = new Date();
 		String strDate = sdf.format(curDate);
 
@@ -1752,59 +1762,123 @@ public class DataLoader {
 		}
 
 	}
-
-	private void writeStatusReport(int RunID, String tblName, String extStart,
-			String extEnd, String loadStart, String loadEnd,
-			String loadStartRS, String loadEndRS, boolean headers)
-			throws ParseException {
-
-		String Status, content;
-		if (extEnd.equalsIgnoreCase("error")) {
-			Status = "Error during Data Extraction";
-			content = RunID + "\t\t\t" + tblName + "\t\t\t" + extStart
-					+ "\t\t--\t\t" + loadStart + "\t\t" + loadEnd + "\t\t"
-					+ Status;
-		} else if (loadEnd.equalsIgnoreCase("error")) {
-			Status = "Datafile created but S3 load error";
-			content = RunID + "\t\t\t" + tblName + "\t\t\t" + extStart + "\t\t"
-					+ extEnd + "\t\t" + loadStart + "\t\t--\t\t" + Status;
-		} else if (loadEndRS.equalsIgnoreCase("error")) {
-
-			Status = "Datafile created and loaded in S3 but Redshift load error";
-			content = RunID + "\t\t\t" + tblName + "\t\t\t" + extStart + "\t\t"
-					+ extEnd + "\t\t" + loadStart + "\t\t" + loadEnd + "\t\t"
-					+ loadStartRS + "\t\t--\t\t" + Status;
-
-		} else {
-			Status = "Loaded";
-			content = RunID + "\t\t\t" + tblName + "\t\t\t" + extStart + "\t\t"
-					+ extEnd + "\t\t" + loadStart + "\t\t" + loadEnd + "\t\t"
-					+ loadStartRS + "\t\t" + loadEndRS + "\t\t" + Status;
-		}
-
-		String FileName = statusRptLocation + File.separator
-				+ "Status_Report.txt";
-
-		File file = new File(FileName);
-
-		try (PrintWriter out = new PrintWriter(new BufferedWriter(
-				new FileWriter(file, true)))) {
-
-			if (headers) {
-				out.println("RunID \t\t\tTable\t\t\tExtractStartTime\t\tExtractEndTime\t\tLoadStartTime(S3)\t\tLoadEndTime(S3)\t\tLoadStartTime(Redshift)\t\tLoadEndTime(Redshift)\t\tStatus");
-			}
-
-			out.println(content);
-			out.flush();
-			out.close();
-		}
-
-		catch (IOException e) {
-
+	
+	public void updateConfig(String property,String value) {
+		
+		PreparedStatement ps;
+		String logSql = "";
+		
+		try {
+			Connection connection = DriverManager.getConnection(logDbURL,logDbUid,logDbPwd);
+			logSql = "UPDATE p2p_config SET value = ? WHERE key = ?";
+			ps = connection.prepareStatement(logSql);
+			ps.setString(1, value);
+			ps.setString(2, property);
+			ps.executeUpdate();
+				    	
+			
+		} catch (SQLException e) {
+			
+			
+			e.printStackTrace();
+		} catch (Exception e) {
+			
 			e.printStackTrace();
 		}
-
+		
+		
 	}
+	
+	
+	public String getConfig(String property) {
+		
+		PreparedStatement ps;
+		String logSql = "";
+		ResultSet rs = null;
+		try {
+			Connection connection = DriverManager.getConnection(logDbURL,logDbUid,logDbPwd);
+			logSql = "SELECT value FROM p2p_config WHERE key = ?";
+			ps = connection.prepareStatement(logSql);
+			ps.setString(1, property);
+			rs = ps.executeQuery();
+			return rs.getString(0);
+	    	
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+		}
+		
+		return "";
+	}
+
+	public void copyConfigToDb() {
+		
+		Map<String, String> propMap = null;
+		PreparedStatement ps;
+		String logSql = "";
+		
+		String passKey = "ScholasticsETL12";
+		appConfigPropFile = "config.properties";
+		
+				
+		try {
+			Connection connection = DriverManager.getConnection(logDbURL,logDbUid,logDbPwd);
+			propMap = readPropertiesFileAsMap("config.properties", "=");
+			
+			logSql = "TRUNCATE TABLE p2p_config";
+			ps = connection.prepareStatement(logSql);
+			ps.executeUpdate();
+			
+			for (Map.Entry<String, String> entry : propMap.entrySet()) {
+				
+				logSql = "INSERT INTO p2p_config(property,value) "
+						+ "VALUES(?,?)";
+				
+				ps = connection.prepareStatement(logSql);
+				ps.setString(1, entry.getKey());
+		    	ps.setString(2,EncryptionUtil.encryptAES(entry.getValue(), passKey));
+				ps.executeUpdate();
+			}
+			
+			connection.close();
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+		}
+	}
+	
+	public static Map<String, String> readPropertiesFileAsMap(String filename, String delimiter)
+			throws Exception
+			{
+			  Map<String, String> map = new HashMap();
+			  BufferedReader reader = new BufferedReader(new FileReader(filename));
+			  String line;
+			  Properties properties = new Properties();
+			  File pf = new File(filename);
+			  properties.load(new FileReader(pf));
+			  String key,value;
+			  
+			  while ((line = reader.readLine()) != null)
+			  {
+			    if (line.trim().length()==0) continue;
+			    if (line.charAt(0)=='#') continue;
+			    int delimPosition = line.indexOf(delimiter);
+			    key = line.substring(0, delimPosition-1).trim();
+			    value = properties.getProperty(key).trim();
+			    map.put(key, value);
+			  }
+			  reader.close();
+			  return map;
+			}
+	
 
 	public String[] getListOfDimensionsFacts() {
 		String[] files = null;
@@ -1935,7 +2009,7 @@ public class DataLoader {
 
 			case "REDSHIFTLOADEND":
 
-				logSql = "UPDATE job_log SET RedShiftLoadEnd = ? WHERE job_id = ? ";
+				logSql = "UPDATE job_log SET RedShiftLoadEnd = ?, job_status='Success' WHERE job_id = ? ";
 				break;
 
 			case "ERROR":
@@ -1948,8 +2022,7 @@ public class DataLoader {
 				break;
 
 			}
-
-			if (!optName.equalsIgnoreCase("error")) {
+			if (!optName.isEmpty() && !optName.equalsIgnoreCase("error")) {
 				PreparedStatement ps = connection.prepareStatement(logSql);
 				Timestamp ts = Timestamp.valueOf(optTime);
 				ps.setTimestamp(1, ts);
@@ -1959,21 +2032,18 @@ public class DataLoader {
 			} else {
 
 				PreparedStatement ps = connection.prepareStatement(logSql);
-
-				ps.setString(1, "Error");
+				if(optName.equalsIgnoreCase("error")) {
+					ps.setString(1, "Error");
+				} else {
+					ps.setString(1, optTime);
+				}
 				ps.setInt(2, (int) key);
 				ps.executeUpdate();
 			}
 
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			System.exit(0);
 		}
-
-		// Calendar calendar = Calendar.getInstance();
-		// Timestamp currentTimestamp = new
-		// java.sql.Timestamp(calendar.getTime().getTime());
-
 	}
 
 	private boolean checkErrorStatus(String errorType, String tabName) {
