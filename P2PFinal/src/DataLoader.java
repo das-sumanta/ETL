@@ -2000,7 +2000,7 @@ public class DataLoader {
 
 			case "REDSHIFTLOADEND":
 
-				logSql = "UPDATE job_log SET RedShiftLoadEnd = ?, job_status='Success' WHERE job_id = ? ";
+				logSql = "UPDATE job_log SET RedShiftLoadEnd = ? WHERE job_id = ? ";
 				break;
 
 			case "ERROR":
