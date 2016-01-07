@@ -336,6 +336,13 @@ public class DataLoader {
 	}
 
 	public void createDbExtract() throws IOException {
+		String[] dimensionsArr = dimensions;
+		String[] factsArr = facts;
+		createDBExtract(dimensionsArr, factsArr, CommonConstants.RUNMODE_NORMAL, CommonConstants.DATAEXTRACTION);
+
+	}
+
+	public void createDBExtract(String[] dimArr, String[] factArr, String runMode,String process) throws IOException, FileNotFoundException {
 		insertIDList = new ArrayList<>();
 		String TBL_DEF_CONF = "tbl_def.properties";
 		String factFileName;
@@ -344,222 +351,196 @@ public class DataLoader {
 		File pf = new File(TBL_DEF_CONF);
 		properties.load(new FileReader(pf));
 
-	//	if (dimensions != null) { 
-			for (int i = 0; i < dimensions.length; i++) {
+		for (int i = 0; i < dimArr.length; i++) {
 
-				System.out
-						.println("DataExtraction Operation Started for DB table "
-								+ dimensions[i]);
-				System.out
-						.println("--------------------------------------------------------");
+			System.out
+			.println("DataExtraction Operation Started for DB table "
+					+ dimArr[i]);
+			System.out.println("--------------------------------------------------------");
 
-				writeLog("RunID " + RunID
-						+ " DataExtraction Operation Started for DB table "
-						+ dimensions[i], "info", dimensions[i],
-						"DataExtraction", "db");
-				
+			writeLog("RunID " + RunID
+					+ " DataExtraction Operation Started for DB table "
+					+ dimArr[i], "info", dimArr[i],
+					"DataExtraction", "db");
 
-					/*insertID[i] =*/ insertIDList.add(writeJobLog(getRunID(), dimensions[i], "Normal", "In-Progress"));
+			insertIDList.add(writeJobLog(getRunID(), dimArr[i], runMode, "In-Progress"));
 
-				
+			// LOAD USER SPECIFIC COLUMNS FROM THE TABLE DEFINED IN PROPERTIES FILE
 
-				// LOAD USER SPECIFIC COLUMNS FROM THE TABLE DEFINED IN
-				// PROPERTIES FILE
+			query = properties.getProperty(dimArr[i]);
 
-				query = properties.getProperty(dimensions[i]);
+			try {
 
-				try {
+				writeJobLog(insertIDList.get(insertIDList.size()-1), "EXTRACTSTART",
+						new SimpleDateFormat("YYYY-MM-DD HH:mm:ss").format(Calendar
+								.getInstance().getTime()));
 
-					writeJobLog(insertIDList.get(insertIDList.size()-1), "EXTRACTSTART",
-							new SimpleDateFormat("YYYY-MM-DD HH:mm:ss").format(Calendar
-									.getInstance().getTime()));
+				writeLog("RunID " + RunID + " Retrieving data for "
+						+ dimArr[i], "info", dimArr[i],
+						process, "db");
 
-					writeLog("RunID " + RunID + " Retrieving data for "
-							+ dimensions[i], "info", dimensions[i],
-							"DataExtraction", "db");
+				System.out.println("Retrieving data...");
 
-					System.out.println("Retrieving data...");
+				statement = con.createStatement();
 
-					statement = con.createStatement();
+				System.out.println("Executing query for " + dimArr[i]
+						+ " table.");
 
-					System.out.println("Executing query for " + dimensions[i]
-							+ " table.");
+				resultSet = statement.executeQuery(query);
 
-					resultSet = statement.executeQuery(query);
+				SimpleDateFormat sdf = new SimpleDateFormat(
+						"ddMMyyyyHHmmss"); 
+				Date curDate = new Date();
+				String strDate = sdf.format(curDate);
 
-					SimpleDateFormat sdf = new SimpleDateFormat(
-							"ddMMyyyyHHmmss"); 
-					Date curDate = new Date();
-					String strDate = sdf.format(curDate);
+				String fileName = extractLocationLocal + File.separator
+						+ dimArr[i] + "-" + "RunID-" + RunID + "-"
+						+ strDate + ".csv";
+				File file = new File(fileName);
+				FileWriter fstream = new FileWriter(file);
+				BufferedWriter out = new BufferedWriter(fstream);
+				String str = "";
+				List<String> columnNames = getColumnNames(resultSet);
+				for (int c = 0; c < columnNames.size(); c++) {
+					str = "\"" + columnNames.get(c) + "\"";
+					out.append(str);
+					if (c != columnNames.size() - 1) {
+						out.append(csvDelimiter);
+					}
+				}
 
-					String fileName = extractLocationLocal + File.separator
-							+ dimensions[i] + "-" + "RunID-" + RunID + "-"
-							+ strDate + ".csv";
-					File file = new File(fileName);
-					FileWriter fstream = new FileWriter(file);
-					BufferedWriter out = new BufferedWriter(fstream);
-					String str = "";
-					List<String> columnNames = getColumnNames(resultSet);
-					for (int c = 0; c < columnNames.size(); c++) {
-						str = "\"" + columnNames.get(c) + "\"";
-						out.append(str);
-						if (c != columnNames.size() - 1) {
-							out.append(csvDelimiter);
-						}
+				// process results
+
+				while (resultSet.next()) {
+
+					List<Object> row = new ArrayList<Object>();
+
+					row.add(RunID);
+
+					for (int k = 0; k < columnNames.size() - 1; k++) {
+						row.add(resultSet.getObject(k + 1));
+
 					}
 
-					// process results
+					out.newLine();
 
-					while (resultSet.next()) {
-
-						List<Object> row = new ArrayList<Object>();
-
-						row.add(RunID);
-
-						for (int k = 0; k < columnNames.size() - 1; k++) {
-							row.add(resultSet.getObject(k + 1));
-
-						}
-
-						out.newLine();
-
-						for (int j = 0; j < row.size(); j++) {
-							if (!String.valueOf(row.get(j)).equals("null")) {
-								String tmp = "\"" + String.valueOf(row.get(j))
-										+ "\"";
-								out.append(tmp);
-								if (j != row.size() - 1) {
-									out.append(csvDelimiter);
-								}
-							} else {
-								if (j != row.size() - 1) {
-									out.append(csvDelimiter);
-								}
+					for (int j = 0; j < row.size(); j++) {
+						if (!String.valueOf(row.get(j)).equals("null")) {
+							String tmp = "\"" + String.valueOf(row.get(j))
+									+ "\"";
+							out.append(tmp);
+							if (j != row.size() - 1) {
+								out.append(csvDelimiter);
+							}
+						} else {
+							if (j != row.size() - 1) {
+								out.append(csvDelimiter);
 							}
 						}
 					}
-					
-					out.close();
+				}
+
+				out.close();
+
+				writeJobLog(insertIDList.get(insertIDList.size()-1), "EXTRACTEND",
+						new SimpleDateFormat("YYYY-MM-DD HH:mm:ss").format(Calendar
+								.getInstance().getTime()));
+
+				File csvFile = new File(fileName);
+
+				writeLog("RunID " + RunID
+						+ " DataExtraction Operation for table "
+						+ dimArr[i] + " is extracted in " + fileName,
+						"info", dimArr[i], process, "db");
+
+				System.out.println("DataExtraction Operation for table "
+						+ dimArr[i] + " is extracted in " + fileName);
+
+				checkList.put(dimArr[i], "Extraction Done");
+
+			} catch (SQLException e) {
+				System.out
+				.println("SQL Error!! Please Check the query and try again.\n"
+						+ e.getMessage());
+
+				checkList.put(dimArr[i], "Extraction Error");
+
+				writeLog(
+						"RunID " + RunID + " SQL Error!!" + e.getMessage(),
+						"error", dimArr[i], process, "db");
+
+				writeJobLog(insertIDList.get(insertIDList.size()-1), "Error", "");
+
+			} catch (IOException e) {
+
+				System.out
+				.println("IO Error!! Please check the error message.\n"
+						+ e.getMessage());
+
+				checkList.put(dimArr[i], "Extraction Error");
+
+				writeLog("RunID " + RunID + " Error!!" + e.getMessage(),
+						"error", dimArr[i], process, "db");
+
+				writeJobLog(insertIDList.get(insertIDList.size()-1), "Error", "");
+
+			} catch (Exception e) {
+				System.out.println("RunID " + RunID
+						+ " Error!! Please check the error message.\n"
+						+ e.getMessage());
+
+				checkList.put(dimArr[i], "Extraction Error");
+
+				writeLog("RunID " + RunID + " Error!!" + e.getMessage(),
+						"error", dimArr[i], process, "db");
+
+				writeJobLog(insertIDList.get(insertIDList.size()-1), "Error", "");
+
+			} finally {
+				continue;
+			}
+
+		}
+
+		/***************************** Fact Extraction Started **************************************/
+
+		if (factArr != null) {
+			int idex = dimArr.length - 1;
+			System.out.println("DataExtraction Operation is Started for factArr.");
+
+			writeLog("RunID " + RunID
+					+ " DataExtraction Operation is Started for factArr.", "info",
+					"", process, "db");
+			int cunt1 = insertIDList.size();
+			for (int x = 0; x < factArr.length; x++) {
+				insertIDList.add(writeJobLog(getRunID(), factArr[x],"Normal", "In-Progress"));
+
+				writeJobLog(insertIDList.get(insertIDList.size()-1), "EXTRACTSTART",
+						new SimpleDateFormat("YYYY-MM-DD HH:mm:ss").format(Calendar
+								.getInstance().getTime()));
+
+				idex = idex + x + 1;
+
+				try {
+
+					factFileName = factsSqlScriptLocation + File.separator
+							+ factArr[x] + ".sql";
+
+					createFactExtract(con, factFileName, factArr[x], idex);
 
 					writeJobLog(insertIDList.get(insertIDList.size()-1), "EXTRACTEND",
 							new SimpleDateFormat("YYYY-MM-DD HH:mm:ss").format(Calendar
 									.getInstance().getTime()));
 
-					File csvFile = new File(fileName);
-					double bytes = csvFile.length();
-
-					writeLog("RunID " + RunID
-							+ " DataExtraction Operation for table "
-							+ dimensions[i] + " is extracted in " + fileName,
-							"info", dimensions[i], "Dataextraction", "db");
-
-					System.out.println("DataExtraction Operation for table "
-							+ dimensions[i] + " is extracted in " + fileName);
-
-					checkList.put(dimensions[i], "Extraction Done");
-
-					/*extractEndTime.add(i, new SimpleDateFormat("HH:mm:ss")
-							.format(Calendar.getInstance().getTime()));*/
-
-				} catch (SQLException e) {
-					System.out
-							.println("SQL Error!! Please Check the query and try again.\n"
-									+ e.getMessage());
-
-					checkList.put(dimensions[i], "Extraction Error");
-
-					writeLog(
-							"RunID " + RunID + " SQL Error!!" + e.getMessage(),
-							"error", dimensions[i], "Dataextraction", "db");
-
-			//		extractEndTime.add(i, "Error");
-
-					writeJobLog(insertIDList.get(insertIDList.size()-1), "Error", "");
-
-				} catch (IOException e) {
-
-					System.out
-							.println("IO Error!! Please check the error message.\n"
-									+ e.getMessage());
-
-					checkList.put(dimensions[i], "Extraction Error");
-
-					writeLog("RunID " + RunID + " Error!!" + e.getMessage(),
-							"error", dimensions[i], "Dataextraction", "db");
-				/*	extractEndTime.add(i, "Error");*/
-
-					writeJobLog(insertIDList.get(insertIDList.size()-1), "Error", "");
-
-				} catch (Exception e) {
-					System.out.println("RunID " + RunID
-							+ " Error!! Please check the error message.\n"
-							+ e.getMessage());
-
-					checkList.put(dimensions[i], "Extraction Error");
-
-					writeLog("RunID " + RunID + " Error!!" + e.getMessage(),
-							"error", dimensions[i], "Dataextraction", "db");
-					/*extractEndTime.add(i, "Error");*/
-
-					writeJobLog(insertIDList.get(insertIDList.size()-1), "Error", "");
-
-				} finally {
-					continue;
-				}
-
-			}
-	//	} 
-
-		/***************************** Fact Extraction Started **************************************/
-
-		if (facts != null) {
-			int idex = dimensions.length - 1;
-			System.out.println("DataExtraction Operation is Started for Facts.");
-
-			writeLog("RunID " + RunID
-					+ " DataExtraction Operation is Started for Facts.", "info",
-					"", "Dataextraction", "db");
-			int cunt1 = insertIDList.size();
-			for (int x = 0; x < facts.length; x++) {
-
-				
-
-					/*insertID[cunt1] =*/ insertIDList.add(writeJobLog(getRunID(), facts[x],"Normal", "In-Progress"));
-					
-					writeJobLog(/*insertID[cunt1]*/insertIDList.get(insertIDList.size()-1), "EXTRACTSTART",
-							new SimpleDateFormat("YYYY-MM-DD HH:mm:ss").format(Calendar
-									.getInstance().getTime()));
-
-				
-
-					
-				
-				idex = idex + x + 1;
-				/*extractStartTime.add(idex, new SimpleDateFormat("HH:mm:ss")
-						.format(Calendar.getInstance().getTime()));*/
- 
-				try {
-
-					factFileName = factsSqlScriptLocation + File.separator
-							+ facts[x] + ".sql";
-
-					createFactExtract(con, factFileName, facts[x], idex);
-					
-					writeJobLog(/*insertID[cunt1]*/insertIDList.get(insertIDList.size()-1), "EXTRACTEND",
-							new SimpleDateFormat("YYYY-MM-DD HH:mm:ss").format(Calendar
-									.getInstance().getTime()));
-
 				} catch (Exception e) {
 
-					/*extractEndTime.add(idex, "Error");*/
-
-					checkList.put(facts[x], "Extraction Error");
+					checkList.put(factArr[x], "Extraction Error");
 
 					writeLog("RunID " + RunID + " Error!!" + e.getMessage(),
-							"error", facts[x], "Dataextraction", "db");
-					
-					writeJobLog(/*insertID[cunt1]*/insertIDList.get(insertIDList.size()-1), "Error","");
-					
+							"error", factArr[x], process, "db");
+
+					writeJobLog(insertIDList.get(insertIDList.size()-1), "Error","");
+
 
 				} finally {
 					continue;
@@ -568,222 +549,11 @@ public class DataLoader {
 		} else {
 			System.out.println("No facts are mentioned in the config file.");
 		}
-
 	}
 
 	public void createDbExtract(char mode, String[] failedFileList)
 			throws IOException {
-
-		String TBL_DEF_CONF = "tbl_def.properties";
-		String clmNames;
-		String factFileName;
-
-		for (int i = 0; i < failedFileList.length; i++) {
-
-			if (Arrays.asList(DIM).contains(failedFileList[i])) {
-
-				System.out
-						.println("DataExtraction Operation Started for DB table "
-								+ failedFileList[i]);
-				System.out
-						.println("--------------------------------------------------------");
-
-				writeLog("DataExtraction Operation Started for DB table "
-						+ failedFileList[i], "info", failedFileList[i],
-						"Dataextraction_Reprocess", "db");
-
-				// LOAD USER SPECIFIC COLUMNS FROM THE TABLE DEFINED IN
-				// PROPERTIES FILE
-
-				Properties properties = new Properties();
-				File pf = new File(TBL_DEF_CONF);
-				properties.load(new FileReader(pf));
-
-				clmNames = properties.getProperty(failedFileList[i]);
-
-				if (clmNames.equalsIgnoreCase("ALL"))
-					query = "SELECT * FROM " + failedFileList[i] + ";";
-				else
-					query = "SELECT " + clmNames + " FROM " + failedFileList[i]
-							+ ";";
-
-				try {
-
-					insertID[i] = writeJobLog(getRunID(), failedFileList[i],
-							"Re-Process", "In-Progress");
-					
-					writeJobLog(insertIDList.get(insertIDList.size()-1), "EXTRACTSTART",
-							new SimpleDateFormat("YYYY-MM-DD HH:mm:ss").format(Calendar
-									.getInstance().getTime()));
-
-					statement = con.createStatement();
-					System.out.println("Executing query for "
-							+ failedFileList[i] + " table.");
-
-					resultSet = statement.executeQuery(query);
-
-					System.out.println("Retrieving data...");
-
-					writeLog("Retrieving data for " + failedFileList[i],
-							"info", failedFileList[i],
-							"Dataextraction_Reprocess", "db");
-
-					SimpleDateFormat sdf = new SimpleDateFormat(
-							"ddMMyyyyHHmmss");
-					Date curDate = new Date();
-					String strDate = sdf.format(curDate);
-
-					String fileName = extractLocationLocal + File.separator
-							+ failedFileList[i] + "-" + "RunID-" + RunID + "-"
-							+ strDate + ".csv";
-					File file = new File(fileName);
-					FileWriter fstream = new FileWriter(file);
-					BufferedWriter out = new BufferedWriter(fstream);
-					String str = "";
-					List<String> columnNames = getColumnNames(resultSet);
-
-					for (int c = 0; c < columnNames.size(); c++) {
-						str = "\"" + columnNames.get(c) + "\"";
-						out.append(str);
-						if (c != columnNames.size() - 1) {
-							out.append(",");
-						}
-					}
-
-					// process results
-					while (resultSet.next()) {
-						List<Object> row = new ArrayList<Object>();
-						// do something meaning full with the result
-						for (int k = 0; k < columnNames.size(); k++) {
-							row.add(resultSet.getObject(k + 1));
-						}
-
-						out.newLine();
-
-						for (int j = 0; j < row.size(); j++) {
-							if (!String.valueOf(row.get(j)).equals("null")) {
-								String tmp = "\"" + String.valueOf(row.get(j))
-										+ "\"";
-								out.append(tmp);
-								if (j != row.size() - 1) {
-									out.append(",");
-								}
-							} else {
-								if (j != row.size() - 1) {
-									out.append(",");
-								}
-							}
-						}
-					}
-					out.close();
-					
-					writeJobLog(insertIDList.get(insertIDList.size()-1), "EXTRACTEND",
-							new SimpleDateFormat("YYYY-MM-DD HH:mm:ss").format(Calendar
-									.getInstance().getTime()));
-					
-					writeLog("RunID " + RunID
-							+ " DataExtraction Operation for table "
-							+ failedFileList[i] + " is extracted in "
-							+ fileName, "info", failedFileList[i],
-							"Dataextraction_Reprocess", "db");
-					
-					System.out.println("DataExtraction Operation for table "
-							+ failedFileList[i] + " is extracted in "
-							+ fileName);
-
-					
-
-				} catch (SQLException e) {
-					System.out
-							.println("SQL Error!! Please Cheack the query and try again.\n"
-									+ e.getMessage());
-
-					// checkList.put(dimensions[i],"Extraction Error");
-
-					writeLog(
-							"RunID " + RunID + " SQL Error!!" + e.getMessage(),
-							"error", failedFileList[i], "Dataextraction", "DB");
-					
-					writeJobLog(insertIDList.get(insertIDList.size()-1), "Error","");
-
-					// extractEndTime.add(i, "Error");
-
-				} catch (IOException e) {
-					
-					System.out
-							.println("IO Error!! Please check the error message.\n"
-									+ e.getMessage());
-
-					// checkList.put(dimensions[i],"Extraction Error");
-
-					writeLog("RunID " + RunID + " Error!!" + e.getMessage(),
-							"error", failedFileList[i], "Dataextraction", "DB");
-					
-					writeJobLog(insertIDList.get(insertIDList.size()-1), "Error","");
-					// extractEndTime.add(i, "Error");
-
-				} catch (Exception e) {
-					System.out
-							.println("Error!! Please check the error message.\n"
-									+ e.getMessage());
-
-					// checkList.put(dimensions[i],"Extraction Error");
-
-					writeLog("RunID " + RunID + " Error!!" + e.getMessage(),
-							"error", failedFileList[i], "Dataextraction", "DB");
-					
-					writeJobLog(insertIDList.get(insertIDList.size()-1), "Error","");
-					// extractEndTime.add(i, "Error");
-
-				} finally {
-					continue;
-				}
-
-			} else {
-
-				try {
-
-					factFileName = factsSqlScriptLocation + File.separator
-							+ failedFileList[i] + ".sql";
-					
-					writeLog("DataExtraction Operation Started for DB table "
-							+ failedFileList[i], "info", failedFileList[i],
-							"Dataextraction_Reprocess", "db");
-
-					insertID[i] = writeJobLog(getRunID(), failedFileList[i],
-							"Re-Process", "In-Progress");
-					
-					writeJobLog(insertIDList.get(insertIDList.size()-1), "EXTRACTSTART",
-							new SimpleDateFormat("YYYY-MM-DD HH:mm:ss").format(Calendar
-									.getInstance().getTime()));
-					
-					createFactExtract(con, factFileName, failedFileList[i], -1);
-					
-					writeJobLog(insertIDList.get(insertIDList.size()-1), "EXTRACTSTART",
-							new SimpleDateFormat("YYYY-MM-DD HH:mm:ss").format(Calendar
-									.getInstance().getTime()));
-					
-					writeLog("DataExtraction Operation Ended for DB table "
-							+ failedFileList[i], "info", failedFileList[i],
-							"Dataextraction_Reprocess", "db");
-
-				} catch (Exception e) {
-
-					// extractEndTime.add(idex, "Error");
-
-					// checkList.put(facts[x],"Extraction Error");
-					
-					writeJobLog(insertIDList.get(insertIDList.size()-1), "Error","");
-
-					writeLog("RunID " + RunID + " Error!!" + e.getMessage(),
-							"error", failedFileList[i], "DataExtraction", "DB");
-
-				} finally {
-					continue;
-				}
-			}
-
-		}
+		createDBExtract(failedFileList,CommonConstants.RUNMODE_REPROCESS, CommonConstants.DATAEXTRACTION_REPROCESS);
 
 	}
 
@@ -975,6 +745,11 @@ public class DataLoader {
 	public void doAmazonS3FileTransfer() throws SecurityException, IOException {
 
  		String[] files = combine(dimensions, facts);
+		s3AndRedShiftUpload(files, CommonConstants.S3_TRANSFER); 
+
+	}
+
+	public void s3AndRedShiftUpload(String[] files, String process) throws IOException {
 		AWSCredentials credentials = null;
 		try {
 
@@ -985,7 +760,7 @@ public class DataLoader {
 					"Cannot load the credentials from the credential profiles file. "
 							+ "Please make sure that your credentials file is at the correct "
 							+ "location, and is in valid format.", "error", "",
-					"S3Transfer", "DB");
+					process, "DB");
 			throw new AmazonClientException(
 					"Cannot load the credentials from the credential profiles file. "
 							+ "Please make sure that your credentials file is at the correct "
@@ -1006,16 +781,11 @@ public class DataLoader {
 		String key = credentials.getAWSAccessKeyId();
 
 		System.out.println("\n\nUploading DB Extracts to Amazon S3");
-		System.out
-				.println("--------------------------------------------------------");
+		System.out.println("--------------------------------------------------------");
 
 		for (int i = 0; i < files.length; i++) {
 			
 			if (!checkErrorStatus("Extraction", files[i])) {
-
-			/*	loadStartTime.add(i, new SimpleDateFormat("HH:mm:ss")
-						.format(Calendar.getInstance().getTime()));*/
-				
 								
 				writeJobLog(insertIDList.get(i), "S3LOADSTART",
 						new SimpleDateFormat("YYYY-MM-DD HH:mm:ss").format(Calendar
@@ -1028,7 +798,7 @@ public class DataLoader {
 					writeLog(
 							"RunID " + RunID + " Uploading " + s3File.getName()
 									+ " to Amazon S3 bucket " + bucketName,
-							"info", files[i], "S3Transfer", "DB");
+							"info", files[i], process, "DB");
 					System.out.println("Uploading " + s3File.getName()
 							+ " to S3.\n");
 
@@ -1038,7 +808,6 @@ public class DataLoader {
 					upload.waitForCompletion();
 					if(upload.getState().ordinal()==2)
 					 {
-					//	tx.shutdownNow(); //TODO call it outside for loop test
 					 
 					writeJobLog(insertIDList.get(i), "S3LOADEND",
 							new SimpleDateFormat("YYYY-MM-DD HH:mm:ss").format(Calendar
@@ -1046,13 +815,9 @@ public class DataLoader {
 					
 					writeLog("RunID " + RunID +" "+ s3File.getName()
 							+ " transferred successfully.", "info", files[i],
-							"S3Transfer", "DB");
+							process, "DB");
 					
 					System.out.println(files[i] + " file transferred.");
-
-					/*loadEndTime.add(i, new SimpleDateFormat("HH:mm:ss")
-							.format(Calendar.getInstance().getTime()));*/
-					
 					
 					writeJobLog(insertIDList.get(i), "REDSHIFTLOADSTART",
 							new SimpleDateFormat("YYYY-MM-DD HH:mm:ss").format(Calendar
@@ -1074,7 +839,7 @@ public class DataLoader {
 									+ ase.getErrorCode() + " Error Type: "
 									+ ase.getErrorType() + " Request Id: "
 									+ ase.getRequestId(), "error", "",
-							"S3Transfer", "DB");
+							process, "DB");
 					System.out
 							.println("Caught an AmazonServiceException, which means your request made it "
 									+ "to Amazon S3, but was rejected with an error response for some reason.");
@@ -1088,8 +853,6 @@ public class DataLoader {
 					System.out.println("Request ID:       "
 							+ ase.getRequestId());
 
-				/*	loadEndTime.add(i, "Error");*/
-
 					writeJobLog(insertIDList.get(i), "Error","");
 
 					checkList.put(files[i], "Loading Error");
@@ -1101,10 +864,7 @@ public class DataLoader {
 									+ "a serious internal problem while trying to communicate with S3, "
 									+ "such as not being able to access the network."
 									+ ace.getMessage(), "error", files[i],
-							"S3Transfer", "DB");
-
-					/*loadEndTime.add(i, "Error");*/
-					
+							process, "DB");
 
 					checkList.put(files[i], "Loading Error");
 
@@ -1112,11 +872,9 @@ public class DataLoader {
 
 				} catch (Exception e) {
 					writeLog("RunID " + RunID + " " + e.getMessage(), "error",
-							files[i], "S3Transfer", "DB");
+							files[i], process, "DB");
 					System.out.println("Error !! Please check error message "
 							+ e.getMessage());
-
-					/*loadEndTime.add(i, "Error");*/
 
 					checkList.put(files[i], "Loading Error");
 
@@ -1130,7 +888,7 @@ public class DataLoader {
 				checkList.put(files[i], "Loading Error");   //TODO Showing this exception in log
 				writeLog("As there is an issue while creating the extract of "
 						+ files[i] + " so loading operation is skipped for "
-						+ files[i], "info", files[i], "S3Transfer", "DB");
+						+ files[i], "info", files[i], process, "DB");
 				
 	//			writeJobLog(insertIDList.get(i), "Error",""); //TODO Can be removed as already in error state
 				
@@ -1142,8 +900,7 @@ public class DataLoader {
 			}
 		}
 
-		tx.shutdownNow(); 
-
+		tx.shutdownNow();
 	}
 
 	
@@ -1169,156 +926,8 @@ public class DataLoader {
 		return proceed;
 	}	
 
-	public void doAmazonS3FileTransfer(char mode, String[] files) throws SecurityException, IOException {
-
-		AWSCredentials credentials = null;
-		try {
-			credentials = new ProfileCredentialsProvider(awsProfile)
-					.getCredentials();
-		} catch (Exception e) {
-			writeLog(
-					"Cannot load the credentials from the credential profiles file. "
-							+ "Please make sure that your credentials file is at the correct "
-							+ "location, and is in valid format.", "error", "",
-					"S3Transfer_Reprocess", "DB");
-			throw new AmazonClientException(
-					"Cannot load the credentials from the credential profiles file. "
-							+ "Please make sure that your credentials file is at the correct "
-							+ "location, and is in valid format.", e);
-
-		}
-
-		AmazonS3 s3 = new AmazonS3Client(credentials);
-		Region usWest2 = Region.getRegion(Regions.US_EAST_1);
-		s3.setRegion(usWest2);
-		tx = new TransferManager(s3);
-
-		SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-		Date curDate = new Date();
-		String strDate = sdf.format(curDate);
-
-		String bucketName = extractLocationS3;
-		String key = credentials.getAWSAccessKeyId();
-
-		System.out.println("\nUploading DB Extracts to Amazon S3");
-		System.out
-				.println("--------------------------------------------------------");
-
-		for (int i = 0; i < files.length; i++) {
-
-			if (!checkErrorStatus("Extraction", files[i])) {
-
-				writeJobLog(insertIDList.get(i), "S3LoadStart",
-						new SimpleDateFormat("YYYY-MM-DD HH:mm:ss").format(Calendar
-								.getInstance().getTime()));
-
-				try {
-
-					File s3File = getLastFileModifiedFile(extractLocationLocal,
-							files[i]);
-					writeLog("Uploading " + s3File.getName()
-							+ " to Amazon S3 bucket " + bucketName, "info",
-							files[i], "S3Transfer_Reprocess", "DB");
-					System.out.println("Uploading " + s3File.getName()
-							+ " to S3.\n");
-
-					PutObjectRequest request = new PutObjectRequest(bucketName,
-							strDate + "/" + s3File.getName(), s3File);
-					upload = tx.upload(request);
-					upload.waitForCompletion();
-					System.out.println(upload.getState().ordinal());
-					if(upload.getState().ordinal()==2)
-					{
-
-						writeJobLog(insertIDList.get(i), "S3LoadEnd",
-								new SimpleDateFormat("YYYY-MM-DD HH:mm:ss").format(Calendar
-										.getInstance().getTime()));
-
-						writeLog(s3File.getName() + " transferred successfully.",
-								"info", files[i], "S3Transfer_Reprocess", "DB");
-						System.out.println(files[i] + " file transferred.");
-
-						writeJobLog(insertIDList.get(i), "RedShiftLoadStart",
-								new SimpleDateFormat("YYYY-MM-DD HH:mm:ss").format(Calendar
-										.getInstance().getTime()));
-
-						loadDataToRedShiftDB(files[i], s3File.getName(),i);
-						
-					}
-
-				} catch (AmazonServiceException ase) {
-
-					writeLog(
-							"Caught an AmazonServiceException, which means your request made it "
-									+ "to Amazon S3, but was rejected with an error response for some reason.\nError Message:"
-									+ ase.getMessage() + "\n"
-									+ "HTTP Status Code: "
-									+ ase.getStatusCode() + "\n"
-									+ "AWS Error Code: " + ase.getErrorCode()
-									+ "\n" + "Error Type: "
-									+ ase.getErrorType() + "\n"
-									+ "Request Id: " + ase.getRequestId(),
-							"error", "", "S3Transfer_Reprocess", "DB");
-					System.out
-							.println("Caught an AmazonServiceException, which means your request made it "
-									+ "to Amazon S3, but was rejected with an error response for some reason.");
-					System.out.println("Error Message:    " + ase.getMessage());
-					System.out.println("HTTP Status Code: "
-							+ ase.getStatusCode());
-					System.out.println("AWS Error Code:   "
-							+ ase.getErrorCode());
-					System.out.println("Error Type:       "
-							+ ase.getErrorType());
-					System.out.println("Request ID:       "
-							+ ase.getRequestId());
-
-					writeJobLog(insertIDList.get(i), "Error","");
-
-				} catch (AmazonClientException ace) {
-					writeLog(
-							"Caught an AmazonClientException, which means the client encountered "
-									+ "a serious internal problem while trying to communicate with S3, "
-									+ "such as not being able to access the network."
-									+ ace.getMessage(), "error", "",
-							"S3Transfer", "DB");
-					
-					writeJobLog(insertIDList.get(i), "Error","");
-
-					System.out.println("Error !! Please check error message "
-							+ ace.getMessage());
-
-					
-				} catch (Exception e) {
-					writeLog("RunID " + RunID + " " + e.getMessage(), "error",
-							"", "S3Transfer_Reprocess", "DB");
-					
-					writeJobLog(insertIDList.get(i), "Error","");
-					
-					System.out.println("Error !! Please check error message "
-							+ e.getMessage());
-
-					
-				} finally {
-					continue;
-				}
-
-			} else {
-				checkList.put(files[i], "Loading Error");
-				writeLog("As there is an issue while creating the extract of "
-						+ files[i] + " so loading operation is skipped for "
-						+ files[i], "info", files[i], "S3Transfer_Reprocess",
-						"DB");
-				
-				writeJobLog(insertIDList.get(i), "Error","");
-				
-				System.out
-						.println("As there is an issue while creating the extract of "
-								+ files[i]
-								+ " so loading operation is skipped for "
-								+ files[i]);
-			}
-		}
-		tx.shutdownNow();  
+	public void doAmazonS3FileTransfer(String[] files) throws SecurityException, IOException {
+		s3AndRedShiftUpload(files, CommonConstants.S3_TRANSFER_REPROCESS); 
 	}
 
 	public void loadDataToRedShiftDB(String tableName, String fileName, int listIndex) throws SecurityException, IOException {
