@@ -388,7 +388,7 @@ public class DataLoader {
 					resultSet = statement.executeQuery(query);
 
 					SimpleDateFormat sdf = new SimpleDateFormat(
-							"ddMMyyyyHHmmss"); // TODO change to 24hr format
+							"ddMMyyyyHHmmss"); 
 					Date curDate = new Date();
 					String strDate = sdf.format(curDate);
 
@@ -438,6 +438,7 @@ public class DataLoader {
 							}
 						}
 					}
+					
 					out.close();
 
 					writeJobLog(insertIDList.get(insertIDList.size()-1), "EXTRACTEND",
@@ -1524,7 +1525,7 @@ public class DataLoader {
 			Map<String, String> row;
 			while ((row = mapReader.read(readHeader)) != null) {
 
-				// add your column with desired value
+				
 				row.put(timeHeader, String.valueOf(this.getRunID()));
 
 				mapWriter.write(row, writeHeader);
@@ -1565,52 +1566,7 @@ public class DataLoader {
 
 	}
 
-	public void reviewDataLoadingSession() throws SecurityException, IOException {
-		int errCount = 0;
-		int successCount = 0;
-		System.out.println("DataLoading Operation completed.");
-
-		for (Map.Entry<String, String> entry : checkList.entrySet()) {
-			if (entry.getValue().equalsIgnoreCase("Extraction Error")) {
-
-				errCount++;
-
-			} else if (entry.getValue().equalsIgnoreCase("Loading Error")) {
-
-				errCount++;
-
-			} else {
-				successCount++;
-			}
-		}
-
-		if (errCount > 0) {
-			writeLog(
-					"RunID "
-							+ RunID
-							+ " Out of "
-							+ (dimensions.length + facts.length)
-							+ "tables "
-							+ successCount
-							+ " tables are loaded successfully. \n Program will try to load all the failure tables in the next run",
-					"info", "", "FinalReview", "DB");
-			System.out
-					.println("Out of "
-							+ (dimensions.length + facts.length)
-							+ "tables "
-							+ successCount
-							+ " tables are loaded successfully. \n Program will try to load all the failure tables in the next run");
-			cleanResources();
-			System.exit(0);
-
-		} else {
-			writeLog("RunID " + RunID + " All tables are loaded sucessfully",
-					"info", "", "FinalReview", "DB");
-			System.out.println("All tables are loaded successfully");
-			cleanResources();
-			System.exit(0);
-		}
-	}
+	
 
 	// Utility methods
 	public int convertToNumber(String value, String propertyName) {
