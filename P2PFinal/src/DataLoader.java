@@ -284,7 +284,7 @@ public class DataLoader {
 		try {
 			new File(extractLocationLocal).mkdirs();
 			new File(logLocation).mkdirs();
-			new File(statusRptLocation).mkdirs();
+
 			// Creating JDBC DB Connection
 			Class.forName("com.netsuite.jdbc.openaccess.OpenAccessDriver");
 			connectionString = String
@@ -361,7 +361,7 @@ public class DataLoader {
 			writeLog("RunID " + RunID
 					+ " DataExtraction Operation Started for DB table "
 					+ dimArr[i], "info", dimArr[i],
-					"DataExtraction", "db");
+					process, "db");
 
 			insertIDList.add(writeJobLog(getRunID(), dimArr[i], runMode, "In-Progress"));
 
@@ -506,14 +506,13 @@ public class DataLoader {
 
 		if (factArr != null) {
 			int idex = dimArr.length - 1;
-			System.out.println("DataExtraction Operation is Started for factArr.");
+			System.out.println("DataExtraction Operation Started for facts.");
 
 			writeLog("RunID " + RunID
-					+ " DataExtraction Operation is Started for factArr.", "info",
+					+ " DataExtraction Operation Started for facts.", "info",
 					"", process, "db");
-			int cunt1 = insertIDList.size();
 			for (int x = 0; x < factArr.length; x++) {
-				insertIDList.add(writeJobLog(getRunID(), factArr[x],"Normal", "In-Progress"));
+				insertIDList.add(writeJobLog(getRunID(), factArr[x],runMode, "In-Progress"));
 
 				writeJobLog(insertIDList.get(insertIDList.size()-1), "EXTRACTSTART",
 						new SimpleDateFormat("YYYY-MM-DD HH:mm:ss").format(Calendar
@@ -526,7 +525,7 @@ public class DataLoader {
 					factFileName = factsSqlScriptLocation + File.separator
 							+ factArr[x] + ".sql";
 
-					createFactExtract(con, factFileName, factArr[x], idex);
+					createFactExtract(con, factFileName, factArr[x], idex, process);
 
 					writeJobLog(insertIDList.get(insertIDList.size()-1), "EXTRACTEND",
 							new SimpleDateFormat("YYYY-MM-DD HH:mm:ss").format(Calendar
@@ -551,14 +550,25 @@ public class DataLoader {
 		}
 	}
 
-	public void createDbExtract(char mode, String[] failedFileList)
-			throws IOException {
-		createDBExtract(failedFileList,CommonConstants.RUNMODE_REPROCESS, CommonConstants.DATAEXTRACTION_REPROCESS);
+	public void createDbExtract(char mode, String[] failedFileList)	throws IOException {
+		List<String> dimList = new ArrayList<>();
+		List<String> factList = new ArrayList<>();
+		for(String file: failedFileList) {
+			if(Arrays.asList(DIM).contains(file)) {
+				dimList.add(file);
+			} else {
+				factList.add(file);
+			}
+		}
+		
+		String[] dimArr = dimList.toArray( new String[dimList.size()]);
+		String[] factArr = factList.toArray( new String[factList.size()]);
+		createDBExtract(dimArr, factArr, CommonConstants.RUNMODE_REPROCESS, CommonConstants.DATAEXTRACTION_REPROCESS);
 
 	}
 
 	private void createFactExtract(Connection conn, String factFile,
-			String factName, int pos) throws SQLException, IOException {
+			String factName, int pos, String process) throws SQLException, IOException {
 
 		Statement st = null;
 		ResultSet rs = null;
@@ -594,17 +604,11 @@ public class DataLoader {
 
 				if (!line.isEmpty()) {
 					tmpdt = factsProp.getProperty(factName).split(",");
-					SimpleDateFormat formatter = new SimpleDateFormat(
-							"yyyy-MM-dd HH:mm:ss");
-					Date date = formatter.parse(tmpdt[1]);
-					Calendar cal = Calendar.getInstance();
-					cal.setTime(date);
-					cal.add(Calendar.SECOND, 1);
-					lastModDate = cal.getTime().toString();
-					line = String.format(line, lastModDate);
+					lastModDate = tmpdt[1];
+					line = String.format(line, lastModDate, lastModDate);
 					writeLog("RunID " + RunID + " Executing query for "
 							+ factName + "where DATE_LAST_MODIFIED >= "
-							+ lastModDate, "info", factName, "Dataextraction",
+							+ lastModDate, "info", factName, process,
 							"DB");
 
 					rs = st.executeQuery(line);
@@ -620,7 +624,7 @@ public class DataLoader {
 						System.out.println("Retrieving data...");
 
 						writeLog("Retrieving data for " + factName, "info",
-								factName, "Dataextraction", "DB");
+								factName, process, "DB");
 
 						SimpleDateFormat sdf = new SimpleDateFormat(
 								"ddMMyyyyHHmmss");
@@ -681,7 +685,7 @@ public class DataLoader {
 								+ factName);
 						writeLog("RunID " + RunID
 								+ " Extraction Completed for fact " + factName,
-								"info", factName, "Dataextraction", "DB");
+								"info", factName, process, "DB");
 						//TODO joblog entry is in calling method
 					} else {
 						System.out
@@ -696,7 +700,7 @@ public class DataLoader {
 										+ factName
 										+ "where DATE_LAST_MODIFIED >= "
 										+ lastModDate, "info", factName,
-								"Dataextraction", "DB");
+								process, "DB");
 						if (pos >= 0) {
 							checkList.put(factName, "Extraction Error");
 							//extractEndTime.add(pos, "Error");
@@ -719,26 +723,22 @@ public class DataLoader {
 		} catch (FileNotFoundException e) {
 
 			writeLog("RunID " + RunID + " Error!!" + e.getMessage(), "error",
-					"", "Dataextraction", "DB");
+					"", process, "DB");
 			throw new FileNotFoundException(e.toString());
 
 		} catch (SQLException e) {
 
 			writeLog("RunID " + RunID + " Error!!" + e.getMessage(), "error",
-					"", "Dataextraction", "DB");
+					"", process, "DB");
 			throw new SQLException();
 
 		} catch (IOException e) {
 
 			writeLog("RunID " + RunID + " Error!!" + e.getMessage(), "error",
-					"", "Dataextraction", "DB");
+					"", process, "DB");
 			throw new IOException(e.toString());
 
-		} catch (ParseException e) {
-			writeLog("RunID " + RunID + " Error!!" + e.getMessage(), "error",
-					"", "Dataextraction", "DB");
-			throw new SQLException(e.toString());
-		}
+		} 
 
 	}
 

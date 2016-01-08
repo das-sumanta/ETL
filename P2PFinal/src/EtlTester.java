@@ -74,8 +74,8 @@ public class EtlTester {
 		//	try {
 
 				
-				//dl.createDbExtract('r', fileList);
-				//dl.doAmazonS3FileTransfer('r', fileList);
+				dl.createDbExtract('r', fileList);
+				dl.doAmazonS3FileTransfer(/*'r',*/ fileList);
 
 				Properties properties = new Properties();
 				File pf = new File("config.properties");
@@ -86,7 +86,7 @@ public class EtlTester {
 				File folder = new File(aSQLScriptFilePath);
 				File[] listOfFiles = folder.listFiles();
 
-				//dbObjects = dl.getListOfDimensionsFacts();
+				dbObjects = dl.getListOfDimensionsFacts();
 				
 
 				for (int u = 0; u < fileList.length; u++) {
