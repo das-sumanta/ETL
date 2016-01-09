@@ -66,19 +66,19 @@ public class ScriptRunner {
 
     }
 
-    public void runScript(final Reader reader) throws SQLException, IOException {
+    public void runScript(final Reader reader, long jobId) throws SQLException, IOException {
         final boolean originalAutoCommit = this.connection.getAutoCommit();
         try {
             if (originalAutoCommit != this.autoCommit) {
                 this.connection.setAutoCommit(this.autoCommit);
             }
-            this.runScript(this.connection, reader);
+            this.runScript(this.connection, reader, jobId);
         } finally {
             this.connection.setAutoCommit(originalAutoCommit);
         }
     }
 
-    private void runScript(final Connection conn, final Reader reader) throws SQLException, IOException {
+    private void runScript(final Connection conn, final Reader reader, long jobId) throws SQLException, IOException {
         StringBuffer command = null;
         String temp = "";
         Table table = null;
@@ -140,13 +140,16 @@ public class ScriptRunner {
                             try {
                             	System.out.println("Executing query ->" + command.toString());
                             	stmt.execute(command.toString());
-                            	writeDBLog(runID,stmt.getUpdateCount() + " row(s) affected.",entity, this.errorCode,"Info" );
+                            	Utility.writeLog(stmt.getUpdateCount() + " row(s) affected.", "Info",
+                                		entity, this.errorCode, "DB");
                             } catch (final SQLException e) {
                                 e.fillInStackTrace();
                                 err.println("Error executing SQL Command: \"" + command + "\"");
                                 err.println(e);
                                 err.flush();
-                                writeDBLog(runID, e.getMessage(),entity, this.errorCode,"Error" );
+                                
+                                Utility.writeLog("RunID " + Utility.runID + " Error!!" + e.getMessage(), "error",
+                                		entity, this.errorCode, "DB");
                                 throw e;
                             }
                         }
@@ -197,8 +200,9 @@ public class ScriptRunner {
                             out.println(stmt.getUpdateCount() + " row(s) affected.");
                             out.flush();
                             if(!errorCode.equals("")) {
-                            	writeDBLog(runID,stmt.getUpdateCount() + " row(s) affected.",entity, this.errorCode,"Info" );
-                            	
+                            	                           	
+                            	Utility.writeLog(stmt.getUpdateCount() + " row(s) affected.", "Info",
+                                		entity, this.errorCode, "DB");
                                 errorCode = "";
                             }
                             
@@ -245,8 +249,10 @@ public class ScriptRunner {
             err.println("Error executing SQL Command: \"" + command + "\"");
             err.println(e);
             err.flush();
-            writeDBLog(runID, e.getMessage(),entity, this.errorCode,"Error" );
-            writeJobLog(runID,entity,(manualMode)?"Rerun Mode":"Normal Mode","Error");
+            Utility.writeLog("RunID " + Utility.runID + " Error!!" + e.getMessage(), "error",
+            		entity, this.errorCode, "DB");
+            Utility.writeJobLog(jobId,entity,"Error");
+            
             throw e;
         } catch (final IOException e) {
             e.fillInStackTrace();
@@ -258,45 +264,9 @@ public class ScriptRunner {
     }
     
     
-    public void writeDBLog(int runID,String errorDesc,String entity,String errStg,String msgTyp) throws SQLException {
-    	
-    	Calendar calendar = Calendar.getInstance();
-    	Timestamp currentTimestamp = new java.sql.Timestamp(calendar.getTime().getTime());
-    	
-    	errorSql = "INSERT INTO dw_prestage.message_log(runid,message_desc,target_table,message_stage,message_type,message_timestamp) "
-				+ "VALUES(?,?,?,?,?,?)";
-		
-		ps = connection.prepareStatement(errorSql);
-		ps.setInt(1, runID);
-		ps.setString(2,errorDesc);
-		ps.setString(3, entity);
-		ps.setString(4, errStg);
-		ps.setString(5, msgTyp);
-		ps.setTimestamp(6, currentTimestamp);
-		ps.executeUpdate();
-		connection.commit();
-		
-    }
     
-    public void writeJobLog(int runID,String entity,String run_mode,String job_status) throws SQLException {
-    	
-    	Calendar calendar = Calendar.getInstance();
-    	Timestamp currentTimestamp = new java.sql.Timestamp(calendar.getTime().getTime());
-    	String logSql = "";
-    	
-    	logSql = "INSERT INTO dw_prestage.job_log(runid,entity,run_mode,job_status,job_timestamp) "
-				+ "VALUES(?,?,?,?,?)";
-		
-		ps = connection.prepareStatement(logSql);
-		ps.setInt(1, runID);
-		ps.setString(2,entity);
-		ps.setString(3, run_mode);
-		ps.setString(4, job_status);
-		ps.setTimestamp(5, currentTimestamp);
-		ps.executeUpdate();
-		connection.commit();
-		
-    }
+    
+    
 
     /**
      * @return the tableList

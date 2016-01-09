@@ -4,6 +4,10 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Properties;
 
 public class EtlTester {
@@ -14,17 +18,27 @@ public class EtlTester {
 		String aSQLScriptFilePath = "";
 		String dbObjects[] = null;
 		DataLoader dl=null;
+		Properties properties = new Properties();
+		File pf = new File("config.properties");
+		properties.load(new FileReader(pf));
+		String FileExtractURLTableName = properties.getProperty("FileExtractURLTableName");
+		
 		try {
 			if (args.length == 0) {
+				Utility.applicationStart(false);
+				
+				String tmp = "";
+				
 				dl= new DataLoader();
 				
 				dl.createDbExtract(); 
-				dl.doAmazonS3FileTransfer(); //System.exit(0);
+				
+				if(!FileExtractURLTableName.equals(""))
+					dl.createDbExtractFromURL();
+				
+				dl.doAmazonS3FileTransfer(); 
 
-				Properties properties = new Properties();
-				File pf = new File("config.properties");
-				properties.load(new FileReader(pf));
-				String tmp = "";
+				
 
 				aSQLScriptFilePath = properties.getProperty("SQLScriptsPath");
 				File folder = new File(aSQLScriptFilePath);
@@ -37,10 +51,10 @@ public class EtlTester {
 					for (int i = 0; i < listOfFiles.length; i++) {
 
 						tmp =  dbObjects[u] + "_prestage_opn.sql"; 
+						long jobId = Utility.dbObjectJobIdMap.get(dbObjects[u]);
 						if (tmp.equalsIgnoreCase(listOfFiles[i].getName())) {
 
-							// File file = listOfFiles[i];
-
+							
 							Class.forName(properties.getProperty("RSCLASS"));
 							con = DriverManager.getConnection(
 									properties.getProperty("RSDBURL"),
@@ -48,12 +62,15 @@ public class EtlTester {
 									properties.getProperty("RSPWD"));
 
 							ScriptRunner scriptRunner = new ScriptRunner(con,
-									false, true, dl.getRunID(), dbObjects[u],false);
+									false, true, Utility.runID, dbObjects[u],false);
 
 							scriptRunner.runScript(new FileReader(
 									aSQLScriptFilePath + File.separator
-									+ listOfFiles[i].getName()));
-							scriptRunner.writeJobLog(dl.getRunID(),dbObjects[u],"Normal Mode","Success"); //TODO dw stage needs to be captured
+									+ listOfFiles[i].getName()),jobId);
+						//	scriptRunner.writeJobLog(Utility.runID,dbObjects[u],"Normal Mode","Success"); 
+							Utility.writeJobLog(jobId, "COMPLETED",
+									new SimpleDateFormat("YYYY-MM-DD HH:mm:ss").format(Calendar
+											.getInstance().getTime()));
 							break;
 
 						} else {
@@ -65,34 +82,44 @@ public class EtlTester {
 
 
 			} else {
+				
 			System.out.println("DataLoader running in manual mode");
 			String[] fileList = args[1].split(",");
-			int runId = Integer.valueOf(args[2]);	
-			dl = new DataLoader("r",runId);
+			Utility.runID = Integer.valueOf(args[2]);
+			Utility.applicationStart(true);
+			
+			dl = new DataLoader("r",Utility.runID);
 			
 			
-		//	try {
-
+		
 				
-				//dl.createDbExtract('r', fileList);
-				//dl.doAmazonS3FileTransfer('r', fileList);
+				dl.createDbExtract('r', fileList);
+				
+				if(!FileExtractURLTableName.isEmpty()) {
+					String[] arr= FileExtractURLTableName.split(",");
+					for(String urlDimension:arr) {
+						if(Arrays.asList(fileList).contains(urlDimension)) {
+							dl.createDbExtractFromURL();
+						}
+					}
+				}
+				dl.doAmazonS3FileTransfer(/*'r',*/ fileList);
 
-				Properties properties = new Properties();
-				File pf = new File("config.properties");
-				properties.load(new FileReader(pf));
+
 				String tmp = "";
 
 				aSQLScriptFilePath = properties.getProperty("SQLScriptsPath");
 				File folder = new File(aSQLScriptFilePath);
 				File[] listOfFiles = folder.listFiles();
 
-				//dbObjects = dl.getListOfDimensionsFacts();
+				dbObjects = dl.getListOfDimensionsFacts();
 				
 
 				for (int u = 0; u < fileList.length; u++) {
 					for (int i = 0; i < listOfFiles.length; i++) {
 
 						tmp =  fileList[u] + "_prestage_opn.sql"; 
+						long jobId = Utility.dbObjectJobIdMap.get(fileList[u]);
 						if (tmp.equalsIgnoreCase(listOfFiles[i].getName())) {
 
 							Class.forName(properties.getProperty("RSCLASS"));
@@ -102,13 +129,15 @@ public class EtlTester {
 									properties.getProperty("RSPWD"));
 
 							ScriptRunner scriptRunner = new ScriptRunner(con,
-									false, true, dl.getRunID(), fileList[u],true);
+									false, true, Utility.runID, fileList[u],true);
 
 							scriptRunner.runScript(new FileReader(
 									aSQLScriptFilePath + File.separator
-											+ listOfFiles[i].getName()));
+											+ listOfFiles[i].getName()),jobId);
 							
-							scriptRunner.writeJobLog(dl.getRunID(),fileList[u],"Re-run mode","Success");
+							Utility.writeJobLog(jobId, "COMPLETED",
+									new SimpleDateFormat("YYYY-MM-DD HH:mm:ss").format(Calendar
+											.getInstance().getTime()));
 							break;
 
 						} else {
@@ -117,30 +146,12 @@ public class EtlTester {
 					}
 				}
 				
-				dl.updateRunID(runId++);
-				
-
-			/*} catch (ClassNotFoundException e) {
-
-				e.printStackTrace();
-
-			} catch (IOException e) {
-
-				e.printStackTrace();
-
-			} catch (SQLException se) {
-				System.out.println("Error !! Please check error message "
-						+ se.getMessage());
-				dl.writeLog("RunID " + dl.getRunID() + "Error !! Please check error message. " + se.getMessage(),
-						"error","","Aplication Startup","db");
-				System.exit(0);
-			}*/
 
 		}
 		} catch (ClassNotFoundException e) {
 			System.out.println("Error !! Please check error message "
 					+ e.getMessage());
-			dl.writeLog("RunID " + dl.getRunID()  + "Error !! Please check error message. "
+			dl.writeLog("RunID " + Utility.runID  + "Error !! Please check error message. "
 					+ e.getMessage(), "error", "", "ScriptRunner Startup", "db");
 			System.exit(0);
 		} catch (IOException e) {
@@ -148,7 +159,7 @@ public class EtlTester {
 			e.printStackTrace();
 
 		} catch (SQLException e) {
-			dl.writeLog("RunID " + dl.getRunID() + " Error !! Please check error message. " + e.getMessage(),
+			dl.writeLog("RunID " + Utility.runID + " Error !! Please check error message. " + e.getMessage(),
 					"error","","ScriptRunner Startup","db");
 		}
 
