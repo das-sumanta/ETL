@@ -27,7 +27,7 @@ public class ScriptRunner {
     private final PrintWriter out, err;
     private String errorSql;
     private PreparedStatement ps;
-    private String errorCode;
+    private String stageDesc;
     private int runID;
     private String entity;
     private boolean manualMode;
@@ -54,7 +54,7 @@ public class ScriptRunner {
         this.manualMode = isManualMode;
         tableList = new ArrayList<Table>();
         sqlOutput = new ArrayList<String>();
-        errorCode = "";
+        stageDesc = "";
         
         
 
@@ -94,7 +94,7 @@ public class ScriptRunner {
                               
                if (trimmedLine.startsWith("/*") && trimmedLine.endsWith("*/")) {
             	   
-            	   errorCode = trimmedLine.substring(trimmedLine.indexOf("*") + 1, trimmedLine.lastIndexOf("*")).trim();
+            	   stageDesc = trimmedLine.substring(trimmedLine.indexOf("*") + 1, trimmedLine.lastIndexOf("*")).trim();
             	   
             	          	   
                }
@@ -135,7 +135,7 @@ public class ScriptRunner {
                             	System.out.println("Executing query ->" + command.toString());
                             	stmt.execute(command.toString());
                             	Utility.writeLog(stmt.getUpdateCount() + " row(s) affected.", "Info",
-                                		entity, this.errorCode, "DB");
+                                		entity, this.stageDesc, "DB");
                             } catch (final SQLException e) {
                                 e.fillInStackTrace();
                                 err.println("Error executing SQL Command: \"" + command + "\"");
@@ -143,7 +143,7 @@ public class ScriptRunner {
                                 err.flush();
                                 
                                 Utility.writeLog("RunID " + Utility.runID + " Error!!" + e.getMessage(), "error",
-                                		entity, this.errorCode, "DB");
+                                		entity, this.stageDesc, "DB");
                                 throw e;
                             }
                         }
@@ -193,11 +193,11 @@ public class ScriptRunner {
 
                             out.println(stmt.getUpdateCount() + " row(s) affected.");
                             out.flush();
-                            if(!errorCode.equals("")) {
+                            if(!stageDesc.equals("")) {
                             	                           	
                             	Utility.writeLog(stmt.getUpdateCount() + " row(s) affected.", "Info",
-                                		entity, this.errorCode, "DB");
-                                errorCode = "";
+                                		entity, this.stageDesc, "DB");
+                                stageDesc = "";
                             }
                             
                         }
@@ -246,7 +246,7 @@ public class ScriptRunner {
             err.println(e);
             err.flush();
             Utility.writeLog("RunID " + Utility.runID + " Error!!" + e.getMessage(), "error",
-            		entity, this.errorCode, "DB");
+            		entity, this.stageDesc, "DB");
             Utility.writeJobLog(jobId,entity,"Error");
             
             throw e;
