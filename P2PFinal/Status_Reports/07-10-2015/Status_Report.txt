@@ -1,8 +1,0 @@
-RunID 			Table			ExtractStartTime		ExtractEndTime		LoadStartTime(S3)		LoadEndTime(S3)		LoadStartTime(Redshift)		LoadEndTime(Redshift)		Status
-15			CLASSES			18:23:54		18:23:57		18:23:57		18:23:57		18:24:57		--		Datafile created and loaded in S3 but Redshift load error
-16			CLASSES			18:27:06		18:27:49		18:27:55		18:27:55		18:28:55		--		Datafile created and loaded in S3 but Redshift load error
-17			CLASSES			18:29:58		18:30:00		18:30:01		18:30:01		18:31:01		--		Datafile created and loaded in S3 but Redshift load error
-20			CLASSES			18:50:47		18:50:49		18:50:50		18:50:50		18:51:50		--		Datafile created and loaded in S3 but Redshift load error
-19			CLASSES			18:38:45		18:38:47		18:38:48		18:38:48		18:39:48		--		Datafile created and loaded in S3 but Redshift load error
-21			CLASSES			19:05:01		19:05:04		19:05:04		19:05:04		19:06:04		--		Datafile created and loaded in S3 but Redshift load error
-22			CLASSES			20:07:13		20:07:15		20:07:16		20:07:16		20:08:16		20:08:21		Loaded

@@ -1,5 +1,0 @@
-RunID 			Table			ExtractStartTime		ExtractEndTime		LoadStartTime(S3)		LoadEndTime(S3)		LoadStartTime(Redshift)		LoadEndTime(Redshift)		Status
-59			VENDORS			18:07:27		18:09:28		18:09:28		18:09:28		18:10:28		--		Datafile created and loaded in S3 but Redshift load error
-60			VENDORS			18:17:19		19:03:49		19:03:51		19:03:51		19:04:51		--		Datafile created and loaded in S3 but Redshift load error
-61			PAYMENT_TERMS			19:51:42		19:51:46		19:59:53		19:59:53		20:00:53		20:01:20		Loaded
-61			VENDORS			19:51:46		19:59:50		20:01:20		20:01:20		20:02:20		--		Datafile created and loaded in S3 but Redshift load error

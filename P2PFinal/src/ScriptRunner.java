@@ -1,6 +1,4 @@
 
-import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.LineNumberReader;
 import java.io.PrintWriter;
@@ -11,12 +9,8 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import org.apache.commons.lang.StringUtils;
 
@@ -80,7 +74,7 @@ public class ScriptRunner {
 
     private void runScript(final Connection conn, final Reader reader, long jobId) throws SQLException, IOException {
         StringBuffer command = null;
-        String temp = "";
+       
         Table table = null;
        
         try {
@@ -240,9 +234,11 @@ public class ScriptRunner {
                     
                 }
             }
-            if (!this.autoCommit) {
+            if (!this.autoCommit) { 
                 conn.commit();
             }
+            Utility.writeLog("RunID " + Utility.runID + " Application ended successfully.", "info", "", "Application Ends", "DB");  
+            
         } catch (final SQLException e) {
             conn.rollback();
             e.fillInStackTrace();

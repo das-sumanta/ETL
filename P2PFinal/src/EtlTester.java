@@ -8,6 +8,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Properties;
 
 public class EtlTester {
@@ -16,12 +17,12 @@ public class EtlTester {
 		
 		Connection con = null;
 		String aSQLScriptFilePath = "";
-		String dbObjects[] = null;
+		List<String> dbObjects = new ArrayList<>();
 		DataLoader dl=null;
 		Properties properties = new Properties();
 		File pf = new File("config.properties");
 		properties.load(new FileReader(pf));
-		String FileExtractURLTableName = properties.getProperty("FileExtractURLTableName");
+		String fileExtractURLTableName = properties.getProperty("FileExtractURLTableName");
 		
 		try {
 			if (args.length == 0) {
@@ -33,7 +34,7 @@ public class EtlTester {
 				
 				dl.createDbExtract(); 
 				
-				if(!FileExtractURLTableName.equals(""))
+				if(!fileExtractURLTableName.equals(""))
 					dl.createDbExtractFromURL();
 				
 				dl.doAmazonS3FileTransfer(); 
@@ -44,30 +45,30 @@ public class EtlTester {
 				File folder = new File(aSQLScriptFilePath);
 				File[] listOfFiles = folder.listFiles();
 
-				dbObjects = dl.getListOfDimensionsFacts();
+				dbObjects.addAll(dl.getListOfDimensionsFacts());
 
-
-				for (int u = 0; u < dbObjects.length; u++) {
+				if(!dbObjects.isEmpty()) {
+				for (String dbObject : dbObjects) {
 					for (int i = 0; i < listOfFiles.length; i++) {
 
-						tmp =  dbObjects[u] + "_prestage_opn.sql"; 
-						long jobId = Utility.dbObjectJobIdMap.get(dbObjects[u]);
+						tmp =  dbObject + "_prestage_opn.sql"; 
+						long jobId = Utility.dbObjectJobIdMap.get(dbObject);
 						if (tmp.equalsIgnoreCase(listOfFiles[i].getName())) {
 
 							
-							Class.forName(properties.getProperty("RSCLASS"));
+							Class.forName(Utility.getConfig("RSCLASS"));
 							con = DriverManager.getConnection(
-									properties.getProperty("RSDBURL"),
-									properties.getProperty("RSUID"),
-									properties.getProperty("RSPWD"));
+									Utility.getConfig("RSDBURL"),
+									Utility.getConfig("RSUID"),
+									Utility.getConfig("RSPWD"));
 
 							ScriptRunner scriptRunner = new ScriptRunner(con,
-									false, true, Utility.runID, dbObjects[u],false);
+									false, true, Utility.runID, dbObject,false);
 
 							scriptRunner.runScript(new FileReader(
 									aSQLScriptFilePath + File.separator
 									+ listOfFiles[i].getName()),jobId);
-						//	scriptRunner.writeJobLog(Utility.runID,dbObjects[u],"Normal Mode","Success"); 
+						//	scriptRunner.writeJobLog(Utility.runID,dbObject,"Normal Mode","Success"); 
 							Utility.writeJobLog(jobId, "COMPLETED",
 									new SimpleDateFormat("YYYY-MM-DD HH:mm:ss").format(Calendar
 											.getInstance().getTime()));
@@ -79,7 +80,7 @@ public class EtlTester {
 					}
 				}
 
-
+			}	
 
 			} else {
 				
@@ -95,15 +96,16 @@ public class EtlTester {
 				
 				dl.createDbExtract('r', fileList);
 				
-				if(!FileExtractURLTableName.isEmpty()) {
-					String[] arr= FileExtractURLTableName.split(",");
+				if(!fileExtractURLTableName.isEmpty()) {
+					String[] arr= fileExtractURLTableName.split(",");
 					for(String urlDimension:arr) {
 						if(Arrays.asList(fileList).contains(urlDimension)) {
 							dl.createDbExtractFromURL();
 						}
 					}
 				}
-				dl.doAmazonS3FileTransfer(/*'r',*/ fileList);
+				List<String> failedFileList=new ArrayList<>(Arrays.asList(fileList)); //TODO TEST fact extraction no resultSet fact file removed again gets added
+				dl.doAmazonS3FileTransfer(failedFileList);
 
 
 				String tmp = "";
@@ -112,24 +114,24 @@ public class EtlTester {
 				File folder = new File(aSQLScriptFilePath);
 				File[] listOfFiles = folder.listFiles();
 
-				dbObjects = dl.getListOfDimensionsFacts();
-				
+				dbObjects.addAll(dl.getListOfDimensionsFacts());
 
-				for (int u = 0; u < fileList.length; u++) {
+				if(!dbObjects.isEmpty()) {
+				for (String dbObject : dbObjects) {
 					for (int i = 0; i < listOfFiles.length; i++) {
 
-						tmp =  fileList[u] + "_prestage_opn.sql"; 
-						long jobId = Utility.dbObjectJobIdMap.get(fileList[u]);
+						tmp =  dbObject + "_prestage_opn.sql"; 
+						long jobId = Utility.dbObjectJobIdMap.get(dbObject);
 						if (tmp.equalsIgnoreCase(listOfFiles[i].getName())) {
 
-							Class.forName(properties.getProperty("RSCLASS"));
+							Class.forName(Utility.getConfig("RSCLASS"));
 							con = DriverManager.getConnection(
-									properties.getProperty("RSDBURL"),
-									properties.getProperty("RSUID"),
-									properties.getProperty("RSPWD"));
+									Utility.getConfig("RSDBURL"),
+									Utility.getConfig("RSUID"),
+									Utility.getConfig("RSPWD"));
 
 							ScriptRunner scriptRunner = new ScriptRunner(con,
-									false, true, Utility.runID, fileList[u],true);
+									false, true, Utility.runID, dbObject,true);
 
 							scriptRunner.runScript(new FileReader(
 									aSQLScriptFilePath + File.separator
@@ -145,13 +147,13 @@ public class EtlTester {
 						}
 					}
 				}
-				
+			}	
 
 		}
 		} catch (ClassNotFoundException e) {
 			System.out.println("Error !! Please check error message "
 					+ e.getMessage());
-			dl.writeLog("RunID " + Utility.runID  + "Error !! Please check error message. "
+			Utility.writeLog("RunID " + Utility.runID  + "Error !! Please check error message. "
 					+ e.getMessage(), "error", "", "ScriptRunner Startup", "db");
 			System.exit(0);
 		} catch (IOException e) {
@@ -159,7 +161,10 @@ public class EtlTester {
 			e.printStackTrace();
 
 		} catch (SQLException e) {
-			dl.writeLog("RunID " + Utility.runID + " Error !! Please check error message. " + e.getMessage(),
+			Utility.writeLog("RunID " + Utility.runID + " Error !! Please check error message. " + e.getMessage(),
+					"error","","ScriptRunner Startup","db");
+		} catch (Exception e) {
+			Utility.writeLog("RunID " + Utility.runID + " Error !! Please check error message. " + e.getMessage(),
 					"error","","ScriptRunner Startup","db");
 		}
 

@@ -78,7 +78,7 @@ public final class Utility {
 			runID = getRunId(isManual);
 			if (!isManual) {
 
-				setRunId(runID++);
+				setRunId(++runID);
 			}
 			
 			
@@ -113,8 +113,9 @@ public final class Utility {
 			}
 			ps = con.prepareStatement(logSql);
 			rs = ps.executeQuery();
-
-			return rs.getInt(0);
+			while(rs.next()) {
+				return rs.getInt(1);
+			}
 
 		} catch (SQLException e) {
 
@@ -184,6 +185,7 @@ public final class Utility {
 		} catch (SQLException sq1ex) {
 
 			System.out.println("Connection exception" + sq1ex.getMessage());
+			writeLog("Connection exception" + sq1ex.getMessage(),"error","","Application Start","file");		
 			System.exit(0);
 
 		}
@@ -193,7 +195,7 @@ public final class Utility {
 
 	public static void writeLog(String msg, String type, String entity,
 			String stage, String appender)
-			throws /* SecurityException, */IOException {
+			 {
 
 		String logSql = "";
 
@@ -213,7 +215,7 @@ public final class Utility {
 					logger.addHandler(fh);
 					SimpleFormatter formatter = new SimpleFormatter();
 					fh.setFormatter(formatter);
-					logger.severe(msg);
+					logger.severe(msg+" Stage = "+stage+" Entity:" + entity);
 					fh.close();
 
 				} catch (Exception e) {
@@ -247,17 +249,16 @@ public final class Utility {
 				closeConnection(con);
 
 			} catch (SQLException e1) { // Modified to capture if MySql is down
-				// e1.printStackTrace();
-				FileHandler fh = new FileHandler("App.log", true); // can throw
-																	// IOException
-				logger.addHandler(fh);
-				SimpleFormatter formatter = new SimpleFormatter();
-				fh.setFormatter(formatter);
-				logger.severe("Error in writing message_log!!  Hence terminating the program. "
-						+ e1.getMessage());
-				fh.close();
+							
+				writeLog("Error in writing message_log!!  Hence terminating the program. "
+						+ e1.getMessage(),"error",entity,stage,"file");	
 				closeConnection(con);
 				System.exit(0);
+			} catch (Exception e) {
+				
+				writeLog("Error in writing message_log!!  Hence terminating the program. "
+						+ e.getMessage(),"error",entity,stage,"file");
+				System.out.println(e.getMessage());
 			}
 		}
 
@@ -298,24 +299,25 @@ public final class Utility {
 
 		String logSql = "";
 		ResultSet rs = null;
-		byte[] encodedKey     = Base64.decode( encConfig.get("secretKey"), Base64.DEFAULT);
-		SecretKey originalKey = new SecretKeySpec(encodedKey, 0, encodedKey.length, "AES");
 		try {
 			
 			if(encConfig.containsKey(property)) {
 				
-				return EncryptionUtil.decrypt(encConfig.get(property),((SecretKey) encConfig.get("secretKey")));
+				return EncryptionUtil.decrypt(encConfig.get(property),encConfig.get("SECRETKEY"));
 			} else {
 			
 				if (con.isClosed()) {
 					con = createConnection(logDbURL, logDbUid, logDbPwd);
 				}
-				logSql = "SELECT value FROM p2p_config WHERE key = ?";
+				logSql = "SELECT property, value FROM p2p_config";
 				ps = con.prepareStatement(logSql);
-				ps.setString(1, property);
 				rs = ps.executeQuery();
+				
+				while(rs.next()) {
+					encConfig.put(rs.getString(1), rs.getString(2));
+				}
 	
-				return EncryptionUtil.decrypt(rs.getString(0), );
+				return EncryptionUtil.decrypt(encConfig.get(property),encConfig.get("SECRETKEY"));
 			}
 
 		} catch (SQLException e) {
